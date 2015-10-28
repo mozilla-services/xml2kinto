@@ -1,1 +1,10 @@
+tox
+flake8
+WebTest
+mock
+pytest
+pytest-cache
+pytest-capturelog
+pytest-cover
+pytest-sugar
 https://github.com/Kinto/kinto.py/archive/master.zip

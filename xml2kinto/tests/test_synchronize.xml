@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocklist xmlns="http://www.mozilla.org/2006/addons-blocklist" lastupdate="1445462022000">
+  <certItems>
+    <certItem issuerName="MIGQMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRowGAYDVQQKExFDT01PRE8gQ0EgTGltaXRlZDE2MDQGA1UEAxMtQ09NT0RPIFJTQSBEb21haW4gVmFsaWRhdGlvbiBTZWN1cmUgU2VydmVyIENB">
+      <serialNumber>D9UltDPl4XVfSSqQOvdiwQ==</serialNumber>
+    </certItem>
+    <certItem issuerName="MDIxCzAJBgNVBAYTAkNOMQ4wDAYDVQQKEwVDTk5JQzETMBEGA1UEAxMKQ05OSUMgUk9PVA==">
+      <serialNumber>STMAjg==</serialNumber>
+    </certItem>
+  </certItems>
+</blocklist>

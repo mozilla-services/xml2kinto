@@ -1,2 +1,2 @@
-def SynchronizationError(Exception):
+class SynchronizationError(Exception):
     pass

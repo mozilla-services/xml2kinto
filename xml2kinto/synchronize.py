@@ -15,6 +15,7 @@ def synchronize(fields, xml_options, kinto_options):
     to_update = []
     to_create = []
 
+    print(xml.records, kinto.records)
     # looking at kinto to list records
     # to delete or to update
     for record in kinto.records:

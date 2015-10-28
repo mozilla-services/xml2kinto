@@ -24,11 +24,11 @@ class KintoRecords(Records):
         return [self._kinto2rec(rec) for rec in
                 self.collection.get_records()]
 
-    def _kinto2rec(self, data):
+    def _kinto2rec(self, record):
         rec = {}
         for key in self.fields:
-            rec[key] = data.data.get(key)
-        rec['id'] = text_type(data.id)
+            rec[key] = record.data.get(key)
+        rec['id'] = text_type(record.id)
         return rec
 
     def delete(self, data):

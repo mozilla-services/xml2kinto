@@ -30,12 +30,12 @@ build-requirements:
 	$(TEMPDIR)/bin/pip install -Ue .
 	$(TEMPDIR)/bin/pip freeze > requirements.txt
 
-# tests-once: install-dev
-# 	$(VENV)/bin/nosetests -s --with-mocha-reporter --cover-min-percentage=100 --with-coverage --cover-package=xml2kinto
+tests-once: install-dev
+	$(VENV)/bin/py.test --cov-report term-missing --cov-fail-under 100 --cov xml2kinto
 
-# tests:
-# 	@rm -fr .coverage
-# 	tox
+tests:
+	@rm -fr .coverage
+	tox
 
 clean:
 	find . -name '*.pyc' -delete
