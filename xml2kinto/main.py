@@ -46,13 +46,13 @@ class KintoRecords(object):
         rec['id'] = str(data.id)
         return rec
 
-    def delete_record(self, data):
-        self.collection.delete_record(data['id'])
+    def delete(self, data):
+        self.collection.delete(data['id'])
 
-    def create_record(self, data):
+    def create(self, data):
         if 'id' not in data:
             data['id'] = create_id(data)
-        rec = self.collection.create_record(data)
+        rec = self.collection.create(data)
         rec.save()   # XXX
         return rec
 
