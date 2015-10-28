@@ -3,7 +3,7 @@ from xml2kinto.synchronize import synchronize
 
 # options to move to a config file
 xml_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                        'blocklist.xml'))
+                                        '..', 'blocklist.xml'))
 auth = ('mark', 'p4ssw0rd')
 collection_permissions = {'read': ["system.Everyone"]}
 bucket_name = u'onecrl'
