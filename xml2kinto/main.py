@@ -19,11 +19,20 @@ DATAFILE = os.path.join(os.path.dirname(__file__), 'blocklist.xml')
 URL = '{http://www.mozilla.org/2006/addons-blocklist}'
 tree = ET.parse(DATAFILE)
 root = tree.getroot()
+user = 'mark'
 
-bucket = Bucket('default', server_url='http://localhost:8888/v1',
-                auth=('tarek', 'p4ssw0rd'))
+permissions = {'read': ["system.Everyone"]}
 
-crl_collection = bucket.get_collection('onecrl')
+bucket = Bucket('onecrl', server_url='http://localhost:8888/v1',
+                auth=(user, 'p4ssw0rd'), create=True,
+                permissions=permissions)
+
+colls = bucket.list_collections()
+
+if 'blocklist' not in colls:
+    bucket.create_collection('blocklist')
+
+crl_collection = bucket.get_collection('blocklist')
 
 
 for item in root.iterfind('%scertItems/*' % URL):
