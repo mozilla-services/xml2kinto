@@ -47,12 +47,12 @@ class KintoRecords(object):
         return rec
 
     def delete(self, data):
-        self.collection.delete(data['id'])
+        self.collection.delete_record(data['id'])
 
     def create(self, data):
         if 'id' not in data:
             data['id'] = create_id(data)
-        rec = self.collection.create(data)
+        rec = self.collection.create_record(data)
         rec.save()   # XXX
         return rec
 
@@ -123,13 +123,13 @@ def synchronize():
 
     for record in to_delete:
         try:
-            kinto.delete_record(record)
+            kinto.delete(record)
         except KintoException as e:
             raise Exception(e.response.content)
 
     for record in to_create + to_update:
         try:
-            kinto.create_record(record)
+            kinto.create(record)
         except KintoException as e:
             raise Exception(e.response.content)
 
