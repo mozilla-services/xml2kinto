@@ -73,8 +73,20 @@ class XMLRecords(object):
 
     def _xml2rec(self, data):
         rec = {}
-        for key in fields:
-            rec[key] = data.get(key)
+
+        # grabbing child nodes
+        for child in data.getchildren():
+            field_name = child.tag
+            if field_name.startswith(self.url):
+                field_name = field_name[len(self.url):]
+            if field_name in fields:
+                rec[field_name] = child.text
+
+        # grabbing attributes
+        for key in data.keys():
+            if key in fields:
+                rec[key] = data.get(key)
+
         if 'id' not in data:
             rec['id'] = create_id(data)
         return rec
@@ -87,7 +99,7 @@ class XMLRecords(object):
 
 def same_record(one, two):
     for key in fields:
-        if one[key] != two[key]:
+        if one.get(key) != two.get(key):
             return False
     return True
 
