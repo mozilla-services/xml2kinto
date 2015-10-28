@@ -7,12 +7,22 @@ from kinto_client import Bucket
 from kinto_client.exceptions import KintoException
 
 
-DATAFILE = os.path.join(os.path.dirname(__file__), 'blocklist.xml')
+# options to move to a config file
+xml_file = os.path.join(os.path.dirname(__file__), 'blocklist.xml')
 user = 'mark'
 permissions = {'read': ["system.Everyone"]}
-bucket_name = 'onecrl'
-collection_name = 'blocklist'
+bucket_name = u'onecrl'
+collection_name = u'blocklist'
 kinto_server = 'http://localhost:8888/v1'
+
+
+def create_id(data):
+    hash = hashlib.md5()
+    data = data.items()
+    data.sort()
+    for __, value in data:
+        hash.update(str(value))
+    return str(uuid.UUID(hash.hexdigest()))
 
 
 class KintoRecords(object):
@@ -25,19 +35,30 @@ class KintoRecords(object):
         if collection_name not in colls:
             self.bucket.create_collection(collection_name)
         self.collection = self.bucket.get_collection(collection_name)
+        self.records = [self._kinto2rec(rec) for rec in
+                        self.collection.get_records()]
+
+    def _kinto2rec(self, data):
+        rec = {}
+        for key in ('subject', 'publicKeyHash', 'serialNumber', 'issuerName'):
+            rec[key] = data.data.get(key)
+        rec['id'] = str(data.id)
+        return rec
+
+    def delete_record(self, data):
+        self.collection.delete_record(data['id'])
 
     def create_record(self, data):
         if 'id' not in data:
-            data['id'] = self._create_id(data)
+            data['id'] = create_id(data)
         rec = self.collection.create_record(data)
         rec.save()   # XXX
         return rec
 
-    def _create_id(self, data):
-        hash = hashlib.md5()
-        for value in cert.values():
-            hash.update(str(value))
-        return str(uuid.UUID(hash.hexdigest()))
+    def find(self, id):
+        for rec in self.records:
+            if rec['id'] == id:
+                return rec
 
 
 class XMLRecords(object):
@@ -46,20 +67,69 @@ class XMLRecords(object):
         self.url = '{http://www.mozilla.org/2006/addons-blocklist}'
         self.tree = ET.parse(self.filename)
         self.root = self.tree.getroot()
-        self.records = self.root.iterfind('%scertItems/*' % self.url)
+        self.records = [self._xml2rec(rec) for rec in
+                        self.root.iterfind('%scertItems/*' % self.url)]
+
+    def _xml2rec(self, data):
+        rec = {}
+        for key in ('subject', 'publicKeyHash', 'serialNumber', 'issuerName'):
+            rec[key] = data.get(key)
+        if 'id' not in data:
+            rec['id'] = create_id(data)
+        return rec
+
+    def find(self, id):
+        for rec in self.records:
+            if rec['id'] == id:
+                return rec
 
 
 
-xml = XMLRecords(DATAFILE)
-kinto = KintoRecords()
-
-
-for record in xml.records:
-    cert = {}
+def same_record(one, two):
     for key in ('subject', 'publicKeyHash', 'serialNumber', 'issuerName'):
-        cert[key] = record.get(key)
+        if one[key] != two[key]:
+            return False
+    return True
 
+
+xml = XMLRecords(xml_file)
+kinto = KintoRecords()
+to_delete = []
+to_update = []
+to_create = []
+
+# looking at kinto to list records
+# to delete or to update
+for record in kinto.records:
+    xml_rec = xml.find(record['id'])
+    if xml_rec is None:
+        to_delete.append(record)
+    else:
+        if not same_record(xml_rec, record):
+            to_update.append(xml_rec)
+
+# new records ?
+for record in xml.records:
+    kinto_rec = kinto.find(record['id'])
+    if not kinto_rec:
+        to_create.append(record)
+
+
+print('%d records to create' % len(to_create))
+print('%d records to delete' % len(to_delete))
+print('%d records to update' % len(to_update))
+
+
+for record in to_delete:
     try:
-        kinto.create_record(cert)
+        kinto.delete_record(record)
     except KintoException as e:
         raise Exception(e.response.content)
+
+for record in to_create + to_update:
+    try:
+        kinto.create_record(record)
+    except KintoException as e:
+        raise Exception(e.response.content)
+
+print('Done!')
