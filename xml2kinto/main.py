@@ -100,7 +100,7 @@ class XMLRecords(Records):
                 rec[key] = data.get(key)
 
         if 'id' not in data:
-            rec['id'] = create_id(data)
+            rec['id'] = create_id(rec)
         return rec
 
 
