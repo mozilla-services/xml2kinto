@@ -1,28 +1,33 @@
-import os
 import hashlib
+import os
 import uuid
-
 import xml.etree.ElementTree as ET
-from kinto_client import Bucket
-from kinto_client.exceptions import KintoException
+
+from kintoclient import Bucket
+from kintoclient.exceptions import KintoException
 
 
 # options to move to a config file
-xml_file = os.path.join(os.path.dirname(__file__), 'blocklist.xml')
+xml_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                        'blocklist.xml'))
 user = 'mark'
-permissions = {'read': ["system.Everyone"]}
+collection_permissions = {'read': ["system.Everyone"]}
 bucket_name = u'onecrl'
 collection_name = u'blocklist'
 kinto_server = 'http://localhost:8888/v1'
 fields = ('subject', 'publicKeyHash', 'serialNumber', 'issuerName')
 
 
+def SynchronizationError(Exception):
+    pass
+
+
 def create_id(data):
     hash = hashlib.md5()
-    data = data.items()
+    data = list(data.items())
     data.sort()
     for __, value in data:
-        hash.update(str(value))
+        hash.update(value.encode('utf-8'))
     return str(uuid.UUID(hash.hexdigest()))
 
 
@@ -46,12 +51,13 @@ class Records(object):
 class KintoRecords(Records):
     def _load(self):
         self.bucket = Bucket(bucket_name, server_url=kinto_server,
-                             auth=(user, 'p4ssw0rd'), create=True,
-                             permissions=permissions)
-        colls = self.bucket.list_collections()
+                             auth=(user, 'p4ssw0rd'), create=True)
 
+        colls = self.bucket.list_collections()
         if collection_name not in colls:
-            self.bucket.create_collection(collection_name)
+            self.bucket.create_collection(collection_name,
+                                          permissions=collection_permissions)
+
         self.collection = self.bucket.get_collection(collection_name)
         return [self._kinto2rec(rec) for rec in
                 self.collection.get_records()]
@@ -70,7 +76,6 @@ class KintoRecords(Records):
         if 'id' not in data:
             data['id'] = create_id(data)
         rec = self.collection.create_record(data)
-        rec.save()   # XXX
         return rec
 
 
@@ -144,13 +149,13 @@ def synchronize():
         try:
             kinto.delete(record)
         except KintoException as e:
-            raise Exception(e.response.content)
+            raise SynchronizationError(e.response.content)
 
     for record in to_create + to_update:
         try:
             kinto.create(record)
         except KintoException as e:
-            raise Exception(e.response.content)
+            raise SynchronizationError(e.response.content)
 
     print('Done!')
 

@@ -1,11 +1,10 @@
-import platform
 import codecs
 import os
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-with open(os.path.join(here, 'README.rst')) as f:
+with codecs.open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     README = f.read()
 
 
@@ -16,19 +15,22 @@ REQUIREMENTS = [
 
 ENTRY_POINTS = {
     'console_scripts': [
-        'xml2kinto = xml2kinto.main:synchronize'
+        'xml2kinto = xml2kinto.__main__:synchronize'
     ]
 }
 
 
 setup(name='xml2kinto',
-      version='0.1',
+      version='0.1.0.dev0',
       description='XML-to-Kinto',
       long_description=README,
       license='Apache License (2.0)',
       classifiers=[
           "Programming Language :: Python",
+          "Programming Language :: Python :: 2",
           "Programming Language :: Python :: 2.7",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3.4",
           "License :: OSI Approved :: Apache Software License"
       ],
       keywords="web services",
