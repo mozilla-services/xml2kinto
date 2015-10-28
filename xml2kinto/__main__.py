@@ -9,7 +9,7 @@ from kinto_client.exceptions import KintoException
 
 
 # options to move to a config file
-xml_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
+xml_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
                                         'blocklist.xml'))
 user = 'mark'
 collection_permissions = {'read': ["system.Everyone"]}
