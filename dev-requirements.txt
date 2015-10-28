@@ -1,6 +1,5 @@
 tox
 flake8
-WebTest
 mock
 pytest
 pytest-cache
