@@ -126,6 +126,8 @@ def synchronize():
     to_update = []
     to_create = []
 
+    print('Syncing to %s%s/records' % (kinto_server, kinto.collection.uri))
+
     # looking at kinto to list records
     # to delete or to update
     for record in kinto.records:
