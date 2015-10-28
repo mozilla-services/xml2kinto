@@ -5,6 +5,8 @@ PYTHON = $(VENV)/bin/python
 DEV_STAMP = $(VENV)/.dev_env_installed.stamp
 INSTALL_STAMP = $(VENV)/.install.stamp
 TEMPDIR := $(shell mktemp -d)
+KINTO_SERVER = https://kinto.stage.mozaws.net/v1
+
 
 .IGNORE: clean distclean maintainer-clean
 .PHONY: all install install-dev virtualenv tests
@@ -35,7 +37,7 @@ tests-once: install-dev
 
 tests:
 	@rm -fr .coverage
-	tox
+	$(VENV)/bin/tox
 
 clean:
 	find . -name '*.pyc' -delete
@@ -48,4 +50,4 @@ maintainer-clean: distclean
 	rm -fr .venv* .tox/
 
 sync: install
-	$(VENV)/bin/xml2kinto
+	$(VENV)/bin/xml2kinto -s $(KINTO_SERVER)
