@@ -26,8 +26,25 @@ def create_id(data):
     return str(uuid.UUID(hash.hexdigest()))
 
 
-class KintoRecords(object):
-    def __init__(self):
+class Records(object):
+    def __init__(self, options=None):
+        if options is None:
+            self.options = {}
+        else:
+            self.options = options
+        self.records = self._load()
+
+    def _load(self):
+        raise NotImplementedError()
+
+    def find(self, id):
+        for rec in self.records:
+            if rec['id'] == id:
+                return rec
+
+
+class KintoRecords(Records):
+    def _load(self):
         self.bucket = Bucket(bucket_name, server_url=kinto_server,
                              auth=(user, 'p4ssw0rd'), create=True,
                              permissions=permissions)
@@ -36,8 +53,8 @@ class KintoRecords(object):
         if collection_name not in colls:
             self.bucket.create_collection(collection_name)
         self.collection = self.bucket.get_collection(collection_name)
-        self.records = [self._kinto2rec(rec) for rec in
-                        self.collection.get_records()]
+        return [self._kinto2rec(rec) for rec in
+                self.collection.get_records()]
 
     def _kinto2rec(self, data):
         rec = {}
@@ -56,20 +73,15 @@ class KintoRecords(object):
         rec.save()   # XXX
         return rec
 
-    def find(self, id):
-        for rec in self.records:
-            if rec['id'] == id:
-                return rec
 
-
-class XMLRecords(object):
-    def __init__(self, filename):
-        self.filename = filename
+class XMLRecords(Records):
+    def _load(self):
+        self.filename = self.options['filename']
         self.url = '{http://www.mozilla.org/2006/addons-blocklist}'
         self.tree = ET.parse(self.filename)
         self.root = self.tree.getroot()
-        self.records = [self._xml2rec(rec) for rec in
-                        self.root.iterfind('%scertItems/*' % self.url)]
+        return [self._xml2rec(rec) for rec in
+                self.root.iterfind('%scertItems/*' % self.url)]
 
     def _xml2rec(self, data):
         rec = {}
@@ -91,11 +103,6 @@ class XMLRecords(object):
             rec['id'] = create_id(data)
         return rec
 
-    def find(self, id):
-        for rec in self.records:
-            if rec['id'] == id:
-                return rec
-
 
 def same_record(one, two):
     for key in fields:
@@ -107,7 +114,7 @@ def same_record(one, two):
 def synchronize():
     print('Working on %r' % kinto_server)
     print('Reading data from %r' % xml_file)
-    xml = XMLRecords(xml_file)
+    xml = XMLRecords(options={'filename': xml_file})
     kinto = KintoRecords()
     to_delete = []
     to_update = []
