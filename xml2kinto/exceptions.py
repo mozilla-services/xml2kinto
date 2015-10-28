@@ -1,0 +1,2 @@
+def SynchronizationError(Exception):
+    pass
