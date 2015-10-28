@@ -3,8 +3,8 @@ import os
 import uuid
 import xml.etree.ElementTree as ET
 
-from kintoclient import Bucket
-from kintoclient.exceptions import KintoException
+from kinto_client import Bucket
+from kinto_client.exceptions import KintoException
 
 
 # options to move to a config file
