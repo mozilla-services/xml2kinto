@@ -1,0 +1,2 @@
+[run]
+omit = xml2kinto/tests/*, xml2kinto/__main__.py
