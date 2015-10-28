@@ -1,3 +1,4 @@
+PYTHON_VERSION = python2.7
 VIRTUALENV = virtualenv
 VENV := $(shell echo $${VIRTUAL_ENV-.venv})
 PYTHON = $(VENV)/bin/python
@@ -21,7 +22,7 @@ $(DEV_STAMP): $(PYTHON) dev-requirements.txt
 
 virtualenv: $(PYTHON)
 $(PYTHON):
-	$(VIRTUALENV) $(VENV)
+	$(VIRTUALENV) --python /usr/bin/$(PYTHON_VERSION) $(VENV)
 	$(VENV)/bin/pip install -U pip
 
 build-requirements:
