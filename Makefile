@@ -1,6 +1,6 @@
 PYTHON_VERSION = python2.7
 VIRTUALENV = virtualenv
-VENV := $(shell echo $${VIRTUAL_ENV-.venv})
+VENV := $(shell echo $${VIRTUAL_ENV-.venv-$(PYTHON_VERSION)})
 PYTHON = $(VENV)/bin/python
 DEV_STAMP = $(VENV)/.dev_env_installed.stamp
 INSTALL_STAMP = $(VENV)/.install.stamp
@@ -45,7 +45,7 @@ distclean: clean
 	rm -fr *.egg *.egg-info/ dist/ build/
 
 maintainer-clean: distclean
-	rm -fr .venv/ .tox/
+	rm -fr .venv* .tox/
 
 sync: install
 	$(VENV)/bin/xml2kinto
