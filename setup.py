@@ -16,7 +16,7 @@ REQUIREMENTS = [
 
 ENTRY_POINTS = {
     'console_scripts': [
-        'xml2kinto = xml2kinto.__main__:synchronize'
+        'xml2kinto = xml2kinto.__main__:main'
     ]
 }
 
