@@ -22,7 +22,7 @@ ENTRY_POINTS = {
 
 
 setup(name='xml2kinto',
-      version='0.1.0.dev0',
+      version='0.1.0',
       description='XML-to-Kinto',
       long_description=README,
       license='Apache License (2.0)',
