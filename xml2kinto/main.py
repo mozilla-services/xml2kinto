@@ -93,6 +93,8 @@ def same_record(one, two):
 
 
 def synchronize():
+    print('Working on %r' % kinto_server)
+    print('Reading data from %r' % xml_file)
     xml = XMLRecords(xml_file)
     kinto = KintoRecords()
     to_delete = []
@@ -115,9 +117,9 @@ def synchronize():
         if not kinto_rec:
             to_create.append(record)
 
-    print('%d records to create.' % len(to_create))
-    print('%d records to delete.' % len(to_delete))
-    print('%d records to update.' % len(to_update))
+    print('- %d records to create.' % len(to_create))
+    print('- %d records to delete.' % len(to_delete))
+    print('- %d records to update.' % len(to_update))
 
     for record in to_delete:
         try:
