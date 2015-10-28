@@ -2,6 +2,7 @@ import hashlib
 import os
 import uuid
 import xml.etree.ElementTree as ET
+from six import text_type
 
 from kinto_client import Bucket
 from kinto_client.exceptions import KintoException
@@ -28,7 +29,7 @@ def create_id(data):
     data.sort()
     for __, value in data:
         hash.update(value.encode('utf-8'))
-    return str(uuid.UUID(hash.hexdigest()))
+    return text_type(uuid.UUID(hash.hexdigest()))
 
 
 class Records(object):
@@ -66,7 +67,7 @@ class KintoRecords(Records):
         rec = {}
         for key in fields:
             rec[key] = data.data.get(key)
-        rec['id'] = str(data.id)
+        rec['id'] = text_type(data.id)
         return rec
 
     def delete(self, data):
