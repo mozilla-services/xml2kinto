@@ -6,7 +6,7 @@ from xml2kinto.synchronize import synchronize
 # options to move to a config file
 xml_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                         '..', 'blocklist.xml'))
-auth = 'mark:p4ssw0rd'
+auth = ('mark', 'p4ssw0rd')
 collection_permissions = {'read': ["system.Everyone"]}
 bucket_name = u'onecrl'
 collection_name = u'blocklist'
@@ -24,7 +24,7 @@ def main(args=None):
                         type=str, default=xml_file)
 
     parser.add_argument('-a', '--auth', help='BasicAuth user:pass',
-                        type=str, default=auth)
+                        type=str, default=':'.join(auth))
 
     args = parser.parse_args(args=args)
 
@@ -39,5 +39,5 @@ def main(args=None):
                 })
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: nocover
     main()
