@@ -1,4 +1,6 @@
 import os
+import argparse
+
 from xml2kinto.synchronize import synchronize
 
 # options to move to a config file
@@ -12,17 +14,30 @@ kinto_server = 'http://localhost:8888/v1'
 fields = ('subject', 'publicKeyHash', 'serialNumber', 'issuerName')
 
 
-def main():
+def main(args=None):
+    parser = argparse.ArgumentParser(description='Syncs a Kinto DB.')
+
+    parser.add_argument('-s', '--kinto-server', help='Kinto Server',
+                        type=str, default=kinto_server)
+
+    parser.add_argument('-x', '--xml-file', help='XML Source file',
+                        type=str, default=xml_file)
+
+    parser.add_argument('-a', '--auth', help='BasicAuth user:pass',
+                        type=str, default=':'.join(auth))
+
+    args = parser.parse_args(args=args)
+
     synchronize(fields,
-                xml_options={'filename': xml_file},
+                xml_options={'filename': args.xml_file},
                 kinto_options={
-                    'server': kinto_server,
+                    'server': args.kinto_server,
                     'bucket_name': bucket_name,
                     'collection_name': collection_name,
-                    'auth': auth,
+                    'auth': tuple(args.auth.split(':')),
                     'permissions': collection_permissions
                 })
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: nocover
     main()
