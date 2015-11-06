@@ -1,6 +1,4 @@
-from six import text_type
-
-from kinto_client import Bucket
+from kinto_client import Client
 
 from .base import Records
 from .id_generator import create_id
@@ -8,34 +6,27 @@ from .id_generator import create_id
 
 class KintoRecords(Records):
     def _load(self):
-        self.bucket = Bucket(self.options['bucket_name'],
-                             server_url=self.options['server'],
-                             auth=self.options['auth'], create=True)
+        self.client = Client(server_url=self.options['server'],
+                             auth=self.options['auth'],
+                             bucket=self.options['bucket_name'],
+                             collection=self.options['collection_name'])
 
-        colls = self.bucket.list_collections()
-        if self.options['collection_name'] not in colls:
-            self.bucket.create_collection(
-                self.options['collection_name'],
-                permissions=self.options['permissions'])
-
-        self.collection = self.bucket.get_collection(
-            self.options['collection_name'])
+        # Create bucket
+        self.client.create_bucket()
+        self.client.create_collection(self.options['collection_name'],
+                                      permissions=self.options['permissions'])
 
         return [self._kinto2rec(rec) for rec in
-                self.collection.get_records()]
+                self.client.get_records()]
 
     def _kinto2rec(self, record):
-        rec = {}
-        for key in self.fields:
-            rec[key] = record.data.get(key)
-        rec['id'] = text_type(record.id)
-        return rec
+        return record.data
 
     def delete(self, data):
-        self.collection.delete_record(data['id'])
+        self.client.delete_record(data['id'])
 
     def create(self, data):
         if 'id' not in data:
             data['id'] = create_id(data)
-        rec = self.collection.create_record(data)
+        rec = self.client.create_record(data)
         return rec
