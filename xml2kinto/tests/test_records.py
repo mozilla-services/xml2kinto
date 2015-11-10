@@ -60,12 +60,8 @@ class TestKintoRecords:
             "serialNumber": "STMAjg=="
         }
 
-        with mock.patch('xml2kinto.records.kinto.Bucket') as mocked_bucket:
-            mocked_bucket.return_value.list_collections.return_value = [
-                self.collection_name
-            ]
-            mocked_bucket.return_value. \
-                get_collection.return_value.get_records.return_value = [record]
+        with mock.patch('xml2kinto.records.kinto.Client') as mocked_client:
+            mocked_client.return_value.get_records.return_value = [record]
             kinto_records = KintoRecords(('issuerName', 'serialNumber'),
                                          options={
                                              'server': 'http://example.com/v1',
@@ -76,10 +72,8 @@ class TestKintoRecords:
             assert len(kinto_records.records) == 1
 
     def test_create_collection_if_does_not_exists(self):
-        with mock.patch('xml2kinto.records.kinto.Bucket') as mocked_bucket:
-            mocked_bucket.return_value.list_collections.return_value = []
-            mocked_bucket.return_value. \
-                get_collection.return_value.get_records.return_value = []
+        with mock.patch('xml2kinto.records.kinto.Client') as mocked_client:
+            mocked_client.return_value.get_records.return_value = []
 
             KintoRecords(('issuerName', 'serialNumber'),
                          options={
@@ -88,12 +82,12 @@ class TestKintoRecords:
                              'bucket_name': 'onecrl',
                              'collection_name': 'blocklist',
                              'permissions': {"read": ["system.Everyone"]}})
-            mocked_bucket.return_value.create_collection. \
+            mocked_client.return_value.create_collection. \
                 assert_called_with('blocklist',
                                    permissions={"read": ["system.Everyone"]})
 
     def test_can_delete_records(self):
-        with mock.patch('xml2kinto.records.kinto.Bucket'):
+        with mock.patch('xml2kinto.records.kinto.Client'):
             records = KintoRecords(('issuerName', 'serialNumber'),
                                    options={
                                        'server': 'http://example.com/v1',
@@ -102,12 +96,12 @@ class TestKintoRecords:
                                        'collection_name': 'blocklist',
                                        'permissions': {}})
 
-        with mock.patch.object(records, 'collection'):
+        with mock.patch.object(records, 'client'):
             records.delete({'id': 'foobar'})
-            records.collection.delete_record.assert_called_with('foobar')
+            records.client.delete_record.assert_called_with('foobar')
 
     def test_can_create_data(self):
-        with mock.patch('xml2kinto.records.kinto.Bucket'):
+        with mock.patch('xml2kinto.records.kinto.Client'):
             records = KintoRecords(('issuerName', 'serialNumber'),
                                    options={
                                        'server': 'http://example.com/v1',
@@ -116,8 +110,8 @@ class TestKintoRecords:
                                        'collection_name': 'blocklist',
                                        'permissions': {}})
 
-        with mock.patch.object(records, 'collection') as mocked_collection:
-            mocked_collection.create_record = lambda x: x
+        with mock.patch.object(records, 'client') as mocked_client:
+            mocked_client.create_record = lambda x: x
             record = records.create({'issuerName': 'foo',
                                      'serialNumber': 'bar'})
             assert 'id' in record
