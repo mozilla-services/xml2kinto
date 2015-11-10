@@ -20,7 +20,7 @@ class KintoRecords(Records):
                 self.client.get_records()]
 
     def _kinto2rec(self, record):
-        return record.data
+        return record
 
     def delete(self, data):
         self.client.delete_record(data['id'])
