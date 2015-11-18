@@ -8,8 +8,8 @@ xml_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                         '..', 'blocklist.xml'))
 auth = ('mark', 'p4ssw0rd')
 collection_permissions = {'read': ["system.Everyone"]}
-bucket_name = u'onecrl'
-collection_name = u'blocklist'
+bucket_name = u'blocklists'
+collection_name = u'certificates'
 kinto_server = 'http://localhost:8888/v1'
 fields = ('subject', 'publicKeyHash', 'serialNumber', 'issuerName')
 

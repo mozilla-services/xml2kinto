@@ -1,4 +1,5 @@
 from kinto_client import Client
+from kinto_client.exceptions import KintoException
 
 from .base import Records
 from .id_generator import create_id
@@ -15,6 +16,13 @@ class KintoRecords(Records):
         self.client.create_bucket()
         self.client.create_collection(self.options['collection_name'],
                                       permissions=self.options['permissions'])
+
+        # XXX to be removed later
+        # remove the 'onecrl' bucket if it exists
+        try:
+            self.client.delete_bucket('onecrl')
+        except KintoException:
+            pass
 
         return [self._kinto2rec(rec) for rec in
                 self.client.get_records()]
