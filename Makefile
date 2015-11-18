@@ -33,7 +33,7 @@ build-requirements:
 	$(TEMPDIR)/bin/pip freeze > requirements.txt
 
 tests-once: install-dev
-	$(VENV)/bin/py.test --cov-report term-missing --cov-fail-under 100 --cov xml2kinto
+	$(VENV)/bin/py.test --cov-report term-missing --cov xml2kinto xml2kinto
 
 tests:
 	@rm -fr .coverage
