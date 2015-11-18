@@ -34,3 +34,6 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+# VIM
+*.un~
