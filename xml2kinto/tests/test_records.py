@@ -66,8 +66,8 @@ class TestKintoRecords:
                                          options={
                                              'server': 'http://example.com/v1',
                                              'auth': ('user', 'pass'),
-                                             'bucket_name': 'onecrl',
-                                             'collection_name': 'blocklist',
+                                             'bucket_name': 'blocklists',
+                                             'collection_name': 'certificates',
                                              'permissions': {}})
             assert len(kinto_records.records) == 1
 
@@ -79,11 +79,11 @@ class TestKintoRecords:
                          options={
                              'server': 'http://example.com/v1',
                              'auth': ('user', 'pass'),
-                             'bucket_name': 'onecrl',
-                             'collection_name': 'blocklist',
+                             'bucket_name': 'blocklists',
+                             'collection_name': 'certificates',
                              'permissions': {"read": ["system.Everyone"]}})
             mocked_client.return_value.create_collection. \
-                assert_called_with('blocklist',
+                assert_called_with('certificates',
                                    permissions={"read": ["system.Everyone"]})
 
     def test_can_delete_records(self):
@@ -92,8 +92,8 @@ class TestKintoRecords:
                                    options={
                                        'server': 'http://example.com/v1',
                                        'auth': ('user', 'pass'),
-                                       'bucket_name': 'onecrl',
-                                       'collection_name': 'blocklist',
+                                       'bucket_name': 'blocklists',
+                                       'collection_name': 'certificates',
                                        'permissions': {}})
 
         with mock.patch.object(records, 'client'):
@@ -106,8 +106,8 @@ class TestKintoRecords:
                                    options={
                                        'server': 'http://example.com/v1',
                                        'auth': ('user', 'pass'),
-                                       'bucket_name': 'onecrl',
-                                       'collection_name': 'blocklist',
+                                       'bucket_name': 'blocklists',
+                                       'collection_name': 'certificates',
                                        'permissions': {}})
 
         with mock.patch.object(records, 'client') as mocked_client:
