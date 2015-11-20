@@ -9,7 +9,7 @@ with codecs.open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 
 REQUIREMENTS = [
-    'kinto-client >= 0.2',  # kintoclient was renamed kinto_client
+    'kinto-client < 2.0',
     'six',
 ]
 

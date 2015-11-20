@@ -14,6 +14,7 @@ class KintoRecords(Records):
 
         # Create bucket
         self.client.create_bucket()
+
         self.client.create_collection(self.options['collection_name'],
                                       permissions=self.options['permissions'])
 
