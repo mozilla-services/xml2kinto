@@ -42,10 +42,11 @@ class TestXMLRecords:
     def test_load_records_from_a_filename(self):
         here = os.path.dirname(__file__)
         test_file = os.path.join(here, 'test_blocklist.xml')
-        xml_records = XMLRecords(('issuerName', 'serialNumber'), options={
+        xml_records = XMLRecords(('issuerName', 'serialNumber', 'subject',
+                                  'pubKeyHash'), options={
             'filename': test_file
         })
-        assert len(xml_records.records) == 10
+        assert len(xml_records.records) == 11
 
 
 class TestKintoRecords:
@@ -122,6 +123,8 @@ class TestSameRecord:
         fields = ('serialNumber', 'issuerName')
         record1 = {'serialNumber': 'foo', 'issuerName': 'bar'}
         record2 = {'serialNumber': 'BAR', 'issuerName': 'FOO'}
+        assert not same_record(fields, record1, record2)
+        record3 = {'subject': 'foo', 'pubKeyHash': 'bar'}
         assert not same_record(fields, record1, record2)
 
     def test_return_true_if_having_same_fields(self):

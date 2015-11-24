@@ -11,7 +11,7 @@ collection_permissions = {'read': ["system.Everyone"]}
 bucket_name = u'blocklists'
 collection_name = u'certificates'
 kinto_server = 'http://localhost:8888/v1'
-fields = ('subject', 'publicKeyHash', 'serialNumber', 'issuerName')
+fields = ('subject', 'pubKeyHash', 'serialNumber', 'issuerName')
 
 
 def main(args=None):
