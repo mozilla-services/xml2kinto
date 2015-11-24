@@ -125,7 +125,7 @@ class TestSameRecord:
         record2 = {'serialNumber': 'BAR', 'issuerName': 'FOO'}
         assert not same_record(fields, record1, record2)
         record3 = {'subject': 'foo', 'pubKeyHash': 'bar'}
-        assert not same_record(fields, record1, record2)
+        assert not same_record(fields, record1, record3)
 
     def test_return_true_if_having_same_fields(self):
         fields = ('serialNumber', 'issuerName')
