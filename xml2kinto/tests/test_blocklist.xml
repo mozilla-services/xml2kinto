@@ -31,5 +31,7 @@
     <certItem issuerName="MEQxCzAJBgNVBAYTAlVTMRUwEwYDVQQKEwx0aGF3dGUsIEluYy4xHjAcBgNVBAMTFXRoYXd0ZSBFViBTU0wgQ0EgLSBHMw==">
       <serialNumber>CrTHPEE6AZSfI3jysin2bA==</serialNumber>
     </certItem>
+    <certItem subject="MA0xCzAJBgNVBAMMAmNh" pubKeyHash="/xeHA5s+i9/z9d8qy6JEuE1xGoRYIwgJuTE/lmaGJ7M=">
+    </certItem>
   </certItems>
 </blocklist>
