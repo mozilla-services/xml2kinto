@@ -13,10 +13,19 @@ class KintoRecords(Records):
                              collection=self.options['collection_name'])
 
         # Create bucket
-        self.client.create_bucket()
+        try:
+            self.client.create_bucket()
+        except KintoException as e:
+            if e.response.status_code != 412:
+                raise
 
-        self.client.create_collection(self.options['collection_name'],
-                                      permissions=self.options['permissions'])
+        try:
+            self.client.create_collection(
+                self.options['collection_name'],
+                permissions=self.options['permissions'])
+        except KintoException as e:
+            if e.response.status_code != 412:
+                raise
 
         # XXX to be removed later
         # remove the 'onecrl' bucket if it exists
