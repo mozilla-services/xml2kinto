@@ -47,7 +47,7 @@ class TestXMLRecords:
             'filename': test_file,
             'xpath': 'certItems/*'
         })
-        assert len(xml_records.records) == 11
+        assert len(xml_records.records) == 10
 
 
 class TestKintoRecords:
