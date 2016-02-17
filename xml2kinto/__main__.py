@@ -29,7 +29,8 @@ def main(args=None):
     args = parser.parse_args(args=args)
 
     synchronize(fields,
-                xml_options={'filename': args.xml_file},
+                xml_options={'filename': args.xml_file,
+                             'xpath': 'certItems/*'},
                 kinto_options={
                     'server': args.kinto_server,
                     'bucket_name': bucket_name,
