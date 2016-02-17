@@ -8,11 +8,12 @@ from .id_generator import create_id
 class XMLRecords(Records):
     def _load(self):
         self.filename = self.options['filename']
+        self.xpath = self.options['xpath']
         self.url = '{http://www.mozilla.org/2006/addons-blocklist}'
         self.tree = ElementTree.parse(self.filename)
         self.root = self.tree.getroot()
         return [self._xml2rec(rec) for rec in
-                self.root.iterfind('%scertItems/*' % self.url)]
+                self.root.iterfind('%s%s' % (self.url, self.xpath))]
 
     def _xml2rec(self, data):
         rec = {}

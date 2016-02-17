@@ -44,7 +44,8 @@ class TestXMLRecords:
         test_file = os.path.join(here, 'test_blocklist.xml')
         xml_records = XMLRecords(('issuerName', 'serialNumber', 'subject',
                                   'pubKeyHash'), options={
-            'filename': test_file
+            'filename': test_file,
+            'xpath': 'certItems/*'
         })
         assert len(xml_records.records) == 11
 

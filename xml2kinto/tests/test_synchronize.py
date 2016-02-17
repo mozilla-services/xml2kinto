@@ -38,7 +38,8 @@ class TestSynchronize:
             test_file = os.path.join(here, 'test_synchronize.xml')
 
             synchronize(FIELDS,
-                        xml_options={'filename': test_file},
+                        xml_options={'filename': test_file,
+                                     'xpath': 'certItems/*'},
                         kinto_options=mock.MagicMock())
             assert KintoRecords.return_value.create.call_count == 2
 
@@ -51,7 +52,8 @@ class TestSynchronize:
             test_file = os.path.join(here, 'test_synchronize.xml')
 
             synchronize(FIELDS,
-                        xml_options={'filename': test_file},
+                        xml_options={'filename': test_file,
+                                     'xpath': 'certItems/*'},
                         kinto_options=mock.MagicMock())
             assert KintoRecords.return_value.delete.call_count == 1
 
@@ -65,7 +67,8 @@ class TestSynchronize:
             test_file = os.path.join(here, 'test_synchronize.xml')
 
             synchronize(FIELDS,
-                        xml_options={'filename': test_file},
+                        xml_options={'filename': test_file,
+                                     'xpath': 'certItems/*'},
                         kinto_options=mock.MagicMock())
             assert KintoRecords.return_value.create.call_count == 1
             assert KintoRecords.return_value.delete.call_count == 0
@@ -84,7 +87,8 @@ class TestSynchronize:
 
             with pytest.raises(SynchronizationError):
                 synchronize(FIELDS,
-                            xml_options={'filename': test_file},
+                            xml_options={'filename': test_file,
+                                         'xpath': 'certItems/*'},
                             kinto_options=mock.MagicMock())
 
     def test_synchronize_raises_SynchronizationError_if_create_fails(self):
@@ -101,5 +105,6 @@ class TestSynchronize:
 
             with pytest.raises(SynchronizationError):
                 synchronize(FIELDS,
-                            xml_options={'filename': test_file},
+                            xml_options={'filename': test_file,
+                                         'xpath': 'certItems/*'},
                             kinto_options=mock.MagicMock())
