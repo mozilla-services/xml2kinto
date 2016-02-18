@@ -13,8 +13,8 @@ class TestMain(unittest.TestCase):
             options = sync.call_args[1]['kinto_options']
             self.assertEqual(options['server'], kinto_server)
             self.assertEqual(options['auth'], auth)
-            xml_options = sync.call_args[1]['xml_options']
-            self.assertEqual(xml_options['filename'], xml_file)
+            options = sync.call_args[0][0][0]['certificates']
+            self.assertEqual(options['filename'], xml_file)
 
     def test_main_custom_server(self):
         with mock.patch('xml2kinto.__main__.synchronize') as sync:
