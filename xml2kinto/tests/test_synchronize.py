@@ -36,7 +36,8 @@ class TestSynchronize(unittest.TestCase):
         certs = {'fields': FIELDS,
                  'filename': test_file,
                  'xpath': 'certItems/*',
-                 'collection_name': 'certificates'}
+                 'collection_name': 'certificates',
+                 'bucket_name': 'blocklists'}
 
         self.collections = {'certificates': certs}
 

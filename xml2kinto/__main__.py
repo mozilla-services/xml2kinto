@@ -13,6 +13,9 @@ collection_name = u'certificates'
 kinto_server = 'http://localhost:8888/v1'
 
 cert_items_fields = ('subject', 'pubKeyHash', 'serialNumber', 'issuerName')
+gfx_items_fields = ('os', 'vendor', 'feature', 'featureStatus',
+                    'driverVersion', 'driverVersionComparator',
+                    ('devices', {'xpath': 'devices/*'}))
 
 
 def main(args=None):
@@ -29,11 +32,16 @@ def main(args=None):
 
     args = parser.parse_args(args=args)
 
-    collections = [{'certificates': {'fields': cert_items_fields,
-                                     'filename': args.xml_file,
-                                     'xpath': 'certItems/*',
-                                     'bucket_name': bucket_name,
-                                     'collection_name': collection_name}}]
+    collections = {'certificates': {'fields': cert_items_fields,
+                                    'filename': args.xml_file,
+                                    'xpath': 'certItems/*',
+                                    'bucket_name': bucket_name,
+                                    'collection_name': collection_name},
+                   'gfx': {'fields': gfx_items_fields,
+                           'filename': args.xml_file,
+                           'xpath': 'gfxItems/*',
+                           'bucket_name': bucket_name,
+                           'collection_name': 'gfx'}}
 
     synchronize(collections,
                 kinto_options={'server': args.kinto_server,

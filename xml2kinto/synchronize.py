@@ -27,8 +27,10 @@ def synchronize(collections, kinto_options):
         to_update = []
         to_create = []
 
-        print('Syncing to %s%s/records' % (options['server'],
-                                           options['collection_name']))
+        print('Syncing to %s/buckets/%s/collections/%s/records' % (
+            options['server'],
+            options['bucket_name'],
+            options['collection_name']))
 
         # looking at kinto to list records
         # to delete or to update

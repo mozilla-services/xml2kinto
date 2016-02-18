@@ -18,6 +18,17 @@ class XMLRecords(Records):
     def _xml2rec(self, data):
         rec = {}
 
+        # grabbing sub-elements
+        for field in self.fields:
+            if not isinstance(field, tuple):
+                continue
+            name, options = field
+            if 'xpath' in options:
+                rec[name] = [item.text for item in data.findall(self.url +
+                             options['xpath'])]
+            else:
+                raise NotImplementedError(options)
+
         # grabbing child nodes
         for child in data.getchildren():
             field_name = child.tag
