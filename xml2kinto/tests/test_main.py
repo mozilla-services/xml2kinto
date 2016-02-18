@@ -13,7 +13,7 @@ class TestMain(unittest.TestCase):
             options = sync.call_args[1]['kinto_options']
             self.assertEqual(options['server'], kinto_server)
             self.assertEqual(options['auth'], auth)
-            options = sync.call_args[0][0][0]['certificates']
+            options = sync.call_args[0][0]['certificates']
             self.assertEqual(options['filename'], xml_file)
 
     def test_main_custom_server(self):
