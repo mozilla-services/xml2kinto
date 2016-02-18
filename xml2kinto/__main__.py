@@ -11,7 +11,8 @@ collection_permissions = {'read': ["system.Everyone"]}
 bucket_name = u'blocklists'
 collection_name = u'certificates'
 kinto_server = 'http://localhost:8888/v1'
-fields = ('subject', 'pubKeyHash', 'serialNumber', 'issuerName')
+
+cert_items_fields = ('subject', 'pubKeyHash', 'serialNumber', 'issuerName')
 
 
 def main(args=None):
@@ -28,16 +29,16 @@ def main(args=None):
 
     args = parser.parse_args(args=args)
 
-    synchronize(fields,
-                xml_options={'filename': args.xml_file,
-                             'xpath': 'certItems/*'},
-                kinto_options={
-                    'server': args.kinto_server,
-                    'bucket_name': bucket_name,
-                    'collection_name': collection_name,
-                    'auth': tuple(args.auth.split(':')),
-                    'permissions': collection_permissions
-                })
+    collections = [{'certificates': {'fields': cert_items_fields,
+                                     'filename': args.xml_file,
+                                     'xpath': 'certItems/*',
+                                     'bucket_name': bucket_name,
+                                     'collection_name': collection_name}}]
+
+    synchronize(collections,
+                kinto_options={'server': args.kinto_server,
+                               'auth': tuple(args.auth.split(':')),
+                               'permissions': collection_permissions})
 
 
 if __name__ == '__main__':  # pragma: nocover

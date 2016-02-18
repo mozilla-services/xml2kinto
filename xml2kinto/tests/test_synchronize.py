@@ -1,4 +1,5 @@
 import os
+import unittest
 import mock
 import pytest
 from kinto_client.exceptions import KintoException
@@ -28,19 +29,23 @@ deleted_record = {
 }
 
 
-class TestSynchronize:
+class TestSynchronize(unittest.TestCase):
+    def setUp(self):
+        here = os.path.dirname(__file__)
+        test_file = os.path.join(here, 'test_synchronize.xml')
+        certs = {'fields': FIELDS,
+                 'filename': test_file,
+                 'xpath': 'certItems/*',
+                 'collection_name': 'certificates'}
+
+        self.collections = {'certificates': certs}
+
     def test_synchronize_create_missing_records(self):
         with mock.patch('xml2kinto.synchronize.KintoRecords') as KintoRecords:
             KintoRecords.return_value.records = []
             KintoRecords.return_value.find.return_value = None
-
-            here = os.path.dirname(__file__)
-            test_file = os.path.join(here, 'test_synchronize.xml')
-
-            synchronize(FIELDS,
-                        xml_options={'filename': test_file,
-                                     'xpath': 'certItems/*'},
-                        kinto_options=mock.MagicMock())
+            kinto_options = mock.MagicMock()
+            synchronize(self.collections, kinto_options=kinto_options)
             assert KintoRecords.return_value.create.call_count == 2
 
     def test_synchronize_delete_removed_records(self):
@@ -48,13 +53,7 @@ class TestSynchronize:
             KintoRecords.return_value.records = [deleted_record]
             KintoRecords.return_value.find.return_value = None
 
-            here = os.path.dirname(__file__)
-            test_file = os.path.join(here, 'test_synchronize.xml')
-
-            synchronize(FIELDS,
-                        xml_options={'filename': test_file,
-                                     'xpath': 'certItems/*'},
-                        kinto_options=mock.MagicMock())
+            synchronize(self.collections, kinto_options=mock.MagicMock())
             assert KintoRecords.return_value.delete.call_count == 1
 
     def test_synchronize_update_modified_records(self):
@@ -63,13 +62,7 @@ class TestSynchronize:
                                                  updated_record]
             KintoRecords.return_value.find.return_value = True
 
-            here = os.path.dirname(__file__)
-            test_file = os.path.join(here, 'test_synchronize.xml')
-
-            synchronize(FIELDS,
-                        xml_options={'filename': test_file,
-                                     'xpath': 'certItems/*'},
-                        kinto_options=mock.MagicMock())
+            synchronize(self.collections, kinto_options=mock.MagicMock())
             assert KintoRecords.return_value.create.call_count == 1
             assert KintoRecords.return_value.delete.call_count == 0
 
@@ -82,14 +75,8 @@ class TestSynchronize:
             KintoRecords.return_value.find.return_value = None
             KintoRecords.return_value.delete.side_effect = error
 
-            here = os.path.dirname(__file__)
-            test_file = os.path.join(here, 'test_synchronize.xml')
-
             with pytest.raises(SynchronizationError):
-                synchronize(FIELDS,
-                            xml_options={'filename': test_file,
-                                         'xpath': 'certItems/*'},
-                            kinto_options=mock.MagicMock())
+                synchronize(self.collections, kinto_options=mock.MagicMock())
 
     def test_synchronize_raises_SynchronizationError_if_create_fails(self):
         error = KintoException()
@@ -100,11 +87,5 @@ class TestSynchronize:
             KintoRecords.return_value.find.return_value = None
             KintoRecords.return_value.create.side_effect = error
 
-            here = os.path.dirname(__file__)
-            test_file = os.path.join(here, 'test_synchronize.xml')
-
             with pytest.raises(SynchronizationError):
-                synchronize(FIELDS,
-                            xml_options={'filename': test_file,
-                                         'xpath': 'certItems/*'},
-                            kinto_options=mock.MagicMock())
+                synchronize(self.collections, kinto_options=mock.MagicMock())
