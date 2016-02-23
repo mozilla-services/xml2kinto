@@ -16,6 +16,7 @@ cert_items_fields = ('subject', 'pubKeyHash', 'serialNumber', 'issuerName')
 gfx_items_fields = ('os', 'vendor', 'feature', 'featureStatus',
                     'driverVersion', 'driverVersionComparator',
                     ('devices', {'xpath': 'devices/*'}))
+em_items_fields = ('id', 'versionRange:minVersion', 'versionRange:maxVersion')
 
 
 def main(args=None):
@@ -41,7 +42,12 @@ def main(args=None):
                            'filename': args.xml_file,
                            'xpath': 'gfxItems/*',
                            'bucket_name': bucket_name,
-                           'collection_name': 'gfx'}}
+                           'collection_name': 'gfx'},
+                   'em': {'fields': em_items_fields,
+                          'filename': args.xml_file,
+                          'xpath': 'emItems/*',
+                          'bucket_name': bucket_name,
+                          'collection_name': 'em'}}
 
     synchronize(collections,
                 kinto_options={'server': args.kinto_server,

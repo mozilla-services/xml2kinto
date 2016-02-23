@@ -29,13 +29,19 @@ class XMLRecords(Records):
             else:
                 raise NotImplementedError(options)
 
-        # grabbing child nodes
+        # grabbing child nodes (text or attribute)
         for child in data.getchildren():
             field_name = child.tag
             if field_name.startswith(self.url):
                 field_name = field_name[len(self.url):]
+
             if field_name in self.fields:
                 rec[field_name] = child.text
+
+            keys = [('%s:%s' % (field_name, key), key) for key in child.keys()]
+            for fullkey, key in keys:
+                if fullkey in self.fields:
+                    rec[key] = child.get(key)
 
         # grabbing attributes
         for key in data.keys():
