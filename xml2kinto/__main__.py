@@ -2,8 +2,7 @@ import os
 import argparse
 
 from xml2kinto.synchronize import synchronize
-from xml2kinto.records.xml import (
-    get_certificate_records, get_gfx_records, get_addons_records)
+from xml2kinto.records.xml import get_records
 
 # options to move to a config file
 xml_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
@@ -33,18 +32,19 @@ addons_items_fields = (
                 'xpath': 'targetApplication',
                 'fields': (
                     ('id', {'name': 'guid'}),
-                    'minVersion',
-                    'maxVersion',
+                    ('versionRange/minVersion', {'name': 'minVersion'}),
+                    ('versionRange/maxVersion', {'name': 'maxVersion'})
                 )
             })
-        )})
+        )
+    })
 )
 
 plugins_items_fields = (
     'blockID', 'os',
-    ('match[name="name"]', {'name': 'matchName'}),
-    ('match[name="description"]', {'name': 'matchDescription'}),
-    ('match[name="filename"]', {'name': 'matchFilename'}),
+    ('match/name=name', {'name': 'matchName'}),
+    ('match/name=description', {'name': 'matchDescription'}),
+    ('match/name=filename', {'name': 'matchFilename'}),
     'infoURL',
     ('versionRange', {
         'fields': (
@@ -55,8 +55,8 @@ plugins_items_fields = (
             ('targetApplication', {
                 'fields': (
                     ('id', {'name': 'guid'}),
-                    'minVersion',
-                    'maxVersion',
+                    ('versionRange/minVersion', {'name': 'minVersion'}),
+                    ('versionRange/maxVersion', {'name': 'maxVersion'})
                 )
             })
         )})
@@ -80,19 +80,30 @@ def main(args=None):
     # Import certificates
 
     # 1. Get XML Records
-    certificate_records = get_certificate_records(
-        fields=cert_items_fields,
-        filename=args.xml_file)
+    # certificate_records = get_records(
+    #     fields=cert_items_fields,
+    #     filename=args.xml_file,
+    #     xpath='certItems/*')
 
-    gfx_records = get_gfx_records(
-        fields=gfx_items_fields,
-        filename=args.xml_file)
+    # gfx_records = get_records(
+    #     fields=gfx_items_fields,
+    #     filename=args.xml_file,
+    #     xpath='gfxItems/*')
 
-    addons_records = get_addons_records(
-        fields=addons_items_fields,
-        filename=args.xml_file)
+    # addons_records = get_records(
+    #     fields=addons_items_fields,
+    #     filename=args.xml_file,
+    #     xpath='emItems/*')
 
-    import pdb; pdb.set_trace()
+    plugins_records = get_records(
+        fields=plugins_items_fields,
+        filename=args.xml_file,
+        xpath='pluginItem/*')
+
+    print plugins_records
+    import sys
+    sys.exit()
+    import ipdb; ipdb.set_trace()
 
     # 2. Sync the records with the remote server
     synchronize(certificate_records,

@@ -25,6 +25,15 @@ def get_info(fields, data):
             if 'name' in options:
                 name = options['name']
 
+            if '/' in field:  # Eg: 'versionRange/minVersion'
+                tag, attr = field.split('/')
+                try:
+                    node = data.findall('%s%s' % (XML_NAMESPACE, tag))[0]
+                except IndexError:  # Didn't find a node for that.
+                    continue
+                rec[name] = node.get(attr)
+                continue  # We got all we need, don't dig further
+
             if 'xpath' in options:
                 if 'fields' in options:
                     # Use the current node to get the list of matching
@@ -35,8 +44,7 @@ def get_info(fields, data):
                     #     'xpath': 'targetApplication',
                     #     'fields': (
                     #         ('id', {'name': 'guid'}),
-                    #         'minVersion',
-                    #         'maxVersion',
+                    #         ......
                     #     )
                     # })
                     subrecords = data.iterfind(
@@ -49,48 +57,40 @@ def get_info(fields, data):
                     rec[name] = [item.text for item in data.findall(
                         XML_NAMESPACE + options['xpath'])]
 
-            # If the xpath has been handled for this field we don't
-            # need to look for attributes and nodes.
-            continue
+                # If the xpath has been handled for this field we don't
+                # need to look for attributes and nodes.
+                continue
 
         # grabbing child nodes
         for child in data.getchildren():
-            field_name = child.tag
+            field_name = child.tag  # eg versionRange
             if field_name.startswith(XML_NAMESPACE):
                 field_name = field_name[len(XML_NAMESPACE):]
             if field_name == field:
+                # eg <prefs>foo</pref> => rec['prefs'] = 'foo'
                 rec[name] = child.text
 
         # grabbing attributes
         for key in data.keys():
             if key == field:
-                rec[key] = data.get(key)
-
-    if 'id' not in data:
-        rec['id'] = create_id(rec)
+                # eg <emItem blockID="i24" ...> => rec['blockID'] = 'i24'
+                rec[name] = data.get(key)
 
     return rec
 
 
-def get_certificate_records(fields, filename, xpath='certItems/*'):
+def get_record_from_xml(fields, data):
+    rec = get_info(fields, data)
+    if 'id' not in rec:
+        rec['id'] = create_id(rec)
+    return rec
+
+
+def get_records(fields, filename, xpath):
     tree = ElementTree.parse(filename)
     root = tree.getroot()
     records = root.iterfind('%s%s' % (XML_NAMESPACE, xpath))
-    return [get_info(fields, rec) for rec in records]
-
-
-def get_gfx_records(fields, filename, xpath='gfxItems/*'):
-    tree = ElementTree.parse(filename)
-    root = tree.getroot()
-    records = root.iterfind('%s%s' % (XML_NAMESPACE, xpath))
-    return [get_info(fields, rec) for rec in records]
-
-
-def get_addons_records(fields, filename, xpath='emItems/*'):
-    tree = ElementTree.parse(filename)
-    root = tree.getroot()
-    records = root.iterfind('%s%s' % (XML_NAMESPACE, xpath))
-    return [get_info(fields, rec) for rec in records]
+    return [get_record_from_xml(fields, rec) for rec in records]
 
 
 class XMLRecords(Records):
