@@ -42,17 +42,19 @@ addons_items_fields = (
 
 plugins_items_fields = (
     'blockID', 'os',
-    ('match/name=name', {'name': 'matchName'}),
-    ('match/name=description', {'name': 'matchDescription'}),
-    ('match/name=filename', {'name': 'matchFilename'}),
+    ("match[@name='name']/exp", {'name': 'matchName'}),
+    ("match[@name='description']/exp", {'name': 'matchDescription'}),
+    ("match[@name='filename']/exp", {'name': 'matchFilename'}),
     'infoURL',
     ('versionRange', {
+        'xpath': 'versionRange',
         'fields': (
             'minVersion',
             'maxVersion',
             'severity',
-            'vulnerabilitystatus',
+            ('vulnerabilitystatus', {'name': 'vulnerabilityStatus'}),
             ('targetApplication', {
+                'xpath': 'targetApplication',
                 'fields': (
                     ('id', {'name': 'guid'}),
                     ('versionRange/minVersion', {'name': 'minVersion'}),
@@ -80,30 +82,25 @@ def main(args=None):
     # Import certificates
 
     # 1. Get XML Records
-    # certificate_records = get_records(
-    #     fields=cert_items_fields,
-    #     filename=args.xml_file,
-    #     xpath='certItems/*')
+    certificate_records = get_records(
+        fields=cert_items_fields,
+        filename=args.xml_file,
+        xpath='certItems/*')
 
-    # gfx_records = get_records(
-    #     fields=gfx_items_fields,
-    #     filename=args.xml_file,
-    #     xpath='gfxItems/*')
+    gfx_records = get_records(
+        fields=gfx_items_fields,
+        filename=args.xml_file,
+        xpath='gfxItems/*')
 
-    # addons_records = get_records(
-    #     fields=addons_items_fields,
-    #     filename=args.xml_file,
-    #     xpath='emItems/*')
+    addons_records = get_records(
+        fields=addons_items_fields,
+        filename=args.xml_file,
+        xpath='emItems/*')
 
     plugins_records = get_records(
         fields=plugins_items_fields,
         filename=args.xml_file,
-        xpath='pluginItem/*')
-
-    print plugins_records
-    import sys
-    sys.exit()
-    import ipdb; ipdb.set_trace()
+        xpath='pluginItems/*')
 
     # 2. Sync the records with the remote server
     synchronize(certificate_records,
