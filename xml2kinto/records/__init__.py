@@ -1,8 +1,6 @@
 from .base import Records
-from .xml import XMLRecords
-from .kinto import KintoRecords
 
-__all__ = ('same_record', 'Records', 'XMLRecords', 'KintoRecords')
+__all__ = ('same_record', 'Records')
 
 
 def same_record(fields, one, two):

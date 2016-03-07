@@ -4,7 +4,16 @@ import mock
 import pytest
 from kinto_client.exceptions import KintoException
 from xml2kinto.exceptions import SynchronizationError
-from xml2kinto.synchronize import synchronize
+from xml2kinto.synchronize import get_diff, synchronize
+
+
+def test_get_diff():
+    source = [{'id': 1, 'val': 2}, {'id': 2, 'val': 3}]
+    dest = [{'id': 2, 'val': 3}, {'id': 3, 'val': 4}]
+    assert get_diff(source, dest) == (
+        [{'id': 1, 'val': 2}],
+        [{'id': 3, 'val': 4}])
+
 
 FIELDS = ('serialNumber', 'issuerName')
 
