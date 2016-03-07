@@ -1,9 +1,13 @@
+import mock
+import os
+import pytest
+
 from xml.etree import ElementTree
 
 from xml2kinto.__main__ import (
     addons_items_fields, cert_items_fields, gfx_items_fields,
     plugins_items_fields)
-from xml2kinto.xml import get_record_from_xml
+from xml2kinto.xml import get_record_from_xml, get_info, get_xml_records
 
 XML_TPL = """<?xml version="1.0" encoding="UTF-8"?>
              <blocklist xmlns="http://www.mozilla.org/2006/addons-blocklist"
@@ -147,3 +151,44 @@ def test_certificate_record():
         'id': 'a81803c3-3c06-1549-bbe3-4b7d4c739f25',
         'issuerName': 'MIGQMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRowGAYDVQQKExFDT01PRE8gQ0EgTGltaXRlZDE2MDQGA1UEAxMtQ09NT0RPIFJTQSBEb21haW4gVmFsaWRhdGlvbiBTZWN1cmUgU2VydmVyIENB',  # noqa
         'serialNumber': 'D9UltDPl4XVfSSqQOvdiwQ=='}
+
+
+def test_get_info_raise_if_an_option_is_not_supported():
+    with pytest.raises(NotImplementedError):
+        get_info((("id", {"unsupported": "unsupported"}),), mock.sentinel.data)
+
+
+def test_if_match_name_cannot_be_found():
+    plugin_data = """
+        <pluginItem os="Linux" blockID="p328">
+            <match name="description" exp="some description"/>
+            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+            <versionRange minVersion="5.1" maxVersion="5.2"
+                          severity="0" vulnerabilitystatus="1">
+            </versionRange>
+        </pluginItem>
+    """
+
+    xml_node = _to_ElementTree(plugin_data)
+    expected = get_record_from_xml(plugins_items_fields, xml_node)
+    assert expected == {
+        'blockID': 'p328',
+        'id': '158dcb37-3316-c848-5ee7-5af62acb87ca',
+        'matchDescription': 'some description',
+        'os': 'Linux',
+        'infoURL': 'https://get.adobe.com/flashplayer/',
+        'versionRange': [
+            {'minVersion': '5.1',
+             'maxVersion': '5.2',
+             'severity': '0',
+             'vulnerabilityStatus': '1',
+             'targetApplication': []}]}
+
+
+def test_get_xml_records_can_load_xml_file():
+    filename = os.path.join(os.path.dirname(__file__), "test_blocklist.xml")
+    records = get_xml_records(fields=cert_items_fields,
+                              filename=filename,
+                              xpath='certItems/*')
+
+    assert len(records) == 10

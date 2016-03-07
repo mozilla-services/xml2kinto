@@ -19,7 +19,7 @@ def get_diff(source, dest):
             [dest_dict[k] for k in to_delete])
 
 
-def synchronize(diff, kinto_client, bucket, collection, permissions):
+def synchronize(diff, kinto_client, bucket, collection):
     to_create, to_delete = diff
 
     print('Syncing to {}{}'.format(

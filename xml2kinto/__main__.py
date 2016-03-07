@@ -15,10 +15,10 @@ cert_bucket = u'blocklists'
 cert_collection = u'certificates'
 gfx_bucket = u'blocklists'
 gfx_collection = u'gfx'
-addon_bucket = u'blocklists'
-addon_collection = u'addons'
-plugin_bucket = u'blocklists'
-plugin_collection = u'plugins'
+addons_bucket = u'blocklists'
+addons_collection = u'addons'
+plugins_bucket = u'blocklists'
+plugins_collection = u'plugins'
 kinto_server = 'http://localhost:8888/v1'
 
 cert_items_fields = ('serialNumber', 'issuerName')
@@ -85,9 +85,8 @@ def sync_records(fields, filename, xpath, kinto_client, bucket, collection):
         permissions=COLLECTION_PERMISSIONS)
 
     diff = get_diff(xml_records, kinto_records)
-    synchronize(
-        diff, kinto_client, bucket=bucket,
-        collection=collection, permissions=COLLECTION_PERMISSIONS)
+    synchronize(diff, kinto_client,
+                bucket=bucket, collection=collection)
 
 
 def main(args=None):
@@ -110,19 +109,19 @@ def main(args=None):
                         help='Collection name for gfx',
                         type=str, default=gfx_collection)
 
-    parser.add_argument('--addon-bucket', help='Bucket name for addons',
-                        type=str, default=addon_bucket)
+    parser.add_argument('--addons-bucket', help='Bucket name for addons',
+                        type=str, default=addons_bucket)
 
-    parser.add_argument('--addon-collection',
+    parser.add_argument('--addons-collection',
                         help='Collection name for addon',
-                        type=str, default=addon_collection)
+                        type=str, default=addons_collection)
 
-    parser.add_argument('--plugin-bucket', help='Bucket name for plugins',
-                        type=str, default=plugin_bucket)
+    parser.add_argument('--plugins-bucket', help='Bucket name for plugins',
+                        type=str, default=plugins_bucket)
 
-    parser.add_argument('--plugin-collection',
+    parser.add_argument('--plugins-collection',
                         help='Collection name for plugin',
-                        type=str, default=plugin_collection)
+                        type=str, default=plugins_collection)
 
     parser.add_argument('-x', '--xml-file', help='XML Source file',
                         type=str, default=xml_file)
@@ -156,15 +155,15 @@ def main(args=None):
              filename=args.xml_file,
              xpath='emItems/*',
              kinto_client=kinto_client,
-             bucket=args.addon_bucket,
-             collection=args.addon_collection),
+             bucket=args.addons_bucket,
+             collection=args.addons_collection),
         # Plugins
         dict(fields=plugins_items_fields,
              filename=args.xml_file,
              xpath='pluginItems/*',
              kinto_client=kinto_client,
-             bucket=args.plugin_bucket,
-             collection=args.plugin_collection)]
+             bucket=args.plugins_bucket,
+             collection=args.plugins_collection)]
 
     for collection in collections:
         sync_records(**collection)
