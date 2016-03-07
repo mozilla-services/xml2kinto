@@ -48,3 +48,7 @@ class KintoRecords(Records):
             data['id'] = create_id(data)
         rec = self.client.create_record(data)
         return rec
+
+
+def get_kinto_records(fields, kinto_client, bucket, collection):
+    pass

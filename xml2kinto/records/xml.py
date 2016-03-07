@@ -86,50 +86,8 @@ def get_record_from_xml(fields, data):
     return rec
 
 
-def get_records(fields, filename, xpath):
+def get_xml_records(fields, filename, xpath):
     tree = ElementTree.parse(filename)
     root = tree.getroot()
     records = root.iterfind('%s%s' % (XML_NAMESPACE, xpath))
     return [get_record_from_xml(fields, rec) for rec in records]
-
-
-class XMLRecords(Records):
-    def _load(self):
-        self.filename = self.options['filename']
-        self.xpath = self.options['xpath']
-        self.url = '{http://www.mozilla.org/2006/addons-blocklist}'
-        self.tree = ElementTree.parse(self.filename)
-        self.root = self.tree.getroot()
-        return [self._xml2rec(rec) for rec in
-                self.root.iterfind('%s%s' % (self.url, self.xpath))]
-
-    def _xml2rec(self, data):
-        rec = {}
-
-        # grabbing sub-elements
-        for field in self.fields:
-            if not isinstance(field, tuple):
-                continue
-            name, options = field
-            if 'xpath' in options:
-                rec[name] = [item.text for item in data.findall(self.url +
-                             options['xpath'])]
-            else:
-                raise NotImplementedError(options)
-
-        # grabbing child nodes
-        for child in data.getchildren():
-            field_name = child.tag
-            if field_name.startswith(self.url):
-                field_name = field_name[len(self.url):]
-            if field_name in self.fields:
-                rec[field_name] = child.text
-
-        # grabbing attributes
-        for key in data.keys():
-            if key in self.fields:
-                rec[key] = data.get(key)
-
-        if 'id' not in data:
-            rec['id'] = create_id(rec)
-        return rec
