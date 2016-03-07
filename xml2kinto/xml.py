@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 from xml.etree import ElementTree
 
-from .base import Records
 from .id_generator import create_id
 
 XML_NAMESPACE = '{http://www.mozilla.org/2006/addons-blocklist}'

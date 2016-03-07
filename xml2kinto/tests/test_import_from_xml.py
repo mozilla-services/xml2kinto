@@ -3,7 +3,7 @@ from xml.etree import ElementTree
 from xml2kinto.__main__ import (
     addons_items_fields, cert_items_fields, gfx_items_fields,
     plugins_items_fields)
-from xml2kinto.records.xml import get_record_from_xml
+from xml2kinto.xml import get_record_from_xml
 
 XML_TPL = """<?xml version="1.0" encoding="UTF-8"?>
              <blocklist xmlns="http://www.mozilla.org/2006/addons-blocklist"

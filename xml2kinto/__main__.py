@@ -2,9 +2,9 @@ import os
 import argparse
 
 from kinto_client import Client
+from xml2kinto.kinto import get_kinto_records
 from xml2kinto.synchronize import get_diff, synchronize
-from xml2kinto.records.kinto import get_kinto_records
-from xml2kinto.records.xml import get_xml_records
+from xml2kinto.xml import get_xml_records
 
 # options to move to a config file
 xml_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
