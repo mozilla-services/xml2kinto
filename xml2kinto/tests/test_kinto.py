@@ -21,7 +21,7 @@ def test_get_kinto_records_try_to_create_the_collection_with_permissions():
         permissions=mock.sentinel.permissions, if_not_exists=True)
 
 
-def test_get_kinto_records_return_a_list_of_records():
+def test_get_kinto_records_gets_a_list_of_records():
     kinto_client = mock.MagicMock()
     get_kinto_records(kinto_client, mock.sentinel.bucket,
                       mock.sentinel.collection, mock.sentinel.permissions)

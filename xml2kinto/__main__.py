@@ -3,30 +3,30 @@ import argparse
 
 from kinto_client import Client
 from xml2kinto.kinto import get_kinto_records
-from xml2kinto.synchronize import get_diff, synchronize
+from xml2kinto.synchronize import get_diff, push_changes
 from xml2kinto.xml import get_xml_records
 
 # options to move to a config file
-xml_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
+XML_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                         '..', 'blocklist.xml'))
-auth = ('mark', 'p4ssw0rd')
+AUTH = ('mark', 'p4ssw0rd')
 COLLECTION_PERMISSIONS = {'read': ["system.Everyone"]}
-cert_bucket = u'blocklists'
-cert_collection = u'certificates'
-gfx_bucket = u'blocklists'
-gfx_collection = u'gfx'
-addons_bucket = u'blocklists'
-addons_collection = u'addons'
-plugins_bucket = u'blocklists'
-plugins_collection = u'plugins'
-kinto_server = 'http://localhost:8888/v1'
+CERT_BUCKET = u'blocklists'
+CERT_COLLECTION = u'certificates'
+GFX_BUCKET = u'blocklists'
+GFX_COLLECTION = u'gfx'
+ADDONS_BUCKET = u'blocklists'
+ADDONS_COLLECTION = u'addons'
+PLUGINS_BUCKET = u'blocklists'
+PLUGINS_COLLECTION = u'plugins'
+KINTO_SERVER = 'http://localhost:8888/v1'
 
-cert_items_fields = ('serialNumber', 'issuerName')
-gfx_items_fields = ('blockID', 'os', 'vendor', 'feature', 'featureStatus',
+CERT_ITEMS_FIELDS = ('serialNumber', 'issuerName')
+GFX_ITEMS_FIELDS = ('blockID', 'os', 'vendor', 'feature', 'featureStatus',
                     'driverVersion', 'driverVersionComparator',
                     ('devices', {'xpath': 'devices/*'}))
 
-addons_items_fields = (
+ADDONS_ITEMS_FIELDS = (
     'blockID',
     ('id', {'name': 'guid'}),
     ('prefs', {'xpath': 'prefs/*'}),
@@ -48,7 +48,7 @@ addons_items_fields = (
     })
 )
 
-plugins_items_fields = (
+PLUGINS_ITEMS_FIELDS = (
     'blockID', 'os',
     ("match[@name='name']/exp", {'name': 'matchName'}),
     ("match[@name='description']/exp", {'name': 'matchDescription'}),
@@ -85,49 +85,49 @@ def sync_records(fields, filename, xpath, kinto_client, bucket, collection):
         permissions=COLLECTION_PERMISSIONS)
 
     diff = get_diff(xml_records, kinto_records)
-    synchronize(diff, kinto_client,
-                bucket=bucket, collection=collection)
+    push_changes(diff, kinto_client,
+                 bucket=bucket, collection=collection)
 
 
 def main(args=None):
     parser = argparse.ArgumentParser(description='Syncs a Kinto DB.')
 
     parser.add_argument('-s', '--kinto-server', help='Kinto Server',
-                        type=str, default=kinto_server)
+                        type=str, default=KINTO_SERVER)
 
     parser.add_argument('--cert-bucket', help='Bucket name for certificates',
-                        type=str, default=cert_bucket)
+                        type=str, default=CERT_BUCKET)
 
     parser.add_argument('--cert-collection',
                         help='Collection name for certificates',
-                        type=str, default=cert_collection)
+                        type=str, default=CERT_COLLECTION)
 
     parser.add_argument('--gfx-bucket', help='Bucket name for gfx',
-                        type=str, default=gfx_bucket)
+                        type=str, default=GFX_BUCKET)
 
     parser.add_argument('--gfx-collection',
                         help='Collection name for gfx',
-                        type=str, default=gfx_collection)
+                        type=str, default=GFX_COLLECTION)
 
     parser.add_argument('--addons-bucket', help='Bucket name for addons',
-                        type=str, default=addons_bucket)
+                        type=str, default=ADDONS_BUCKET)
 
     parser.add_argument('--addons-collection',
                         help='Collection name for addon',
-                        type=str, default=addons_collection)
+                        type=str, default=ADDONS_COLLECTION)
 
     parser.add_argument('--plugins-bucket', help='Bucket name for plugins',
-                        type=str, default=plugins_bucket)
+                        type=str, default=PLUGINS_BUCKET)
 
     parser.add_argument('--plugins-collection',
                         help='Collection name for plugin',
-                        type=str, default=plugins_collection)
+                        type=str, default=PLUGINS_COLLECTION)
 
     parser.add_argument('-x', '--xml-file', help='XML Source file',
-                        type=str, default=xml_file)
+                        type=str, default=XML_FILE)
 
     parser.add_argument('-a', '--auth', help='BasicAuth user:pass',
-                        type=str, default=':'.join(auth))
+                        type=str, default=':'.join(AUTH))
 
     args = parser.parse_args(args=args)
 
@@ -137,28 +137,28 @@ def main(args=None):
     # Import certificates
     collections = [
         # Certificates
-        dict(fields=cert_items_fields,
+        dict(fields=CERT_ITEMS_FIELDS,
              filename=args.xml_file,
              xpath='certItems/*',
              kinto_client=kinto_client,
              bucket=args.cert_bucket,
              collection=args.cert_collection),
         # GFX drivers
-        dict(fields=gfx_items_fields,
+        dict(fields=GFX_ITEMS_FIELDS,
              filename=args.xml_file,
              xpath='gfxItems/*',
              kinto_client=kinto_client,
              bucket=args.gfx_bucket,
              collection=args.gfx_collection),
         # Addons
-        dict(fields=addons_items_fields,
+        dict(fields=ADDONS_ITEMS_FIELDS,
              filename=args.xml_file,
              xpath='emItems/*',
              kinto_client=kinto_client,
              bucket=args.addons_bucket,
              collection=args.addons_collection),
         # Plugins
-        dict(fields=plugins_items_fields,
+        dict(fields=PLUGINS_ITEMS_FIELDS,
              filename=args.xml_file,
              xpath='pluginItems/*',
              kinto_client=kinto_client,

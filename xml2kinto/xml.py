@@ -7,7 +7,8 @@ XML_NAMESPACE = '{http://www.mozilla.org/2006/addons-blocklist}'
 SUPPORTED_OPTIONS = ['name', 'xpath', 'fields']
 
 
-def get_info(fields, data):
+def get_record(fields, data):
+    """Extract a record and its attributes and children from an xml node."""
     rec = {}
 
     # grabbing sub-elements
@@ -48,7 +49,7 @@ def get_info(fields, data):
                     # })
                     subrecords = data.iterfind(
                         '%s%s' % (XML_NAMESPACE, options['xpath']))
-                    rec[name] = [get_info(options['fields'], r)
+                    rec[name] = [get_record(options['fields'], r)
                                  for r in subrecords]
                 else:
                     # Handle the case when we return a list
@@ -79,13 +80,15 @@ def get_info(fields, data):
 
 
 def get_record_from_xml(fields, data):
-    rec = get_info(fields, data)
+    """Extract a record from an xml node and compute an id for it."""
+    rec = get_record(fields, data)
     if 'id' not in rec:
         rec['id'] = create_id(rec)
     return rec
 
 
 def get_xml_records(fields, filename, xpath):
+    """Get all the records from the xml that correspond to the given xpath."""
     tree = ElementTree.parse(filename)
     root = tree.getroot()
     records = root.iterfind('%s%s' % (XML_NAMESPACE, xpath))

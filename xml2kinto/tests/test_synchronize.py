@@ -2,7 +2,7 @@ import mock
 import unittest
 
 from contextlib import contextmanager
-from xml2kinto.synchronize import get_diff, synchronize
+from xml2kinto.synchronize import get_diff, push_changes
 
 
 def test_get_diff():
@@ -28,8 +28,8 @@ class SynchronizeTest(unittest.TestCase):
         self.collection = mock.sentinel.collection
 
     def test_synchronize_create_the_batch_request(self):
-        synchronize(([{'id': 1, 'val': 2}], [{'id': 3, 'val': 4}]),
-                    self.kinto_client, self.bucket, self.collection)
+        push_changes(([{'id': 1, 'val': 2}], [{'id': 3, 'val': 4}]),
+                     self.kinto_client, self.bucket, self.collection)
 
         self.mocked_batch.create_record.assert_called_with({'id': 1, 'val': 2})
         self.mocked_batch.delete_record.assert_called_with({'id': 3, 'val': 4})

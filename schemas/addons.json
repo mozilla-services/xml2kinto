@@ -1,6 +1,6 @@
 {
-  "title": "Addon",
-  "description": "Addon",
+  "title": "Add-on",
+  "description": "A blocked add-on entry",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -14,8 +14,8 @@
   "properties": {
     "addonId": {
       "type": "string",
-      "title": "Addon id",
-      "description": "The addon unique identifier.",
+      "title": "Add-on id",
+      "description": "The add-on unique identifier.",
       "minLength": 1,
       "default": ""
     },

@@ -4,10 +4,8 @@ import pytest
 
 from xml.etree import ElementTree
 
-from xml2kinto.__main__ import (
-    addons_items_fields, cert_items_fields, gfx_items_fields,
-    plugins_items_fields)
-from xml2kinto.xml import get_record_from_xml, get_info, get_xml_records
+from xml2kinto import __main__ as main
+from xml2kinto.xml import get_record_from_xml, get_record, get_xml_records
 
 XML_TPL = """<?xml version="1.0" encoding="UTF-8"?>
              <blocklist xmlns="http://www.mozilla.org/2006/addons-blocklist"
@@ -44,7 +42,7 @@ def _to_ElementTree(data):
 
 def test_addon_record():
     xml_node = _to_ElementTree(ADDON_DATA)
-    expected = get_record_from_xml(addons_items_fields, xml_node)
+    expected = get_record_from_xml(main.ADDONS_ITEMS_FIELDS, xml_node)
     assert expected == {
         'blockID': 'i15',
         'id': '5a5172a7-c130-b45a-104b-dc121960bc91',
@@ -86,7 +84,7 @@ PLUGIN_DATA = """
 
 def test_plugin_record():
     xml_node = _to_ElementTree(PLUGIN_DATA)
-    expected = get_record_from_xml(plugins_items_fields, xml_node)
+    expected = get_record_from_xml(main.PLUGINS_ITEMS_FIELDS, xml_node)
     assert expected == {
         'blockID': 'p328',
         'id': 'af9baa03-da4e-5a03-9a2c-9e20ec2d7994',
@@ -124,7 +122,7 @@ GFX_DATA = """
 
 def test_gfx_record():
     xml_node = _to_ElementTree(GFX_DATA)
-    expected = get_record_from_xml(gfx_items_fields, xml_node)
+    expected = get_record_from_xml(main.GFX_ITEMS_FIELDS, xml_node)
     assert expected == {
         'blockID': 'g35',
         'id': '6da38ca9-31e5-dd0d-b937-d06ffee543b4',
@@ -146,16 +144,17 @@ CERTIFICATE_DATA = """
 
 def test_certificate_record():
     xml_node = _to_ElementTree(CERTIFICATE_DATA)
-    expected = get_record_from_xml(cert_items_fields, xml_node)
+    expected = get_record_from_xml(main.CERT_ITEMS_FIELDS, xml_node)
     assert expected == {
         'id': '7c8a594f-2d88-4175-75f3-5b7b2d569036',
         'issuerName': 'MIGQMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRowGAYDVQQKExFDT01PRE8gQ0EgTGltaXRlZDE2MDQGA1UEAxMtQ09NT0RPIFJTQSBEb21haW4gVmFsaWRhdGlvbiBTZWN1cmUgU2VydmVyIENB',  # noqa
         'serialNumber': 'D9UltDPl4XVfSSqQOvdiwQ=='}
 
 
-def test_get_info_raise_if_an_option_is_not_supported():
+def test_get_record_raise_if_an_option_is_not_supported():
     with pytest.raises(NotImplementedError):
-        get_info((("id", {"unsupported": "unsupported"}),), mock.sentinel.data)
+        get_record(
+            (("id", {"unsupported": "unsupported"}),), mock.sentinel.data)
 
 
 def test_if_match_name_cannot_be_found():
@@ -170,7 +169,7 @@ def test_if_match_name_cannot_be_found():
     """
 
     xml_node = _to_ElementTree(plugin_data)
-    expected = get_record_from_xml(plugins_items_fields, xml_node)
+    expected = get_record_from_xml(main.PLUGINS_ITEMS_FIELDS, xml_node)
     assert expected == {
         'blockID': 'p328',
         'id': '772b9bb5-8eb4-edc1-359e-43d1932c0b47',
@@ -187,7 +186,7 @@ def test_if_match_name_cannot_be_found():
 
 def test_get_xml_records_can_load_xml_file():
     filename = os.path.join(os.path.dirname(__file__), "test_blocklist.xml")
-    records = get_xml_records(fields=cert_items_fields,
+    records = get_xml_records(fields=main.CERT_ITEMS_FIELDS,
                               filename=filename,
                               xpath='certItems/*')
 
