@@ -10,4 +10,4 @@ def test_create_id():
             "age": 15,
             "children": ["foo", "bar", "foobar"]
         }
-    }) == '45b1dc14-65c4-fe65-9c4f-b8667fb4266a'
+    }) == 'ef636b94-97a2-3c5e-5a64-22e23cf28e8f'

@@ -47,7 +47,7 @@ def test_addon_record():
     expected = get_record_from_xml(addons_items_fields, xml_node)
     assert expected == {
         'blockID': 'i15',
-        'id': '03272ae9-ba1b-38ff-683a-9c8f79eab600',
+        'id': '5a5172a7-c130-b45a-104b-dc121960bc91',
         'guid': 'personas@christopher.beard',
         'prefs': ['browser.startup.homepage',
                   'browser.search.defaultenginename'],
@@ -89,7 +89,7 @@ def test_plugin_record():
     expected = get_record_from_xml(plugins_items_fields, xml_node)
     assert expected == {
         'blockID': 'p328',
-        'id': '7ab024f4-cef5-a57c-72e7-619d732b3726',
+        'id': 'af9baa03-da4e-5a03-9a2c-9e20ec2d7994',
         'infoURL': 'https://get.adobe.com/flashplayer/',
         'os': 'Linux',
         'matchName': 'some name',
@@ -127,7 +127,7 @@ def test_gfx_record():
     expected = get_record_from_xml(gfx_items_fields, xml_node)
     assert expected == {
         'blockID': 'g35',
-        'id': '38a9146e-ddd2-39ea-5ab5-a62cd45e9bf6',
+        'id': '6da38ca9-31e5-dd0d-b937-d06ffee543b4',
         'os': 'WINNT 6.1',
         'vendor': '0x10de',
         'feature': 'DIRECT2D',
@@ -148,7 +148,7 @@ def test_certificate_record():
     xml_node = _to_ElementTree(CERTIFICATE_DATA)
     expected = get_record_from_xml(cert_items_fields, xml_node)
     assert expected == {
-        'id': 'a81803c3-3c06-1549-bbe3-4b7d4c739f25',
+        'id': '7c8a594f-2d88-4175-75f3-5b7b2d569036',
         'issuerName': 'MIGQMQswCQYDVQQGEwJHQjEbMBkGA1UECBMSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHEwdTYWxmb3JkMRowGAYDVQQKExFDT01PRE8gQ0EgTGltaXRlZDE2MDQGA1UEAxMtQ09NT0RPIFJTQSBEb21haW4gVmFsaWRhdGlvbiBTZWN1cmUgU2VydmVyIENB',  # noqa
         'serialNumber': 'D9UltDPl4XVfSSqQOvdiwQ=='}
 
@@ -173,7 +173,7 @@ def test_if_match_name_cannot_be_found():
     expected = get_record_from_xml(plugins_items_fields, xml_node)
     assert expected == {
         'blockID': 'p328',
-        'id': '158dcb37-3316-c848-5ee7-5af62acb87ca',
+        'id': '772b9bb5-8eb4-edc1-359e-43d1932c0b47',
         'matchDescription': 'some description',
         'os': 'Linux',
         'infoURL': 'https://get.adobe.com/flashplayer/',
