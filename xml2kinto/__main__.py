@@ -89,29 +89,15 @@ def sync_records(fields, filename, xpath, kinto_client, bucket, collection):
                  bucket=bucket, collection=collection)
 
 
-def remove_action(parser, short, long):
-    actions = list(filter(
-        lambda x: x.option_strings == [short, long],
-        parser._actions))
-    if len(actions) == 1:
-        parser._handle_conflict_resolve(None, [
-            (short, actions[0])])
-        parser._handle_conflict_resolve(None, [
-            (long, actions[0])])
-
-
 def main(args=None):
-    parser = cli_utils.set_parser_server_options(
+    parser = cli_utils.add_parser_options(
         description='Syncs a Kinto DB',
         default_collection=None,
         default_bucket=None,
         default_server=KINTO_SERVER,
-        default_auth=AUTH)
-
-    # Remove the collection and bucket arguments which are not accurate here
-    # because we handle many of them in our code.
-    remove_action(parser, '-c', '--collection')
-    remove_action(parser, '-b', '--bucket')
+        default_auth=AUTH,
+        include_bucket=False,
+        include_collection=False)
 
     parser.add_argument('--cert-bucket', help='Bucket name for certificates',
                         type=str, default=CERT_BUCKET)
@@ -145,10 +131,6 @@ def main(args=None):
                         type=str, default=XML_FILE)
 
     args = parser.parse_args(args=args)
-    # cli_utils.create_client_from_args has those by default, but we override
-    # them.
-    args.collection = None
-    args.bucket = None
 
     cli_utils.setup_logger(logger, args)
 
