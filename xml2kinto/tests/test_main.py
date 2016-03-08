@@ -45,7 +45,7 @@ def test_sync_records_calls_the_scenario():
 
 
 class TestMain(unittest.TestCase):
-    def assert_arguments(self, mocked, kinto_client, **kwargs):
+    def assert_arguments(self, mock_sync, kinto_client, **kwargs):
         kwargs.setdefault('kinto_server', main.KINTO_SERVER)
         kwargs.setdefault('auth', main.AUTH)
         kwargs.setdefault('filename', main.XML_FILE)
@@ -72,7 +72,7 @@ class TestMain(unittest.TestCase):
             'collection': kwargs['cert_collection']
         }
 
-        mocked.assert_any_call(**cert_arguments)
+        mock_sync.assert_any_call(**cert_arguments)
 
         gfx_arguments = {
             'fields': main.GFX_ITEMS_FIELDS,
@@ -83,7 +83,7 @@ class TestMain(unittest.TestCase):
             'collection': kwargs['gfx_collection']
         }
 
-        mocked.assert_any_call(**gfx_arguments)
+        mock_sync.assert_any_call(**gfx_arguments)
 
         addons_arguments = {
             'fields': main.ADDONS_ITEMS_FIELDS,
@@ -94,7 +94,7 @@ class TestMain(unittest.TestCase):
             'collection': kwargs['addons_collection']
         }
 
-        mocked.assert_any_call(**addons_arguments)
+        mock_sync.assert_any_call(**addons_arguments)
 
         plugins_arguments = {
             'fields': main.PLUGINS_ITEMS_FIELDS,
@@ -105,72 +105,117 @@ class TestMain(unittest.TestCase):
             'collection': kwargs['plugins_collection']
         }
 
-        mocked.assert_any_call(**plugins_arguments)
+        mock_sync.assert_any_call(**plugins_arguments)
 
     def test_main_default(self):
         # let's check that main() parsing uses our defaults
         with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
-            with mock.patch('xml2kinto.__main__.sync_records') as mocked:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
                 main.main([])
-                self.assert_arguments(mocked, MockedClient)
+                self.assert_arguments(mock_sync, MockedClient)
 
     def test_main_custom_server(self):
         with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
-            with mock.patch('xml2kinto.__main__.sync_records') as mocked:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
                 main.main(['-s', 'http://yeah'])
-                self.assert_arguments(mocked, MockedClient,
+                self.assert_arguments(mock_sync, MockedClient,
                                       kinto_server='http://yeah')
 
     def test_can_define_the_xml_file(self):
         with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
-            with mock.patch('xml2kinto.__main__.sync_records') as mocked:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
                 main.main(['-x', '/tmp/toto.xml'])
-                self.assert_arguments(mocked, MockedClient,
+                self.assert_arguments(mock_sync, MockedClient,
                                       filename='/tmp/toto.xml')
 
     def test_can_define_the_certificates_bucket_and_collection(self):
         with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
-            with mock.patch('xml2kinto.__main__.sync_records') as mocked:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
                 main.main(
                     ['--cert-bucket', 'bucket',
                      '--cert-collection', 'collection'])
-                self.assert_arguments(mocked, MockedClient,
+                self.assert_arguments(mock_sync, MockedClient,
                                       cert_bucket='bucket',
                                       cert_collection='collection')
 
     def test_can_define_the_gfx_bucket_and_collection(self):
         with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
-            with mock.patch('xml2kinto.__main__.sync_records') as mocked:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
                 main.main(
                     ['--gfx-bucket', 'bucket',
                      '--gfx-collection', 'collection'])
-                self.assert_arguments(mocked, MockedClient,
+                self.assert_arguments(mock_sync, MockedClient,
                                       gfx_bucket='bucket',
                                       gfx_collection='collection')
 
     def test_can_define_the_addons_bucket_and_collection(self):
         with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
-            with mock.patch('xml2kinto.__main__.sync_records') as mocked:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
                 main.main(
                     ['--addons-bucket', 'bucket',
                      '--addons-collection', 'collection'])
-                self.assert_arguments(mocked, MockedClient,
+                self.assert_arguments(mock_sync, MockedClient,
                                       addons_bucket='bucket',
                                       addons_collection='collection')
 
     def test_can_define_the_plugins_bucket_and_collection(self):
         with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
-            with mock.patch('xml2kinto.__main__.sync_records') as mocked:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
                 main.main(
                     ['--plugins-bucket', 'bucket',
                      '--plugins-collection', 'collection'])
-                self.assert_arguments(mocked, MockedClient,
+                self.assert_arguments(mock_sync, MockedClient,
                                       plugins_bucket='bucket',
                                       plugins_collection='collection')
 
     def test_can_define_the_auth_credentials(self):
         with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
-            with mock.patch('xml2kinto.__main__.sync_records') as mocked:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
                 main.main(['--auth', 'user:pass'])
-                self.assert_arguments(mocked, MockedClient,
+                self.assert_arguments(mock_sync, MockedClient,
                                       auth=('user', 'pass'))
+
+    def test_no_collections_means_all_collections(self):
+        """If no 'collection' is passed as parameter, import all of them."""
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
+                main.main([])
+                # Nothing specific to be tested here, it's the default behavior
+                self.assert_arguments(mock_sync, MockedClient)
+
+    def test_only_import_certificats(self):
+        """If only one collection is specified, only import it."""
+        with mock.patch('kinto_client.cli_utils.Client'):
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
+                main.main(['--certificates'])
+
+        mock_sync.assert_called_once_with(fields=main.CERT_ITEMS_FIELDS,
+                                          filename=main.XML_FILE,
+                                          xpath='certItems/*',
+                                          kinto_client=mock.ANY,
+                                          bucket=main.CERT_BUCKET,
+                                          collection=main.CERT_COLLECTION)
+
+    def test_only_import_certs_and_gfx(self):
+        """Only import specified collections"""
+        with mock.patch('kinto_client.cli_utils.Client'):
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
+                main.main(['--certificates', '-G'])
+
+        assert mock_sync.call_count == 2  # Only called for certificats and gfx
+        mock_sync.assert_has_calls([
+            mock.call(
+                fields=main.CERT_ITEMS_FIELDS,
+                filename=main.XML_FILE,
+                xpath='certItems/*',
+                kinto_client=mock.ANY,
+                bucket=main.CERT_BUCKET,
+                collection=main.CERT_COLLECTION),
+            mock.call(
+                fields=main.GFX_ITEMS_FIELDS,
+                filename=main.XML_FILE,
+                xpath='gfxItems/*',
+                kinto_client=mock.ANY,
+                bucket=main.GFX_BUCKET,
+                collection=main.GFX_COLLECTION)],
+            any_order=True)

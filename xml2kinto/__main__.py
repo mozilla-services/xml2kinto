@@ -130,45 +130,70 @@ def main(args=None):
     parser.add_argument('-x', '--xml-file', help='XML Source file',
                         type=str, default=XML_FILE)
 
+    parser.add_argument('-C', '--certificates',
+                        help='Only import certificates',
+                        action='store_true')
+
+    parser.add_argument('-G', '--gfx', help='Only import GFX drivers',
+                        action='store_true')
+
+    parser.add_argument('-A', '--addons', help='Only import addons',
+                        action='store_true')
+
+    parser.add_argument('-P', '--plugins', help='Only import plugins',
+                        action='store_true')
+
     args = parser.parse_args(args=args)
+    # If none of the different "collections" were passed as parameter, then we
+    # want to import them all.
+    import_all = not any([
+        args.certificates,
+        args.gfx,
+        args.addons,
+        args.plugins])
 
     cli_utils.setup_logger(logger, args)
 
     kinto_client = cli_utils.create_client_from_args(args)
 
     # Import certificates
-    collections = [
+    collections = {
         # Certificates
-        dict(fields=CERT_ITEMS_FIELDS,
-             filename=args.xml_file,
-             xpath='certItems/*',
-             kinto_client=kinto_client,
-             bucket=args.cert_bucket,
-             collection=args.cert_collection),
+        'certificates': dict(
+            fields=CERT_ITEMS_FIELDS,
+            filename=args.xml_file,
+            xpath='certItems/*',
+            kinto_client=kinto_client,
+            bucket=args.cert_bucket,
+            collection=args.cert_collection),
         # GFX drivers
-        dict(fields=GFX_ITEMS_FIELDS,
-             filename=args.xml_file,
-             xpath='gfxItems/*',
-             kinto_client=kinto_client,
-             bucket=args.gfx_bucket,
-             collection=args.gfx_collection),
+        'gfx': dict(
+            fields=GFX_ITEMS_FIELDS,
+            filename=args.xml_file,
+            xpath='gfxItems/*',
+            kinto_client=kinto_client,
+            bucket=args.gfx_bucket,
+            collection=args.gfx_collection),
         # Addons
-        dict(fields=ADDONS_ITEMS_FIELDS,
-             filename=args.xml_file,
-             xpath='emItems/*',
-             kinto_client=kinto_client,
-             bucket=args.addons_bucket,
-             collection=args.addons_collection),
+        'addons': dict(
+            fields=ADDONS_ITEMS_FIELDS,
+            filename=args.xml_file,
+            xpath='emItems/*',
+            kinto_client=kinto_client,
+            bucket=args.addons_bucket,
+            collection=args.addons_collection),
         # Plugins
-        dict(fields=PLUGINS_ITEMS_FIELDS,
-             filename=args.xml_file,
-             xpath='pluginItems/*',
-             kinto_client=kinto_client,
-             bucket=args.plugins_bucket,
-             collection=args.plugins_collection)]
+        'plugins': dict(
+            fields=PLUGINS_ITEMS_FIELDS,
+            filename=args.xml_file,
+            xpath='pluginItems/*',
+            kinto_client=kinto_client,
+            bucket=args.plugins_bucket,
+            collection=args.plugins_collection)}
 
-    for collection in collections:
-        sync_records(**collection)
+    for collection_type, collection in collections.items():
+        if getattr(args, collection_type) or import_all:
+            sync_records(**collection)
 
 
 if __name__ == '__main__':  # pragma: nocover
