@@ -1,4 +1,4 @@
-from __future__ import print_function
+from xml2kinto.logger import logger
 
 
 def get_diff(source, dest):
@@ -22,13 +22,13 @@ def get_diff(source, dest):
 def push_changes(diff, kinto_client, bucket, collection):
     to_create, to_delete = diff
 
-    print('Syncing to {}{}'.format(
+    logger.warn('Syncing to {}{}'.format(
         kinto_client.session_kwargs['server_url'],
         kinto_client.endpoints.get(
             'records', bucket=bucket, collection=collection)))
 
-    print('- {} records to create.'.format(len(to_create)))
-    print('- {} records to delete.'.format(len(to_delete)))
+    logger.info('- {} records to create.'.format(len(to_create)))
+    logger.info('- {} records to delete.'.format(len(to_delete)))
 
     with kinto_client.batch(bucket=bucket, collection=collection) as batch:
         for record in to_delete:
@@ -36,4 +36,4 @@ def push_changes(diff, kinto_client, bucket, collection):
         for record in to_create:
             batch.create_record(record)
 
-    print('Done!')
+    logger.info('Done!')

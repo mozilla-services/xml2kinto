@@ -59,7 +59,9 @@ class TestMain(unittest.TestCase):
         kwargs.setdefault('plugins_collection', main.PLUGINS_COLLECTION)
 
         kinto_client.assert_called_with(server_url=kwargs['kinto_server'],
-                                        auth=kwargs['auth'])
+                                        auth=kwargs['auth'],
+                                        bucket=None,
+                                        collection=None)
 
         cert_arguments = {
             'fields': main.CERT_ITEMS_FIELDS,
@@ -107,27 +109,27 @@ class TestMain(unittest.TestCase):
 
     def test_main_default(self):
         # let's check that main() parsing uses our defaults
-        with mock.patch('xml2kinto.__main__.Client') as MockedClient:
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
             with mock.patch('xml2kinto.__main__.sync_records') as mocked:
                 main.main([])
                 self.assert_arguments(mocked, MockedClient)
 
     def test_main_custom_server(self):
-        with mock.patch('xml2kinto.__main__.Client') as MockedClient:
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
             with mock.patch('xml2kinto.__main__.sync_records') as mocked:
                 main.main(['-s', 'http://yeah'])
                 self.assert_arguments(mocked, MockedClient,
                                       kinto_server='http://yeah')
 
     def test_can_define_the_xml_file(self):
-        with mock.patch('xml2kinto.__main__.Client') as MockedClient:
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
             with mock.patch('xml2kinto.__main__.sync_records') as mocked:
                 main.main(['-x', '/tmp/toto.xml'])
                 self.assert_arguments(mocked, MockedClient,
                                       filename='/tmp/toto.xml')
 
     def test_can_define_the_certificates_bucket_and_collection(self):
-        with mock.patch('xml2kinto.__main__.Client') as MockedClient:
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
             with mock.patch('xml2kinto.__main__.sync_records') as mocked:
                 main.main(
                     ['--cert-bucket', 'bucket',
@@ -137,7 +139,7 @@ class TestMain(unittest.TestCase):
                                       cert_collection='collection')
 
     def test_can_define_the_gfx_bucket_and_collection(self):
-        with mock.patch('xml2kinto.__main__.Client') as MockedClient:
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
             with mock.patch('xml2kinto.__main__.sync_records') as mocked:
                 main.main(
                     ['--gfx-bucket', 'bucket',
@@ -147,7 +149,7 @@ class TestMain(unittest.TestCase):
                                       gfx_collection='collection')
 
     def test_can_define_the_addons_bucket_and_collection(self):
-        with mock.patch('xml2kinto.__main__.Client') as MockedClient:
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
             with mock.patch('xml2kinto.__main__.sync_records') as mocked:
                 main.main(
                     ['--addons-bucket', 'bucket',
@@ -157,7 +159,7 @@ class TestMain(unittest.TestCase):
                                       addons_collection='collection')
 
     def test_can_define_the_plugins_bucket_and_collection(self):
-        with mock.patch('xml2kinto.__main__.Client') as MockedClient:
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
             with mock.patch('xml2kinto.__main__.sync_records') as mocked:
                 main.main(
                     ['--plugins-bucket', 'bucket',
@@ -167,7 +169,7 @@ class TestMain(unittest.TestCase):
                                       plugins_collection='collection')
 
     def test_can_define_the_auth_credentials(self):
-        with mock.patch('xml2kinto.__main__.Client') as MockedClient:
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
             with mock.patch('xml2kinto.__main__.sync_records') as mocked:
                 main.main(['--auth', 'user:pass'])
                 self.assert_arguments(mocked, MockedClient,

@@ -1,8 +1,8 @@
 import os
-import argparse
 
-from kinto_client import Client
+from kinto_client import cli_utils
 from xml2kinto.kinto import get_kinto_records
+from xml2kinto.logger import logger
 from xml2kinto.synchronize import get_diff, push_changes
 from xml2kinto.xml import get_xml_records
 
@@ -89,11 +89,29 @@ def sync_records(fields, filename, xpath, kinto_client, bucket, collection):
                  bucket=bucket, collection=collection)
 
 
-def main(args=None):
-    parser = argparse.ArgumentParser(description='Syncs a Kinto DB.')
+def remove_action(parser, short, long):
+    actions = list(filter(
+        lambda x: x.option_strings == [short, long],
+        parser._actions))
+    if len(actions) == 1:
+        parser._handle_conflict_resolve(None, [
+            (short, actions[0])])
+        parser._handle_conflict_resolve(None, [
+            (long, actions[0])])
 
-    parser.add_argument('-s', '--kinto-server', help='Kinto Server',
-                        type=str, default=KINTO_SERVER)
+
+def main(args=None):
+    parser = cli_utils.set_parser_server_options(
+        description='Syncs a Kinto DB',
+        default_collection=None,
+        default_bucket=None,
+        default_server=KINTO_SERVER,
+        default_auth=AUTH)
+
+    # Remove the collection and bucket arguments which are not accurate here
+    # because we handle many of them in our code.
+    remove_action(parser, '-c', '--collection')
+    remove_action(parser, '-b', '--bucket')
 
     parser.add_argument('--cert-bucket', help='Bucket name for certificates',
                         type=str, default=CERT_BUCKET)
@@ -126,13 +144,15 @@ def main(args=None):
     parser.add_argument('-x', '--xml-file', help='XML Source file',
                         type=str, default=XML_FILE)
 
-    parser.add_argument('-a', '--auth', help='BasicAuth user:pass',
-                        type=str, default=':'.join(AUTH))
-
     args = parser.parse_args(args=args)
+    # cli_utils.create_client_from_args has those by default, but we override
+    # them.
+    args.collection = None
+    args.bucket = None
 
-    kinto_client = Client(
-        server_url=args.kinto_server, auth=tuple(args.auth.split(':')))
+    cli_utils.setup_logger(logger, args)
+
+    kinto_client = cli_utils.create_client_from_args(args)
 
     # Import certificates
     collections = [
