@@ -4,6 +4,7 @@ import asyncio
 import aiohttp
 import base64
 import json
+from random import randint
 from kinto_client import Client, Endpoints
 from pyquery import PyQuery as pyquery
 
@@ -11,6 +12,7 @@ SERVER_URL = 'https://kinto.dev.mozaws.net/v1'
 BUCKET = 'blocklists'
 COLLECTION = 'addons'
 AUTH = ('mark', 'p4ssw0rd')
+THROTTLE = 15  # Split request on 15s
 
 
 async def fetch_info(session, record):
@@ -34,8 +36,8 @@ async def fetch_info(session, record):
     doc = pyquery(data)
     # 5. Modifier les records avec les infos
     # Find out informations
-    record['why'] = doc('.blocked dl>dd')[0].text_content()
-    record['who'] = doc('.blocked dl>dd')[1].text_content()
+    record['why'] = doc('.blocked dl>dd').eq(0).html()
+    record['who'] = doc('.blocked dl>dd').eq(1).html()
 
     # 6. Pousser les modifications
     url = Endpoints(SERVER_URL).get('record', id=record['id'],
@@ -45,15 +47,13 @@ async def fetch_info(session, record):
     headers = {'content-type': 'application/json',
                'Authorization': "Basic {}".format(auth)}
     data = json.dumps({"data": record})
+
+    await asyncio.sleep(randint(0, THROTTLE))
+
     async with session.put(url, headers=headers, data=data) as resp:
         if resp.status != 200:
-            if 500 <= resp.status < 600:
-                # Retry
-                await asyncio.sleep(int(resp.headers.get('Backoff', 15)))
-                resp = await session.put(url, headers=headers, data=data)
-            else:
-                body = await resp.text()
-                raise ValueError('{} — {}'.format(resp.status, body))
+            body = await resp.text()
+            raise ValueError('{} — {}'.format(resp.status, body))
 
     print("Updated {}".format(record['id']))
 
@@ -61,8 +61,8 @@ async def fetch_info(session, record):
 async def scrap_records():
     with aiohttp.ClientSession() as session:
         # 1. Recupèrer tous les records
-        url = Endpoints(SERVER_URL).get('records', bucket=BUCKET,
-                                        collection=COLLECTION)
+        url = '{}'.format(Endpoints(SERVER_URL).get(
+            'records', bucket=BUCKET, collection=COLLECTION))
 
         async with session.get(url) as resp:
 
