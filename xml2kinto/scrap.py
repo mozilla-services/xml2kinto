@@ -5,7 +5,7 @@ from xml2kinto.logger import logger
 def fetch_record_info(session, record):
     if 'blockID' not in record:
         print("{} doesn't have a blockID".format(record['id']))
-        return
+        return record
 
     logger.debug('Ask AMO for record: {}'.format(record['id']))
     # 2. Pour chaque record, calculer l'url de blocklists
