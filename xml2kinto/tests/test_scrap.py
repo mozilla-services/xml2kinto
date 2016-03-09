@@ -23,3 +23,8 @@ def test_fetch_record_info():
         'who': 'All Firefox users who have this add-on installed. Users who '
                'wish\n to continue using this add-on can enable it in the '
                'Add-ons Manager.'}
+
+
+def test_fetch_record_info_ignore_record_with_missing_blockID():
+    res = fetch_record_info(None, {'id': '123'})
+    assert res == {'id': '123'}
