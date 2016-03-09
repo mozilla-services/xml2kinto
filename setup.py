@@ -11,7 +11,7 @@ with codecs.open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
 REQUIREMENTS = [
     'kinto-client',
     'pyquery',
-    'requests',
+    'grequests',
     'six',
 ]
 

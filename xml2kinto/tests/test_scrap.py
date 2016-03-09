@@ -1,20 +1,26 @@
+import mock
 import os
 
-import mock
+from xml2kinto.scrap import (
+    BLOCKLIST_DETAIL_URL, scrap_details_from_amo, log_error)
 
-from xml2kinto.scrap import fetch_record_info
 
+def test_scrap_details_from_amo():
+    record = {'id': '123', 'blockID': 'foobar'}
 
-def test_fetch_record_info():
     with open(os.path.join(os.path.dirname(__file__),
                            'blocked_item_detail_page.html')) as html_file:
         html = html_file.read()
-    response = mock.MagicMock()
-    response.text = html
-    session = mock.MagicMock()
-    session.get.return_value = response
-    res = fetch_record_info(session, {'id': '123', 'blockID': 'foobar'})
-    assert res == {
+
+    with mock.patch('grequests.map') as grequests_mock:
+        response = mock.MagicMock()
+        response.url = BLOCKLIST_DETAIL_URL.format('foobar')
+        response.text = html
+        grequests_mock.return_value = [response]
+
+        records = scrap_details_from_amo([record])
+
+    expected_record = {
         'id': '123',
         'blockID': 'foobar',
         'why': 'This add-on is believed to be silently installed in Firefox, '
@@ -24,7 +30,18 @@ def test_fetch_record_info():
                'wish\n to continue using this add-on can enable it in the '
                'Add-ons Manager.'}
 
+    assert records == [expected_record]
+    assert record != expected_record
 
-def test_fetch_record_info_ignore_record_with_missing_blockID():
-    res = fetch_record_info(None, {'id': '123'})
-    assert res == {'id': '123'}
+
+def test_scrap_detail_should_not_scrap_records_with_missing_blockID():
+    with mock.patch('grequests.map') as grequests_mock:
+        records = scrap_details_from_amo([{"id": "foo"}])
+        assert grequests_mock.call_count == 0
+        assert records == [{"id": "foo"}]
+
+
+def test_log_error_write_into_the_logger():
+    with mock.patch('xml2kinto.scrap.logger') as logger:
+        log_error(mock.sentinel.req, mock.sentinel.exception)
+        logger.error.assert_called_with(mock.sentinel.exception)

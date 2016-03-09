@@ -5,31 +5,23 @@ from xml2kinto import __main__ as main
 
 
 def test_sync_records_scrap_information_for_plugins():
-    with mock.patch(
-            'xml2kinto.__main__.get_xml_records',
-            return_value=mock.sentinel.xml_records):
-        with mock.patch(
-                'xml2kinto.__main__.get_kinto_records',
-                return_value=mock.sentinel.kinto_records):
-            with mock.patch(
-                    'xml2kinto.__main__.get_diff',
-                    return_value=(
-                        [{'id': '123', 'blockID': 'foobar'}],
-                        mock.sentinel.to_delete)):
-                with mock.patch(
-                        'xml2kinto.__main__.push_changes'):
-                    with mock.patch(
-                            'xml2kinto.__main__.fetch_record_info') as fetch:
-                        with mock.patch('requests.Session') as RequestsSession:
-                            main.sync_records(
-                                mock.sentinel.fields, mock.sentinel.filename,
-                                mock.sentinel.xpath, mock.sentinel.client,
-                                mock.sentinel.bucket, mock.sentinel.collection,
-                                with_scrapping=True)
+    with mock.patch('xml2kinto.__main__.scrap_details_from_amo') as fetch:
+        with mock.patch('xml2kinto.__main__.get_xml_records',
+                        return_value=mock.sentinel.xml_records):
+            with mock.patch('xml2kinto.__main__.get_kinto_records',
+                            return_value=mock.sentinel.kinto_records):
+                with mock.patch('xml2kinto.__main__.get_diff',
+                                return_value=(
+                                    mock.sentinel.to_create,
+                                    mock.sentinel.to_delete)):
+                    with mock.patch('xml2kinto.__main__.push_changes'):
+                        main.sync_records(
+                            mock.sentinel.fields, mock.sentinel.filename,
+                            mock.sentinel.xpath, mock.sentinel.client,
+                            mock.sentinel.bucket, mock.sentinel.collection,
+                            with_scrapping=True)
 
-                            fetch.assert_called_with(
-                                RequestsSession(),
-                                {'id': '123', 'blockID': 'foobar'})
+                        fetch.assert_called_with(mock.sentinel.to_create)
 
 
 def test_sync_records_calls_the_scenario():
