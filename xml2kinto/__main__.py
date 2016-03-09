@@ -1,6 +1,5 @@
-import aiohttp
-import asyncio
 import os
+import requests
 
 from kinto_client import cli_utils
 from xml2kinto.kinto import get_kinto_records
@@ -76,7 +75,7 @@ PLUGINS_ITEMS_FIELDS = (
 )
 
 
-def sync_records(loop, fields, filename, xpath,
+def sync_records(fields, filename, xpath,
                  kinto_client, bucket, collection, with_scrapping=False):
     xml_records = get_xml_records(
         fields=fields,
@@ -92,22 +91,15 @@ def sync_records(loop, fields, filename, xpath,
 
     to_create_scrapped = to_create
     if with_scrapping:
-        async def scrap_to_create(records):
-            with aiohttp.ClientSession() as session:
-                coros = [fetch_record_info(session, record)
-                         for record in records]
-                results = await asyncio.gather(*coros)
-
-            return results
-
-        to_create_scrapped = loop.run_until_complete(
-            scrap_to_create(to_create))
+        session = requests.Session()
+        to_create_scrapped = [fetch_record_info(session, record)
+                              for record in to_create]
 
     push_changes((to_create_scrapped, to_delete), kinto_client,
                  bucket=bucket, collection=collection)
 
 
-def main(loop, args=None):
+def main(args=None):
     parser = cli_utils.add_parser_options(
         description='Syncs a Kinto DB',
         default_collection=None,
@@ -213,9 +205,8 @@ def main(loop, args=None):
 
     for collection_type, collection in collections.items():
         if getattr(args, collection_type) or import_all:
-            sync_records(loop, **collection)
+            sync_records(**collection)
 
 
 if __name__ == '__main__':  # pragma: nocover
-    loop = asyncio.get_event_loop()
-    main(loop)
+    main()

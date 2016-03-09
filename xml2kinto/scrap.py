@@ -1,25 +1,23 @@
-from pyquery import PyQuery as pyquery
+from pyquery import PyQuery
+from xml2kinto.logger import logger
 
 
-async def fetch_record_info(session, record):
+def fetch_record_info(session, record):
     if 'blockID' not in record:
         print("{} doesn't have a blockID".format(record['id']))
         return
 
+    logger.debug('Ask AMO for record: {}'.format(record['id']))
     # 2. Pour chaque record, calculer l'url de blocklists
     url = "https://addons.mozilla.org/fr/firefox/blocked/{}".format(
         record['blockID'])
 
-    async with session.get(url) as resp:
-        if resp.status != 200:
-            body = await resp.text()
-            raise ValueError('{} — {}'.format(resp.status, body))
+    resp = session.get(url)
+    resp.raise_for_status()
 
-        print("Scrapped {}".format(record['blockID']))
+    logger.info('AMO answered for record: {}'.format(record['id']))
 
-        data = await resp.text()
-
-    doc = pyquery(data)
+    doc = PyQuery(resp.text)
     # 5. Modifier les records avec les infos
     # Find out informations
     record['why'] = doc('.blocked dl>dd').eq(0).html()
