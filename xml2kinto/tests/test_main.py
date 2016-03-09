@@ -91,7 +91,8 @@ class TestMain(unittest.TestCase):
             'xpath': 'emItems/*',
             'kinto_client': kinto_client.return_value,
             'bucket': kwargs['addons_bucket'],
-            'collection': kwargs['addons_collection']
+            'collection': kwargs['addons_collection'],
+            'with_scrapping': True
         }
 
         mock_sync.assert_any_call(**addons_arguments)
@@ -102,7 +103,8 @@ class TestMain(unittest.TestCase):
             'xpath': 'pluginItems/*',
             'kinto_client': kinto_client.return_value,
             'bucket': kwargs['plugins_bucket'],
-            'collection': kwargs['plugins_collection']
+            'collection': kwargs['plugins_collection'],
+            'with_scrapping': True
         }
 
         mock_sync.assert_any_call(**plugins_arguments)
