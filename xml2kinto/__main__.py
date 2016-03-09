@@ -1,3 +1,5 @@
+import aiohttp
+import asyncio
 import os
 
 from kinto_client import cli_utils
@@ -5,6 +7,7 @@ from xml2kinto.kinto import get_kinto_records
 from xml2kinto.logger import logger
 from xml2kinto.synchronize import get_diff, push_changes
 from xml2kinto.xml import get_xml_records
+from xml2kinto.scrap import fetch_record_info
 
 # options to move to a config file
 XML_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__),
@@ -73,7 +76,8 @@ PLUGINS_ITEMS_FIELDS = (
 )
 
 
-def sync_records(fields, filename, xpath, kinto_client, bucket, collection):
+def sync_records(loop, fields, filename, xpath,
+                 kinto_client, bucket, collection, with_scrapping=False):
     xml_records = get_xml_records(
         fields=fields,
         filename=filename,
@@ -84,12 +88,26 @@ def sync_records(fields, filename, xpath, kinto_client, bucket, collection):
         collection=collection,
         permissions=COLLECTION_PERMISSIONS)
 
-    diff = get_diff(xml_records, kinto_records)
-    push_changes(diff, kinto_client,
+    to_create, to_delete = get_diff(xml_records, kinto_records)
+
+    to_create_scrapped = to_create
+    if with_scrapping:
+        async def scrap_to_create(records):
+            with aiohttp.ClientSession() as session:
+                coros = [fetch_record_info(session, record)
+                         for record in records]
+                results = await asyncio.gather(*coros)
+
+            return results
+
+        to_create_scrapped = loop.run_until_complete(
+            scrap_to_create(to_create))
+
+    push_changes((to_create_scrapped, to_delete), kinto_client,
                  bucket=bucket, collection=collection)
 
 
-def main(args=None):
+def main(loop, args=None):
     parser = cli_utils.add_parser_options(
         description='Syncs a Kinto DB',
         default_collection=None,
@@ -181,7 +199,8 @@ def main(args=None):
             xpath='emItems/*',
             kinto_client=kinto_client,
             bucket=args.addons_bucket,
-            collection=args.addons_collection),
+            collection=args.addons_collection,
+            with_scrapping=True),
         # Plugins
         'plugins': dict(
             fields=PLUGINS_ITEMS_FIELDS,
@@ -189,12 +208,14 @@ def main(args=None):
             xpath='pluginItems/*',
             kinto_client=kinto_client,
             bucket=args.plugins_bucket,
-            collection=args.plugins_collection)}
+            collection=args.plugins_collection,
+            with_scrapping=True)}
 
     for collection_type, collection in collections.items():
         if getattr(args, collection_type) or import_all:
-            sync_records(**collection)
+            sync_records(loop, **collection)
 
 
 if __name__ == '__main__':  # pragma: nocover
-    main()
+    loop = asyncio.get_event_loop()
+    main(loop)
