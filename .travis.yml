@@ -14,7 +14,8 @@ matrix:
       env:
         - TOX_ENV=py35
     - env: TOX_ENV=functional
-      install: make run-kinto &
+      before_install:
+        - make run-kinto &
 after_success:
     # Report coverage results to coveralls.io
     - pip install coveralls
