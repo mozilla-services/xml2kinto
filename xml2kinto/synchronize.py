@@ -1,53 +1,39 @@
-from __future__ import print_function
-
-from kinto_client.exceptions import KintoException
-
-from xml2kinto.exceptions import SynchronizationError
-from xml2kinto.records import XMLRecords, KintoRecords, same_record
+from xml2kinto.logger import logger
 
 
-def synchronize(fields, xml_options, kinto_options):
-    print('Working on %r' % kinto_options['server'])
-    print('Reading data from %r' % xml_options['filename'])
-    xml = XMLRecords(fields, options=xml_options)
-    kinto = KintoRecords(fields, options=kinto_options)
-    to_delete = []
-    to_update = []
-    to_create = []
+def get_diff(source, dest):
+    """Get the diff between two records list in this order:
+        - to_create
+        - to_delete
+    """
+    # First build a dict from the lists, with the ID as the key.
+    source_dict = {record['id']: record for record in source}
+    dest_dict = {record['id']: record for record in dest}
 
-    print('Syncing to %s%s/records' % (kinto_options['server'],
-                                       kinto_options['collection_name']))
+    source_keys = set(source_dict.keys())
+    dest_keys = set(dest_dict.keys())
+    to_create = source_keys - dest_keys
+    to_delete = dest_keys - source_keys
 
-    # looking at kinto to list records
-    # to delete or to update
-    for record in kinto.records:
-        xml_rec = xml.find(record['id'])
-        if xml_rec is None:
-            to_delete.append(record)
-        else:
-            if not same_record(fields, xml_rec, record):
-                to_update.append(xml_rec)
+    return ([source_dict[k] for k in to_create],
+            [dest_dict[k] for k in to_delete])
 
-    # new records ?
-    for record in xml.records:
-        kinto_rec = kinto.find(record['id'])
-        if not kinto_rec:
-            to_create.append(record)
 
-    print('- %d records to create.' % len(to_create))
-    print('- %d records to delete.' % len(to_delete))
-    print('- %d records to update.' % len(to_update))
+def push_changes(diff, kinto_client, bucket, collection):
+    to_create, to_delete = diff
 
-    for record in to_delete:
-        try:
-            kinto.delete(record)
-        except KintoException as e:
-            raise SynchronizationError(e.response.content)
+    logger.warn('Syncing to {}{}'.format(
+        kinto_client.session_kwargs['server_url'],
+        kinto_client.endpoints.get(
+            'records', bucket=bucket, collection=collection)))
 
-    for record in to_create + to_update:
-        try:
-            kinto.create(record)
-        except KintoException as e:
-            raise SynchronizationError(e.response.content)
+    logger.info('- {} records to create.'.format(len(to_create)))
+    logger.info('- {} records to delete.'.format(len(to_delete)))
 
-    print('Done!')
+    with kinto_client.batch(bucket=bucket, collection=collection) as batch:
+        for record in to_delete:
+            batch.delete_record(record)
+        for record in to_create:
+            batch.create_record(record)
+
+    logger.info('Done!')
