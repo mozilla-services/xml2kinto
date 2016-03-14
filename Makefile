@@ -8,6 +8,8 @@ TEMPDIR := $(shell mktemp -d)
 KINTO_SERVER = https://kinto.stage.mozaws.net/v1
 
 
+BLOCKLIST_FILE_URL = "https://blocklist.addons.mozilla.org/blocklist/0/default/default/default/default/default/default/default/default/default/default/default/default/default/"
+
 .IGNORE: clean distclean maintainer-clean
 .PHONY: all install install-dev virtualenv tests
 
@@ -51,3 +53,6 @@ maintainer-clean: distclean
 
 sync: install
 	$(VENV)/bin/xml2kinto -s $(KINTO_SERVER)
+
+update-blocklist-file:
+	wget -O blocklist.xml $(BLOCKLIST_FILE_URL)
