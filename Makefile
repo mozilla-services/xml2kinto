@@ -9,6 +9,7 @@ KINTO_SERVER = https://kinto.stage.mozaws.net/v1
 
 
 BLOCKLIST_FILE_URL = "https://blocklist.addons.mozilla.org/blocklist/0/default/default/default/default/default/default/default/default/default/default/default/default/default/"
+AMO_BLOCKLIST_UI_SCHEMA = "https://raw.githubusercontent.com/mozilla-services/amo-blocklist-ui/master/amo-blocklist.json"
 
 .IGNORE: clean distclean maintainer-clean
 .PHONY: all install install-dev virtualenv tests
@@ -56,3 +57,6 @@ sync: install
 
 update-blocklist-file:
 	wget -O blocklist.xml $(BLOCKLIST_FILE_URL)
+
+update-schemas:
+	wget -O schemas.json $(AMO_BLOCKLIST_UI_SCHEMA)
