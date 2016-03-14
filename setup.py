@@ -1,10 +1,11 @@
 import codecs
 import os
+import sys
 from setuptools import setup, find_packages
 
-here = os.path.abspath(os.path.dirname(__file__))
+HERE = os.path.abspath(os.path.dirname(__file__))
 
-with codecs.open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
+with codecs.open(os.path.join(HERE, 'README.rst'), encoding='utf-8') as f:
     README = f.read()
 
 
@@ -14,6 +15,14 @@ REQUIREMENTS = [
     'grequests',
     'six',
 ]
+
+if sys.version_info < (2, 7, 9):
+    # Add OpenSSL dependencies to handle requests SSL warning.
+    REQUIREMENTS.append([
+        "pyopenssl",
+        "ndg-httpsclient",
+        "pyasn1"
+    ])
 
 
 ENTRY_POINTS = {
