@@ -3,7 +3,7 @@ xml2kinto
 
 Synchronizes an XML file with a Kinto collection.
 
-To run it, make sure you have Python 2.7 and virtualenv, and run::
+To run it, make sure you have Python and virtualenv, and run::
 
     $ make update-blocklist-file
     $ make sync
