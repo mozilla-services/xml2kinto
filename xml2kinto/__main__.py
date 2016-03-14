@@ -150,6 +150,9 @@ def main(args=None):
     parser.add_argument('--no-schema', help='Should we handle schemas',
                         action="store_true")
 
+    parser.add_argument('--with-scrapping', action="store_true",
+                        help='Activate blocklist scrapping on AMO')
+
     parser.add_argument('-C', '--certificates',
                         help='Only import certificates',
                         action='store_true')
@@ -179,7 +182,7 @@ def main(args=None):
     # Load the schemas
     schemas = {}
     if not args.no_schema:
-        with codecs.open(SCHEMA_FILE, 'r', encoding='utf-8') as f:
+        with codecs.open(args.schema_file, 'r', encoding='utf-8') as f:
             schemas = json.load(f)
 
     # Import certificates
@@ -213,7 +216,7 @@ def main(args=None):
             collection=args.addons_collection,
             schema=schemas.get(args.cert_bucket,
                                schemas.get(ADDONS_COLLECTION)),
-            with_scrapping=True),
+            with_scrapping=args.with_scrapping),
         # Plugins
         'plugins': dict(
             fields=PLUGINS_ITEMS_FIELDS,
@@ -224,7 +227,7 @@ def main(args=None):
             collection=args.plugins_collection,
             schema=schemas.get(args.cert_bucket,
                                schemas.get(PLUGINS_COLLECTION)),
-            with_scrapping=True)}
+            with_scrapping=args.with_scrapping)}
 
     for collection_type, collection in collections.items():
         if getattr(args, collection_type) or import_all:

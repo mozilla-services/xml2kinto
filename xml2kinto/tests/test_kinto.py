@@ -48,7 +48,8 @@ def test_get_kinto_records_try_to_create_the_collection_with_schema():
                       schema={'foo': 'bar'})
 
     kinto_client.patch_collection.assert_called_with(
-        mock.sentinel.collection, mock.sentinel.bucket,
+        bucket=mock.sentinel.bucket,
+        collection=mock.sentinel.collection,
         data={"schema": {"foo": "bar"}})
 
 
@@ -69,5 +70,6 @@ def test_get_kinto_records_try_to_update_the_collection_schema():
                       schema={'foo': 'bar'})
 
     kinto_client.patch_collection.assert_called_with(
-        mock.sentinel.collection, mock.sentinel.bucket,
+        bucket=mock.sentinel.bucket,
+        collection=mock.sentinel.collection,
         data={"schema": {"foo": "bar"}})

@@ -91,6 +91,7 @@ class TestMain(unittest.TestCase):
         kwargs.setdefault('plugins_bucket', main.PLUGINS_BUCKET)
         kwargs.setdefault('plugins_collection', main.PLUGINS_COLLECTION)
         kwargs.setdefault('no_schema', False)
+        kwargs.setdefault('with_scrapping', False)
         kwargs.setdefault('schemas', SCHEMAS)
 
         kinto_client.assert_called_with(server_url=kwargs['kinto_server'],
@@ -141,7 +142,7 @@ class TestMain(unittest.TestCase):
             'bucket': kwargs['addons_bucket'],
             'collection': kwargs['addons_collection'],
             'schema': addons_schema,
-            'with_scrapping': True
+            'with_scrapping': kwargs['with_scrapping']
         }
 
         mock_sync.assert_any_call(**addons_arguments)
@@ -154,7 +155,7 @@ class TestMain(unittest.TestCase):
             'bucket': kwargs['plugins_bucket'],
             'collection': kwargs['plugins_collection'],
             'schema': plugins_schema,
-            'with_scrapping': True
+            'with_scrapping': kwargs['with_scrapping']
         }
 
         mock_sync.assert_any_call(**plugins_arguments)
