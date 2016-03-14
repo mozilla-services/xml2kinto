@@ -34,6 +34,8 @@ def push_changes(diff, kinto_client, bucket, collection):
         for record in to_delete:
             batch.delete_record(record)
         for record in to_create:
+            # Add the enabled flag.
+            record['enabled'] = True
             batch.create_record(record)
 
     if to_create or to_delete:
