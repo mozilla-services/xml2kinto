@@ -33,3 +33,15 @@ class SynchronizeTest(unittest.TestCase):
 
         self.mocked_batch.create_record.assert_called_with({'id': 1, 'val': 2})
         self.mocked_batch.delete_record.assert_called_with({'id': 3, 'val': 4})
+
+    def test_synchronize_triggers_the_signature(self):
+        push_changes(([{'id': 1, 'val': 2}], [{'id': 3, 'val': 4}]),
+                     self.kinto_client, self.bucket, self.collection)
+
+        self.kinto_client.patch_collection.assert_called_with(
+            data={'status': 'to-sign'})
+
+    def test_synchronize_does_not_triggers_the_signer_on_empty_changes(self):
+        push_changes(([], []), self.kinto_client, self.bucket, self.collection)
+
+        self.assertFalse(self.kinto_client.patch_collection.called)
