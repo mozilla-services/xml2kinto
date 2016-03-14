@@ -28,3 +28,43 @@ def test_get_kinto_records_gets_a_list_of_records():
 
     kinto_client.get_records.assert_called_with(
         bucket=mock.sentinel.bucket, collection=mock.sentinel.collection)
+
+
+def test_get_kinto_records_try_to_create_the_collection_with_schema():
+    kinto_client = mock.MagicMock()
+    kinto_client.create_collection.return_value.status_code = 201
+    kinto_client.create_collection.return_value.json.return_value = {
+        "data": {
+            "schema": {}
+        }
+    }
+    get_kinto_records(kinto_client,
+                      mock.sentinel.bucket,
+                      mock.sentinel.collection,
+                      mock.sentinel.permissions,
+                      schema={'foo': 'bar'})
+
+    kinto_client.patch_collection.assert_called_with(
+        mock.sentinel.collection, mock.sentinel.bucket,
+        data={"schema": {"foo": "bar"}})
+
+
+def test_get_kinto_records_try_to_update_the_collection_schema():
+    kinto_client = mock.MagicMock()
+    kinto_client.create_collection.return_value.status_code = 412
+    kinto_client.create_collection.return_value.json.return_value = {
+        "details": {
+            "existing": {
+                "schema": {}
+            }
+        }
+    }
+    get_kinto_records(kinto_client,
+                      mock.sentinel.bucket,
+                      mock.sentinel.collection,
+                      mock.sentinel.permissions,
+                      schema={'foo': 'bar'})
+
+    kinto_client.patch_collection.assert_called_with(
+        mock.sentinel.collection, mock.sentinel.bucket,
+        data={"schema": {"foo": "bar"}})
