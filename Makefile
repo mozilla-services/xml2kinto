@@ -6,6 +6,7 @@ DEV_STAMP = $(VENV)/.dev_env_installed.stamp
 INSTALL_STAMP = $(VENV)/.install.stamp
 TEMPDIR := $(shell mktemp -d)
 KINTO_SERVER = https://kinto.stage.mozaws.net/v1
+TEMPDIR := $(shell mktemp -d)
 
 
 BLOCKLIST_FILE_URL = "https://blocklist.addons.mozilla.org/blocklist/0/default/default/default/default/default/default/default/default/default/default/default/default/default/"
@@ -42,6 +43,9 @@ tests:
 	@rm -fr .coverage
 	$(VENV)/bin/tox
 
+functional: need-kinto-running
+	$(VENV)/bin/xml2kinto -s http://localhost:8888/v1 -x blocklists.xml -S schemas.json
+
 clean:
 	find . -name '*.pyc' -delete
 	find . -name '__pycache__' -type d | xargs rm -fr
@@ -60,3 +64,13 @@ update-blocklist-file:
 
 update-schemas:
 	wget -O schemas.json $(AMO_BLOCKLIST_UI_SCHEMA)
+
+$(VENV)/bin/kinto: install
+	$(VENV)/bin/pip install kinto
+
+run-kinto: $(VENV)/bin/kinto
+	$(VENV)/bin/kinto --ini $(TEMPDIR)/kinto.ini --backend memory init
+	$(VENV)/bin/kinto --ini $(TEMPDIR)/kinto.ini start
+
+need-kinto-running:
+	@curl http://localhost:8888/v1 2>/dev/null 1>&2 || (echo "Run 'make run-signer' before starting tests." && exit 1)

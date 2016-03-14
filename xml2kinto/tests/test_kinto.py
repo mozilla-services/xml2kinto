@@ -4,6 +4,7 @@ from xml2kinto.kinto import get_kinto_records
 
 def test_get_kinto_records_try_to_create_the_bucket():
     kinto_client = mock.MagicMock()
+    kinto_client.create_collection.return_value.status_code = 201
     get_kinto_records(kinto_client, mock.sentinel.bucket,
                       mock.sentinel.collection, mock.sentinel.permissions)
 
@@ -13,6 +14,7 @@ def test_get_kinto_records_try_to_create_the_bucket():
 
 def test_get_kinto_records_try_to_create_the_collection_with_permissions():
     kinto_client = mock.MagicMock()
+    kinto_client.create_collection.return_value.status_code = 201
     get_kinto_records(kinto_client, mock.sentinel.bucket,
                       mock.sentinel.collection, mock.sentinel.permissions)
 
@@ -23,6 +25,7 @@ def test_get_kinto_records_try_to_create_the_collection_with_permissions():
 
 def test_get_kinto_records_gets_a_list_of_records():
     kinto_client = mock.MagicMock()
+    kinto_client.create_collection.return_value.status_code = 201
     get_kinto_records(kinto_client, mock.sentinel.bucket,
                       mock.sentinel.collection, mock.sentinel.permissions)
 
