@@ -42,8 +42,8 @@ tests:
 	@rm -fr .coverage
 	$(VENV)/bin/tox
 
-functional: need-kinto-running
-	$(VENV)/bin/xml2kinto -s http://localhost:8888/v1 -x blocklists.xml -S schemas.json
+functional: install-dev need-kinto-running
+	$(VENV)/bin/tox -e functional
 
 clean:
 	find . -name '*.pyc' -delete
@@ -72,4 +72,4 @@ run-kinto: $(VENV)/bin/kinto
 	$(VENV)/bin/kinto --ini config/kinto.ini start
 
 need-kinto-running:
-	@curl http://localhost:8888/v1 2>/dev/null 1>&2 || (echo "Run 'make run-signer' before starting tests." && exit 1)
+	@curl http://localhost:8888/v1 2>/dev/null 1>&2 || (echo "Run 'make run-kinto' before starting tests." && exit 1)

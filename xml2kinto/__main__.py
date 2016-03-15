@@ -10,11 +10,13 @@ from xml2kinto.synchronize import get_diff, push_changes
 from xml2kinto.xml import get_xml_records
 
 # options to move to a config file
-XML_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                        '..', 'blocklist.xml'))
+XML_FILE = os.path.abspath(os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    'blocklist.xml'))
 
-SCHEMA_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                           '..', 'schemas.json'))
+SCHEMA_FILE = os.path.abspath(os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    'schemas.json'))
 
 AUTH = ('mark', 'p4ssw0rd')
 COLLECTION_PERMISSIONS = {'read': ["system.Everyone"]}
@@ -195,7 +197,7 @@ def main(args=None):
             kinto_client=kinto_client,
             bucket=args.cert_bucket,
             collection=args.cert_collection,
-            schema=schemas.get(args.cert_bucket,
+            schema=schemas.get(args.cert_collection,
                                schemas.get(CERT_COLLECTION))),
         # GFX drivers
         'gfx': dict(
@@ -205,7 +207,8 @@ def main(args=None):
             kinto_client=kinto_client,
             bucket=args.gfx_bucket,
             collection=args.gfx_collection,
-            schema=schemas.get(args.cert_bucket, schemas.get(GFX_COLLECTION))),
+            schema=schemas.get(args.gfx_collection,
+                               schemas.get(GFX_COLLECTION))),
         # Addons
         'addons': dict(
             fields=ADDONS_ITEMS_FIELDS,
@@ -214,7 +217,7 @@ def main(args=None):
             kinto_client=kinto_client,
             bucket=args.addons_bucket,
             collection=args.addons_collection,
-            schema=schemas.get(args.cert_bucket,
+            schema=schemas.get(args.addons_collection,
                                schemas.get(ADDONS_COLLECTION)),
             with_scrapping=args.with_scrapping),
         # Plugins
@@ -225,7 +228,7 @@ def main(args=None):
             kinto_client=kinto_client,
             bucket=args.plugins_bucket,
             collection=args.plugins_collection,
-            schema=schemas.get(args.cert_bucket,
+            schema=schemas.get(args.plugins_collection,
                                schemas.get(PLUGINS_COLLECTION)),
             with_scrapping=args.with_scrapping)}
 
