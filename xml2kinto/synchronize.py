@@ -36,4 +36,10 @@ def push_changes(diff, kinto_client, bucket, collection):
         for record in to_create:
             batch.create_record(record)
 
+    if to_create or to_delete:
+        logger.info('Trigger the signature.')
+
+        # Trigger signature once modifications where done.
+        kinto_client.patch_collection(data={'status': 'to-sign'})
+
     logger.info('Done!')
