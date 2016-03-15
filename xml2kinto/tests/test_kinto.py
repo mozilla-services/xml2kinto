@@ -55,8 +55,7 @@ def test_get_kinto_records_try_to_create_the_collection_with_schema():
 
 def test_get_kinto_records_try_to_update_the_collection_schema():
     kinto_client = mock.MagicMock()
-    kinto_client.create_collection.return_value.status_code = 412
-    kinto_client.create_collection.return_value.json.return_value = {
+    kinto_client.create_collection.return_value = {
         "details": {
             "existing": {
                 "schema": {}
@@ -73,3 +72,37 @@ def test_get_kinto_records_try_to_update_the_collection_schema():
         bucket=mock.sentinel.bucket,
         collection=mock.sentinel.collection,
         data={"schema": {"foo": "bar"}})
+
+
+def test_get_kinto_records_does_not_update_the_collection_schema_if_right():
+    kinto_client = mock.MagicMock()
+    kinto_client.create_collection.return_value = {
+        "details": {
+            "existing": {
+                "schema": {"foo": "bar"}
+            }
+        }
+    }
+    get_kinto_records(kinto_client,
+                      mock.sentinel.bucket,
+                      mock.sentinel.collection,
+                      mock.sentinel.permissions,
+                      schema={'foo': 'bar'})
+
+    assert not kinto_client.patch_collection.called
+
+
+def test_get_kinto_records_does_update_if_it_has_created_it():
+    kinto_client = mock.MagicMock()
+    kinto_client.create_collection.return_value = {
+        "data": {
+            "schema": {}
+        }
+    }
+    get_kinto_records(kinto_client,
+                      mock.sentinel.bucket,
+                      mock.sentinel.collection,
+                      mock.sentinel.permissions,
+                      schema={'foo': 'bar'})
+
+    assert kinto_client.patch_collection.called
