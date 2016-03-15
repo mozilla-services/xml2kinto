@@ -64,6 +64,7 @@ update-blocklist-file:
 update-schemas:
 	wget -O schemas.json $(AMO_BLOCKLIST_UI_SCHEMA)
 
+install-kinto: $(VENV)/bin/kinto
 $(VENV)/bin/kinto: install
 	$(VENV)/bin/pip install kinto
 
