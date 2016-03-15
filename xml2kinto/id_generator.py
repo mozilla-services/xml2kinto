@@ -1,6 +1,7 @@
 import hashlib
 import json
 import uuid
+from copy import deepcopy
 from six import text_type
 
 
@@ -11,6 +12,7 @@ def create_id(data):
     exactly equal.
     """
     # We should ignore the enabled key.
+    data = deepcopy(data)
     if 'enabled' in data:
         del data['enabled']
     serialized = json.dumps(data, sort_keys=True, separators=(',', ':'))

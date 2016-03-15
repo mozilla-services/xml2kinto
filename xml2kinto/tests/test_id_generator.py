@@ -14,7 +14,7 @@ def test_create_id():
 
 
 def test_create_id_ignores_enabled_flag():
-    """It should handle strings, list, int and dict."""
+    """It should handle strings, list, int, boolean and dict."""
     assert create_id({
         "foo": "bar",
         "from": {
