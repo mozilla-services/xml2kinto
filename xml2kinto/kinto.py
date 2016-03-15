@@ -5,7 +5,7 @@ def update_schema_if_mandatory(response, schema, patch_collection):
     if 'details' in response:
         collection_schema = response['details']['existing']['schema']
     else:
-        collection_schema = response['data']['schema']
+        collection_schema = response['data'].get('schema')
 
     if schema and (not collection_schema or collection_schema != schema):
         patch_collection(data={'schema': schema})
