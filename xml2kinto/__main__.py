@@ -32,7 +32,8 @@ KINTO_SERVER = 'http://localhost:8888/v1'
 
 CERT_ITEMS_FIELDS = ('serialNumber', 'issuerName')
 GFX_ITEMS_FIELDS = ('blockID', 'os', 'vendor', 'feature', 'featureStatus',
-                    'driverVersion', 'driverVersionComparator',
+                    'driverVersion', 'driverVersionMax',
+                    'driverVersionComparator',
                     ('devices', {'xpath': 'devices/*'}))
 
 
