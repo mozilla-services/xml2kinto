@@ -1,3 +1,4 @@
+from datetime import datetime
 import grequests
 
 from copy import deepcopy
@@ -5,6 +6,7 @@ from pyquery import PyQuery
 from xml2kinto.logger import logger
 
 BLOCKLIST_DETAIL_URL = "https://addons.mozilla.org/en-us/firefox/blocked/{}"
+THROTTLE = 10
 
 
 def scrap_details_from_amo(records):
@@ -23,7 +25,8 @@ def scrap_details_from_amo(records):
     if nb_to_fetch:
         logger.info('Ask for {} block item details'.format(nb_to_fetch))
         rs = (grequests.get(u) for u in records_to_scrap.keys())
-        scrapped = grequests.map(rs, exception_handler=log_error)
+        scrapped = grequests.map(rs, size=THROTTLE,
+                                 exception_handler=log_error)
 
         logger.info('{} block item details retrieved'.format(nb_to_fetch))
 
@@ -42,6 +45,9 @@ def fill_record_info(record, html):
     doc = PyQuery(html)
     name = doc('h1>b').html()
     bug = doc('footer>a').attr('href')
+    created_date = doc('footer').text().split('on ')[1].split('.')[0]
+    created_date = datetime.strptime(created_date, '%B %d, %Y')
+    created_date = created_date.strftime("%Y-%m-%dT%H:%M:%SZ")
     info = doc('.blocked dl>dd')
 
     if len(info) > 0:
@@ -50,6 +56,7 @@ def fill_record_info(record, html):
             'bug': bug,
             'why': info.eq(0).html(),
             'who': info.eq(1).html(),
+            'created': created_date
         }
 
     return record
