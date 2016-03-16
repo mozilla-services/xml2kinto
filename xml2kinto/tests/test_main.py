@@ -1,7 +1,19 @@
+import codecs
+import json
 import mock
 import unittest
 
 from xml2kinto import __main__ as main
+
+SCHEMAS = {
+    'certificates': None,
+    'gfx': None,
+    'add-ons': None,
+    'plugins': None,
+}
+
+with codecs.open(main.SCHEMA_FILE, encoding='utf-8') as f:
+    SCHEMAS = json.load(f)
 
 
 def test_sync_records_scrap_information_for_plugins():
@@ -53,6 +65,7 @@ def test_sync_records_calls_the_scenario():
                         kinto_client=mock.sentinel.kinto_client,
                         bucket=mock.sentinel.bucket,
                         collection=mock.sentinel.collection,
+                        schema=None,
                         permissions=main.COLLECTION_PERMISSIONS)
 
                     get_diff.assert_called_with(
@@ -77,11 +90,25 @@ class TestMain(unittest.TestCase):
         kwargs.setdefault('addons_collection', main.ADDONS_COLLECTION)
         kwargs.setdefault('plugins_bucket', main.PLUGINS_BUCKET)
         kwargs.setdefault('plugins_collection', main.PLUGINS_COLLECTION)
+        kwargs.setdefault('no_schema', False)
+        kwargs.setdefault('with_scrapping', False)
+        kwargs.setdefault('schemas', SCHEMAS)
 
         kinto_client.assert_called_with(server_url=kwargs['kinto_server'],
                                         auth=kwargs['auth'],
                                         bucket=None,
                                         collection=None)
+
+        certificate_schema = kwargs['schemas']['certificates']
+        gfx_schema = kwargs['schemas']['gfx']
+        addons_schema = kwargs['schemas']['add-ons']
+        plugins_schema = kwargs['schemas']['plugins']
+
+        if kwargs['no_schema']:
+            certificate_schema = None
+            gfx_schema = None
+            addons_schema = None
+            plugins_schema = None
 
         cert_arguments = {
             'fields': main.CERT_ITEMS_FIELDS,
@@ -89,7 +116,8 @@ class TestMain(unittest.TestCase):
             'xpath': 'certItems/*',
             'kinto_client': kinto_client.return_value,
             'bucket': kwargs['cert_bucket'],
-            'collection': kwargs['cert_collection']
+            'collection': kwargs['cert_collection'],
+            'schema': certificate_schema,
         }
 
         mock_sync.assert_any_call(**cert_arguments)
@@ -100,7 +128,8 @@ class TestMain(unittest.TestCase):
             'xpath': 'gfxItems/*',
             'kinto_client': kinto_client.return_value,
             'bucket': kwargs['gfx_bucket'],
-            'collection': kwargs['gfx_collection']
+            'collection': kwargs['gfx_collection'],
+            'schema': gfx_schema,
         }
 
         mock_sync.assert_any_call(**gfx_arguments)
@@ -112,7 +141,8 @@ class TestMain(unittest.TestCase):
             'kinto_client': kinto_client.return_value,
             'bucket': kwargs['addons_bucket'],
             'collection': kwargs['addons_collection'],
-            'with_scrapping': True
+            'schema': addons_schema,
+            'with_scrapping': kwargs['with_scrapping']
         }
 
         mock_sync.assert_any_call(**addons_arguments)
@@ -124,7 +154,8 @@ class TestMain(unittest.TestCase):
             'kinto_client': kinto_client.return_value,
             'bucket': kwargs['plugins_bucket'],
             'collection': kwargs['plugins_collection'],
-            'with_scrapping': True
+            'schema': plugins_schema,
+            'with_scrapping': kwargs['with_scrapping']
         }
 
         mock_sync.assert_any_call(**plugins_arguments)
@@ -135,6 +166,13 @@ class TestMain(unittest.TestCase):
             with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
                 main.main([])
                 self.assert_arguments(mock_sync, MockedClient)
+
+    def test_no_schema_option_does_add_the_schema(self):
+        with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
+            with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
+                main.main(['--no-schema'])
+                self.assert_arguments(mock_sync, MockedClient,
+                                      no_schema=True)
 
     def test_main_custom_server(self):
         with mock.patch('kinto_client.cli_utils.Client') as MockedClient:
@@ -209,20 +247,21 @@ class TestMain(unittest.TestCase):
         """If only one collection is specified, only import it."""
         with mock.patch('kinto_client.cli_utils.Client'):
             with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
-                main.main(['--certificates'])
+                main.main(['--certificates', '--no-schema'])
 
         mock_sync.assert_called_once_with(fields=main.CERT_ITEMS_FIELDS,
                                           filename=main.XML_FILE,
                                           xpath='certItems/*',
                                           kinto_client=mock.ANY,
                                           bucket=main.CERT_BUCKET,
-                                          collection=main.CERT_COLLECTION)
+                                          collection=main.CERT_COLLECTION,
+                                          schema=None)
 
     def test_only_import_certs_and_gfx(self):
         """Only import specified collections"""
         with mock.patch('kinto_client.cli_utils.Client'):
             with mock.patch('xml2kinto.__main__.sync_records') as mock_sync:
-                main.main(['--certificates', '-G'])
+                main.main(['--certificates', '-G', '--no-schema'])
 
         assert mock_sync.call_count == 2  # Only called for certificats and gfx
         mock_sync.assert_has_calls([
@@ -232,12 +271,14 @@ class TestMain(unittest.TestCase):
                 xpath='certItems/*',
                 kinto_client=mock.ANY,
                 bucket=main.CERT_BUCKET,
-                collection=main.CERT_COLLECTION),
+                collection=main.CERT_COLLECTION,
+                schema=None),
             mock.call(
                 fields=main.GFX_ITEMS_FIELDS,
                 filename=main.XML_FILE,
                 xpath='gfxItems/*',
                 kinto_client=mock.ANY,
                 bucket=main.GFX_BUCKET,
-                collection=main.GFX_COLLECTION)],
+                collection=main.GFX_COLLECTION,
+                schema=None)],
             any_order=True)

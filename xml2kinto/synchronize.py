@@ -42,6 +42,7 @@ def push_changes(diff, kinto_client, bucket, collection):
         logger.info('Trigger the signature.')
 
         # Trigger signature once modifications where done.
-        kinto_client.patch_collection(data={'status': 'to-sign'})
+        kinto_client.patch_collection(data={'status': 'to-sign'},
+                                      bucket=bucket, collection=collection)
 
     logger.info('Done!')

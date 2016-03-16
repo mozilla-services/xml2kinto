@@ -1,3 +1,5 @@
+import codecs
+import json
 import os
 
 from kinto_client import cli_utils
@@ -8,8 +10,14 @@ from xml2kinto.synchronize import get_diff, push_changes
 from xml2kinto.xml import get_xml_records
 
 # options to move to a config file
-XML_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                        '..', 'blocklist.xml'))
+XML_FILE = os.path.abspath(os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    'blocklist.xml'))
+
+SCHEMA_FILE = os.path.abspath(os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    'schemas.json'))
+
 AUTH = ('mark', 'p4ssw0rd')
 COLLECTION_PERMISSIONS = {'read': ["system.Everyone"]}
 CERT_BUCKET = u'blocklists'
@@ -76,7 +84,7 @@ PLUGINS_ITEMS_FIELDS = (
 
 
 def sync_records(fields, filename, xpath, kinto_client, bucket, collection,
-                 with_scrapping=False):
+                 schema=None, with_scrapping=False):
     xml_records = get_xml_records(
         fields=fields,
         filename=filename,
@@ -85,6 +93,7 @@ def sync_records(fields, filename, xpath, kinto_client, bucket, collection,
         kinto_client=kinto_client,
         bucket=bucket,
         collection=collection,
+        schema=schema,
         permissions=COLLECTION_PERMISSIONS)
 
     to_create, to_delete = get_diff(xml_records, kinto_records)
@@ -137,6 +146,15 @@ def main(args=None):
     parser.add_argument('-x', '--xml-file', help='XML Source file',
                         type=str, default=XML_FILE)
 
+    parser.add_argument('-S', '--schema-file', help='JSON Schemas file',
+                        type=str, default=SCHEMA_FILE)
+
+    parser.add_argument('--no-schema', help='Should we handle schemas',
+                        action="store_true")
+
+    parser.add_argument('--with-scrapping', action="store_true",
+                        help='Activate blocklist scrapping on AMO')
+
     parser.add_argument('-C', '--certificates',
                         help='Only import certificates',
                         action='store_true')
@@ -163,6 +181,12 @@ def main(args=None):
 
     kinto_client = cli_utils.create_client_from_args(args)
 
+    # Load the schemas
+    schemas = {}
+    if not args.no_schema:
+        with codecs.open(args.schema_file, 'r', encoding='utf-8') as f:
+            schemas = json.load(f)
+
     # Import certificates
     collections = {
         # Certificates
@@ -172,7 +196,9 @@ def main(args=None):
             xpath='certItems/*',
             kinto_client=kinto_client,
             bucket=args.cert_bucket,
-            collection=args.cert_collection),
+            collection=args.cert_collection,
+            schema=schemas.get(args.cert_collection,
+                               schemas.get(CERT_COLLECTION))),
         # GFX drivers
         'gfx': dict(
             fields=GFX_ITEMS_FIELDS,
@@ -180,7 +206,9 @@ def main(args=None):
             xpath='gfxItems/*',
             kinto_client=kinto_client,
             bucket=args.gfx_bucket,
-            collection=args.gfx_collection),
+            collection=args.gfx_collection,
+            schema=schemas.get(args.gfx_collection,
+                               schemas.get(GFX_COLLECTION))),
         # Addons
         'addons': dict(
             fields=ADDONS_ITEMS_FIELDS,
@@ -189,7 +217,9 @@ def main(args=None):
             kinto_client=kinto_client,
             bucket=args.addons_bucket,
             collection=args.addons_collection,
-            with_scrapping=True),
+            schema=schemas.get(args.addons_collection,
+                               schemas.get(ADDONS_COLLECTION)),
+            with_scrapping=args.with_scrapping),
         # Plugins
         'plugins': dict(
             fields=PLUGINS_ITEMS_FIELDS,
@@ -198,7 +228,9 @@ def main(args=None):
             kinto_client=kinto_client,
             bucket=args.plugins_bucket,
             collection=args.plugins_collection,
-            with_scrapping=True)}
+            schema=schemas.get(args.plugins_collection,
+                               schemas.get(PLUGINS_COLLECTION)),
+            with_scrapping=args.with_scrapping)}
 
     for collection_type, collection in collections.items():
         if getattr(args, collection_type) or import_all:

@@ -5,7 +5,7 @@ Synchronizes an XML file with a Kinto collection.
 
 To run it, make sure you have Python and virtualenv, and run::
 
-    $ make update-blocklist-file
+    $ make update-blocklist-file update-schemas
     $ make sync
 
 This will update the Stage instance by default. If you want to

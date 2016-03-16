@@ -9,6 +9,7 @@ KINTO_SERVER = https://kinto.stage.mozaws.net/v1
 
 
 BLOCKLIST_FILE_URL = "https://blocklist.addons.mozilla.org/blocklist/0/default/default/default/default/default/default/default/default/default/default/default/default/default/"
+AMO_BLOCKLIST_UI_SCHEMA = "https://raw.githubusercontent.com/mozilla-services/amo-blocklist-ui/master/amo-blocklist.json"
 
 .IGNORE: clean distclean maintainer-clean
 .PHONY: all install install-dev virtualenv tests
@@ -41,6 +42,9 @@ tests:
 	@rm -fr .coverage
 	$(VENV)/bin/tox
 
+functional: install-dev need-kinto-running
+	$(VENV)/bin/tox -e functional
+
 clean:
 	find . -name '*.pyc' -delete
 	find . -name '__pycache__' -type d | xargs rm -fr
@@ -56,3 +60,16 @@ sync: install
 
 update-blocklist-file:
 	wget -O blocklist.xml $(BLOCKLIST_FILE_URL)
+
+update-schemas:
+	wget -O schemas.json $(AMO_BLOCKLIST_UI_SCHEMA)
+
+install-kinto: $(VENV)/bin/kinto
+$(VENV)/bin/kinto: install
+	$(VENV)/bin/pip install kinto
+
+run-kinto: $(VENV)/bin/kinto
+	$(VENV)/bin/kinto --ini config/kinto.ini start
+
+need-kinto-running:
+	@curl http://localhost:8888/v1 2>/dev/null 1>&2 || (echo "Run 'make run-kinto' before starting tests." && exit 1)

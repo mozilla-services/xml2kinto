@@ -41,7 +41,8 @@ class SynchronizeTest(unittest.TestCase):
                      self.kinto_client, self.bucket, self.collection)
 
         self.kinto_client.patch_collection.assert_called_with(
-            data={'status': 'to-sign'})
+            data={'status': 'to-sign'},
+            bucket=mock.sentinel.bucket, collection=mock.sentinel.collection)
 
     def test_synchronize_does_not_triggers_the_signer_on_empty_changes(self):
         push_changes(([], []), self.kinto_client, self.bucket, self.collection)
