@@ -8,6 +8,9 @@ HERE = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(HERE, 'README.rst'), encoding='utf-8') as f:
     README = f.read()
 
+with codecs.open(os.path.join(HERE, 'CHANGELOG.rst'), encoding='utf-8') as f:
+    CHANGELOG = f.read()
+
 
 REQUIREMENTS = [
     'kinto-client',
@@ -35,7 +38,7 @@ ENTRY_POINTS = {
 setup(name='xml2kinto',
       version='0.1.0.dev0',
       description='XML-to-Kinto',
-      long_description=README,
+      long_description=README + "\n\n" + CHANGELOG,
       license='Apache License (2.0)',
       classifiers=[
           "Programming Language :: Python",
