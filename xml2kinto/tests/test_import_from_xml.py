@@ -15,7 +15,7 @@ XML_TPL = """<?xml version="1.0" encoding="UTF-8"?>
 
 
 ADDON_DATA = """
-    <emItem blockID="i15" id="personas@christopher.beard">
+    <emItem blockID="i15" id="personas@christopher.beard" os="Linux">
         <versionRange minVersion="1.6" maxVersion="1.6">
             <targetApplication id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
                 <versionRange minVersion="3.6" maxVersion="3.6.*"/>
@@ -45,7 +45,8 @@ def test_addon_record():
     expected = get_record_from_xml(main.ADDONS_ITEMS_FIELDS, xml_node)
     assert expected == {
         'blockID': 'i15',
-        'id': '5a5172a7-c130-b45a-104b-dc121960bc91',
+        'os': 'Linux',
+        'id': 'e7e359be-51be-096b-c4c2-07727469a754',
         'guid': 'personas@christopher.beard',
         'prefs': ['browser.startup.homepage',
                   'browser.search.defaultenginename'],
