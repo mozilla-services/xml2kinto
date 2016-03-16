@@ -116,7 +116,8 @@ GFX_DATA = """
         <feature>DIRECT2D</feature>
         <featureStatus>BLOCKED_DRIVER_VERSION</featureStatus>
         <driverVersion>8.17.12.5896</driverVersion>
-        <driverVersionComparator>LESS_THAN_OR_EQUAL</driverVersionComparator>
+        <driverVersionMax>8.18</driverVersionMax>
+        <driverVersionComparator>BETWEEN_INCLUSIVE</driverVersionComparator>
     </gfxBlacklistEntry>
 """
 
@@ -126,13 +127,14 @@ def test_gfx_record():
     expected = get_record_from_xml(main.GFX_ITEMS_FIELDS, xml_node)
     assert expected == {
         'blockID': 'g35',
-        'id': '6da38ca9-31e5-dd0d-b937-d06ffee543b4',
+        'id': 'cd673bf9-e7d4-a490-40bf-f86e1b99fd2c',
         'os': 'WINNT 6.1',
         'vendor': '0x10de',
         'feature': 'DIRECT2D',
         'featureStatus': 'BLOCKED_DRIVER_VERSION',
         'driverVersion': '8.17.12.5896',
-        'driverVersionComparator': 'LESS_THAN_OR_EQUAL',
+        'driverVersionMax': '8.18',
+        'driverVersionComparator': 'BETWEEN_INCLUSIVE',
         'devices': ['0x0a6c', '0x0a6d']}
 
 
