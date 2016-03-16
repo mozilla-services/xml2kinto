@@ -37,7 +37,7 @@ GFX_ITEMS_FIELDS = ('blockID', 'os', 'vendor', 'feature', 'featureStatus',
 
 
 ADDONS_ITEMS_FIELDS = (
-    'blockID',
+    'blockID', 'os',
     ('id', {'name': 'guid'}),
     ('prefs', {'xpath': 'prefs/*'}),
     ('versionRange', {
