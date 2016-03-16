@@ -105,6 +105,11 @@
                     "1",
                     "2"
                   ],
+                  "enumNames": [
+                    "",
+                    "Update available",
+                    "Update unavailable"
+                  ],
                   "default": ""
                 },
                 "targetApplication": {
@@ -132,6 +137,12 @@
                           "{3550f703-e582-4d05-9a08-453d09bdfdc6}",
                           "{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}",
                           "{aa3c5121-dab2-40e2-81ca-7ea25febc110}"
+                        ],
+                        "enumNames": [
+                          "Firefox",
+                          "Thunderbird",
+                          "Seamonkey",
+                          "Android"
                         ]
                       },
                       "minVersion": {
@@ -212,7 +223,23 @@
             "type": "string",
             "title": "Serial number",
             "description": "The certificate serial number."
+          },
+          "details": {
+            "type": "object",
+            "title": "Details",
+            "properties": {
+              "name": {"type": "string"},
+              "why": {"type": "string"},
+              "who": {"type": "string"},
+              "bug": {"type": "string"}
+            }
           }
+        }
+      },
+      "uiSchema": {
+        "details": {
+          "why": {"ui:widget": "textarea"},
+          "who": {"ui:widget": "textarea"}
         }
       }
     }
@@ -252,7 +279,28 @@
           "os": {
             "type": "string",
             "title": "OS",
-            "description": "The operating system identifier."
+            "description": "The operating system identifier.",
+            "enum": [
+              "",
+              "All",
+              "Android",
+              "Darwin 9",
+              "Darwin 10",
+              "Darwin 11",
+              "Darwin 12",
+              "Darwin 13",
+              "Darwin 14",
+              "Darwin 15",
+              "Linux",
+              "WINNT 5.1",
+              "WINNT 5.2",
+              "WINNT 6.0",
+              "WINNT 6.1",
+              "WINNT 6.2",
+              "WINNT 6.3",
+              "WINNT 10.0",
+              "Other"
+            ]
           },
           "vendor": {
             "type": "string",
@@ -273,7 +321,26 @@
           "feature": {
             "type": "string",
             "title": "Feature",
-            "description": "The type of feature impacted."
+            "description": "The type of feature impacted.",
+            "enum": [
+              "",
+              "CANVAS2D_ACCELERATION",
+              "DIRECT2D",
+              "DIRECT3D_9_LAYERS",
+              "DIRECT3D_10_LAYERS",
+              "DIRECT3D_10_1_LAYERS",
+              "DIRECT3D_11_LAYERS",
+              "DIRECT3D_11_ANGLE",
+              "HARDWARE_VIDEO_DECODING",
+              "OPENGL_LAYERS",
+              "STAGEFRIGHT",
+              "WEBGL_OPENGL",
+              "WEBGL_ANGLE",
+              "WEBGL_MSAA",
+              "WEBRTC_HW_ACCELERATION_ENCODE",
+              "WEBRTC_HW_ACCELERATION_DECODE",
+              "WEBRTC_HW_ACCELERATION"
+            ]
           },
           "featureStatus": {
             "type": "string",
@@ -281,8 +348,11 @@
             "description": "The feature status.",
             "enum": [
               "",
+              "BLOCKED_DEVICE",
               "BLOCKED_DRIVER_VERSION",
-              "BLOCKED_DEVICE"
+              "BLOCKED_OS_VERSION",
+              "DISCOURAGED",
+              "STATUS_OK"
             ]
           },
           "driverVersion": {
@@ -302,6 +372,10 @@
             "enum": [
               "",
               "EQUAL",
+              "NOT_EQUAL",
+              "BETWEEN_EXCLUSIVE",
+              "BETWEEN_INCLUSIVE",
+              "BETWEEN_INCLUSIVE_START",
               "LESS_THAN",
               "LESS_THAN_OR_EQUAL",
               "GREATER_THAN",
@@ -435,6 +509,11 @@
                     "1",
                     "2"
                   ],
+                  "enumNames": [
+                    "",
+                    "Update available",
+                    "Update unavailable"
+                  ],
                   "default": ""
                 },
                 "targetApplication": {
@@ -462,6 +541,12 @@
                           "{3550f703-e582-4d05-9a08-453d09bdfdc6}",
                           "{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}",
                           "{aa3c5121-dab2-40e2-81ca-7ea25febc110}"
+                        ],
+                        "enumNames": [
+                          "Firefox",
+                          "Thunderbird",
+                          "Seamonkey",
+                          "Android"
                         ]
                       },
                       "minVersion": {
