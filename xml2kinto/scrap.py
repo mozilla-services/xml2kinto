@@ -40,11 +40,17 @@ def fill_record_info(record, html):
         record['id']))
 
     doc = PyQuery(html)
+    name = doc('h1>b').html()
+    bug = doc('footer>a').attr('href')
     info = doc('.blocked dl>dd')
 
     if len(info) > 0:
-        record['why'] = info.eq(0).html()
-        record['who'] = info.eq(1).html()
+        record['details'] = {
+            'name': name,
+            'bug': bug,
+            'why': info.eq(0).html(),
+            'who': info.eq(1).html(),
+        }
 
     return record
 

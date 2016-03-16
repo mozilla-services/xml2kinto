@@ -23,12 +23,18 @@ def test_scrap_details_from_amo():
     expected_record = {
         'id': '123',
         'blockID': 'foobar',
-        'why': 'This add-on is believed to be silently installed in Firefox, '
-               'in violation of the <a href="https://developer.mozilla.org/'
-               'en-US/Add-ons/Add-on_guidelines">Add-on Guidelines</a>.',
-        'who': 'All Firefox users who have this add-on installed. Users who '
-               'wish\n to continue using this add-on can enable it in the '
-               'Add-ons Manager.'}
+        'details': {
+            'why': 'This add-on is believed to be silently installed in '
+                   'Firefox, in violation of the <a href="https://'
+                   'developer.mozilla.org/en-US/Add-ons/Add-on_guidelines">'
+                   'Add-on Guidelines</a>.',
+            'who': 'All Firefox users who have this add-on installed. Users '
+                   'who wish\n to continue using this add-on can enable it in '
+                   'the Add-ons Manager.',
+            'name': 'webget',
+            'bug': 'https://bugzilla.mozilla.org/show_bug.cgi?id=1033857',
+        }
+    }
 
     assert records == [expected_record]
     assert record != expected_record
