@@ -33,6 +33,7 @@ def test_scrap_details_from_amo():
                    'the Add-ons Manager.',
             'name': 'webget',
             'bug': 'https://bugzilla.mozilla.org/show_bug.cgi?id=1033857',
+            'created': '2014-08-06T00:00:00Z',
         }
     }
 

@@ -1,3 +1,4 @@
+from datetime import datetime
 import grequests
 
 from copy import deepcopy
@@ -42,6 +43,9 @@ def fill_record_info(record, html):
     doc = PyQuery(html)
     name = doc('h1>b').html()
     bug = doc('footer>a').attr('href')
+    created_date = doc('footer').text().split('on ')[1].split('.')[0]
+    created_date = datetime.strptime(created_date, '%B %d, %Y')
+    created_date = created_date.strftime("%Y-%m-%dT%H:%M:%SZ")
     info = doc('.blocked dl>dd')
 
     if len(info) > 0:
@@ -50,6 +54,7 @@ def fill_record_info(record, html):
             'bug': bug,
             'why': info.eq(0).html(),
             'who': info.eq(1).html(),
+            'created': created_date
         }
 
     return record
