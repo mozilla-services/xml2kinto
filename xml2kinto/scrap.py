@@ -6,6 +6,7 @@ from pyquery import PyQuery
 from xml2kinto.logger import logger
 
 BLOCKLIST_DETAIL_URL = "https://addons.mozilla.org/en-us/firefox/blocked/{}"
+THROTTLE = 10
 
 
 def scrap_details_from_amo(records):
@@ -24,7 +25,8 @@ def scrap_details_from_amo(records):
     if nb_to_fetch:
         logger.info('Ask for {} block item details'.format(nb_to_fetch))
         rs = (grequests.get(u) for u in records_to_scrap.keys())
-        scrapped = grequests.map(rs, exception_handler=log_error)
+        scrapped = grequests.map(rs, size=THROTTLE,
+                                 exception_handler=log_error)
 
         logger.info('{} block item details retrieved'.format(nb_to_fetch))
 
