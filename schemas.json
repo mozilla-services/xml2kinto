@@ -168,7 +168,8 @@
               "name": {"type": "string"},
               "why": {"type": "string"},
               "who": {"type": "string"},
-              "bug": {"type": "string"}
+              "bug": {"type": "string"},
+              "created": {"type": "date-time"}
             }
           }
         }
@@ -184,7 +185,8 @@
         ],
         "details": {
           "why": {"ui:widget": "textarea"},
-          "who": {"ui:widget": "textarea"}
+          "who": {"ui:widget": "textarea"},
+          "created": {"type": "date-time"}
         }
       }
     }
@@ -262,6 +264,7 @@
         "default": {
           "os": "",
           "vendor": "",
+          "hardware": "",
           "devices": [],
           "feature": "",
           "featureStatus": "",
@@ -382,6 +385,11 @@
               "GREATER_THAN_OR_EQUAL"
             ]
           },
+          "hardware": {
+            "type": "string",
+            "title": "Hardware",
+            "description": "The graphic hardware name, eg. antares"
+          },
           "details": {
             "type": "object",
             "title": "Details",
@@ -389,7 +397,8 @@
               "name": {"type": "string"},
               "why": {"type": "string"},
               "who": {"type": "string"},
-              "bug": {"type": "string"}
+              "bug": {"type": "string"},
+              "created": {"type": "date-time"}
             }
           }
         }
@@ -572,7 +581,8 @@
               "name": {"type": "string"},
               "why": {"type": "string"},
               "who": {"type": "string"},
-              "bug": {"type": "string"}
+              "bug": {"type": "string"},
+              "created": {"type": "date-time"}
             }
           }
         }
