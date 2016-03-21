@@ -8,7 +8,7 @@ TEMPDIR := $(shell mktemp -d)
 KINTO_SERVER = https://kinto.stage.mozaws.net/v1
 
 
-BLOCKLIST_FILE_URL = "https://blocklist.addons.mozilla.org/blocklist/0/default/default/default/default/default/default/default/default/default/default/default/default/default/"
+BLOCKLIST_FILE_URL = "https://blocklist.addons.mozilla.org/blocklist/3/%7Bec8030f7-c20a-464f-9b0e-13a3a9e97384%7D/44.0a1/"
 AMO_BLOCKLIST_UI_SCHEMA = "https://raw.githubusercontent.com/mozilla-services/amo-blocklist-ui/master/amo-blocklist.json"
 
 BLOCKLIST_BUCKET = "staging"
