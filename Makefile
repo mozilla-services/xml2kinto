@@ -58,7 +58,7 @@ maintainer-clean: distclean
 	rm -fr .venv* .tox/
 
 sync: install
-	$(VENV)/bin/xml2kinto -s $(KINTO_SERVER) --cert-bucket $(BLOCKLIST_BUCKET) --addons-bucket $(BLOCKLIST_BUCKET) --plugins-bucket $(BLOCKLIST_BUCKET) --gfx-bucket $(BLOCKLIST_BUCKET)
+	$(VENV)/bin/xml2kinto -s $(KINTO_SERVER) --cert-bucket $(BLOCKLIST_BUCKET) --addons-bucket $(BLOCKLIST_BUCKET) --plugins-bucket $(BLOCKLIST_BUCKET) --gfx-bucket $(BLOCKLIST_BUCKET) --with-scrapping
 
 update-blocklist-file:
 	wget -O blocklist.xml $(BLOCKLIST_FILE_URL)
