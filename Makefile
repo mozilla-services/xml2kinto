@@ -11,6 +11,8 @@ KINTO_SERVER = https://kinto.stage.mozaws.net/v1
 BLOCKLIST_FILE_URL = "https://blocklist.addons.mozilla.org/blocklist/0/default/default/default/default/default/default/default/default/default/default/default/default/default/"
 AMO_BLOCKLIST_UI_SCHEMA = "https://raw.githubusercontent.com/mozilla-services/amo-blocklist-ui/master/amo-blocklist.json"
 
+BLOCKLIST_BUCKET = "staging"
+
 .IGNORE: clean distclean maintainer-clean
 .PHONY: all install install-dev virtualenv tests
 
@@ -56,7 +58,7 @@ maintainer-clean: distclean
 	rm -fr .venv* .tox/
 
 sync: install
-	$(VENV)/bin/xml2kinto -s $(KINTO_SERVER)
+	$(VENV)/bin/xml2kinto -s $(KINTO_SERVER) --cert-bucket $(BLOCKLIST_BUCKET) --addons-bucket $(BLOCKLIST_BUCKET) --plugins-bucket $(BLOCKLIST_BUCKET) --gfx-bucket $(BLOCKLIST_BUCKET)
 
 update-blocklist-file:
 	wget -O blocklist.xml $(BLOCKLIST_FILE_URL)
