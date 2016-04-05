@@ -5,6 +5,18 @@
     "config": {
       "displayFields": ["enabled", "addonId", "os"],
       "schema": {
+        "definitions": {
+          "minVersion": {
+            "type": "string",
+            "title": "Min version",
+            "description": "The mininum version."
+          },
+          "maxVersion": {
+            "type": "string",
+            "title": "Max version",
+            "description": "The maximum version."
+          }
+        },
         "title": "Add-on",
         "description": "Add-on",
         "type": "object",
@@ -73,17 +85,8 @@
                 "vulnerabilityStatus": ""
               },
               "properties": {
-                "minVersion": {
-                  "type": "string",
-                  "title": "Min version",
-                  "description": "The mininum version."
-                },
-                "maxVersion": {
-                  "type": "string",
-                  "title": "Max version",
-                  "description": "The maximum version.",
-                  "default": ""
-                },
+                "minVersion": {"$ref": "#/definitions/minVersion"},
+                "maxVersion": {"$ref": "#/definitions/maxVersion"},
                 "severity": {
                   "type": "string",
                   "title": "Severity",
@@ -145,16 +148,8 @@
                           "Android"
                         ]
                       },
-                      "minVersion": {
-                        "type": "string",
-                        "title": "Min version",
-                        "description": "The mininum version."
-                      },
-                      "maxVersion": {
-                        "type": "string",
-                        "title": "Max version",
-                        "description": "The maximum version."
-                      }
+                      "minVersion": {"$ref": "#/definitions/minVersion"},
+                      "maxVersion": {"$ref": "#/definitions/maxVersion"}
                     }
                   }
                 }
@@ -168,7 +163,8 @@
               "name": {"type": "string"},
               "why": {"type": "string"},
               "who": {"type": "string"},
-              "bug": {"type": "string"}
+              "bug": {"type": "string"},
+              "created": {"type": "date-time"}
             }
           }
         }
@@ -184,7 +180,8 @@
         ],
         "details": {
           "why": {"ui:widget": "textarea"},
-          "who": {"ui:widget": "textarea"}
+          "who": {"ui:widget": "textarea"},
+          "created": {"type": "date-time"}
         }
       }
     }
@@ -262,6 +259,7 @@
         "default": {
           "os": "",
           "vendor": "",
+          "hardware": "",
           "devices": [],
           "feature": "",
           "featureStatus": "",
@@ -382,6 +380,11 @@
               "GREATER_THAN_OR_EQUAL"
             ]
           },
+          "hardware": {
+            "type": "string",
+            "title": "Hardware",
+            "description": "The graphic hardware name, eg. antares"
+          },
           "details": {
             "type": "object",
             "title": "Details",
@@ -389,7 +392,8 @@
               "name": {"type": "string"},
               "why": {"type": "string"},
               "who": {"type": "string"},
-              "bug": {"type": "string"}
+              "bug": {"type": "string"},
+              "created": {"type": "date-time"}
             }
           }
         }
@@ -408,6 +412,18 @@
     "config": {
       "displayFields": ["enabled", "os", "matchName", "matchFilename", "matchDescription"],
       "schema": {
+        "definitions": {
+          "minVersion": {
+            "type": "string",
+            "title": "Min version",
+            "description": "The mininum version."
+          },
+          "maxVersion": {
+            "type": "string",
+            "title": "Max version",
+            "description": "The maximum version."
+          }
+        },
         "title": "Plugin",
         "description": "A blocked plugin entry.",
         "type": "object",
@@ -477,17 +493,8 @@
                 "vulnerabilityStatus": ""
               },
               "properties": {
-                "minVersion": {
-                  "type": "string",
-                  "title": "Min version",
-                  "description": "The mininum version."
-                },
-                "maxVersion": {
-                  "type": "string",
-                  "title": "Max version",
-                  "description": "The maximum version.",
-                  "default": ""
-                },
+                "minVersion": {"$ref": "#/definitions/minVersion"},
+                "maxVersion": {"$ref": "#/definitions/maxVersion"},
                 "severity": {
                   "type": "string",
                   "title": "Severity",
@@ -549,16 +556,8 @@
                           "Android"
                         ]
                       },
-                      "minVersion": {
-                        "type": "string",
-                        "title": "Min version",
-                        "description": "The mininum version."
-                      },
-                      "maxVersion": {
-                        "type": "string",
-                        "title": "Max version",
-                        "description": "The maximum version."
-                      }
+                      "minVersion": {"$ref": "#/definitions/minVersion"},
+                      "maxVersion": {"$ref": "#/definitions/maxVersion"}
                     }
                   }
                 }
@@ -572,7 +571,8 @@
               "name": {"type": "string"},
               "why": {"type": "string"},
               "who": {"type": "string"},
-              "bug": {"type": "string"}
+              "bug": {"type": "string"},
+              "created": {"type": "date-time"}
             }
           }
         }
