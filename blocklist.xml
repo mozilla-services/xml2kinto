@@ -93,6 +93,15 @@
                     <prefs>
               </prefs>
     </emItem>
+      <emItem  blockID="i238" id="/^pink@.*\.info$/">
+                        <versionRange  minVersion="0" maxVersion="*" severity="3">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="18.0" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
       <emItem  blockID="i630" id="webbooster@iminent.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
@@ -162,6 +171,15 @@
                     <prefs>
                   <pref>browser.startup.homepage</pref>
                   <pref>browser.search.defaultenginename</pref>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i926" id="{B1FC07E1-E05B-4567-8891-E63FBE545BA8}">
+                        <versionRange  minVersion="0" maxVersion="*" severity="3">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="39.0a1" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                    <prefs>
               </prefs>
     </emItem>
       <emItem  blockID="i62" id="jid0-EcdqvFOgWLKHNJPuqAnawlykCGZ@jetpack">
@@ -262,8 +280,8 @@
                     <prefs>
               </prefs>
     </emItem>
-      <emItem  blockID="i100" id="{394DCBA4-1F92-4f8e-8EC9-8D2CB90CB69B}">
-                        <versionRange  minVersion="2.5.0" maxVersion="2.5.0" severity="1">
+      <emItem  blockID="i348" id="{13c9f1f9-2322-4d5c-81df-6d4bf8476ba4}">
+                        <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
                     <prefs>
               </prefs>
@@ -298,14 +316,28 @@
                     <prefs>
               </prefs>
     </emItem>
+      <emItem  blockID="i914" id="{0153E448-190B-4987-BDE1-F256CADA672F}">
+                        <versionRange  minVersion="0" maxVersion="*" severity="3">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="39.0a1" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
       <emItem  blockID="i678" id="{C4A4F5A0-4B89-4392-AFAC-D58010E349AF}">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
                     <prefs>
               </prefs>
     </emItem>
-      <emItem  blockID="i106" os="WINNT" id="{97E22097-9A2F-45b1-8DAF-36AD648C7EF4}">
+      <emItem  blockID="i916" os="WINNT" id="{97E22097-9A2F-45b1-8DAF-36AD648C7EF4}">
                         <versionRange  minVersion="0" maxVersion="15.0.5" severity="1">
+                    </versionRange>
+                                <versionRange  minVersion="0" maxVersion="*" severity="3">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="39.0a1" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -434,13 +466,22 @@
                     <prefs>
               </prefs>
     </emItem>
+      <emItem  blockID="i1056" id="{82AF8DCA-6DE9-405D-BD5E-43525BDAD38A}">
+                        <versionRange  minVersion="0" maxVersion="7.5.0.9082" severity="1">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="43.0a1" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
       <emItem  blockID="i344" id="lrcsTube@hansanddeta.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
                     <prefs>
               </prefs>
     </emItem>
-      <emItem  blockID="i461" id="{8E9E3331-D360-4f87-8803-52DE43566502}">
+      <emItem  blockID="i748" id="{32da2f20-827d-40aa-a3b4-2fc4a294352e}">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
                     <prefs>
@@ -483,7 +524,12 @@
               </prefs>
     </emItem>
       <emItem  blockID="i216" id="fdm_ffext@freedownloadmanager.org">
-                        <versionRange  minVersion="1.5.7.5" maxVersion="1.5.7.5" severity="1">
+                        <versionRange  minVersion="1.0" maxVersion="1.3.1">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.0a1" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                                <versionRange  minVersion="1.5.7.5" maxVersion="1.5.7.5" severity="1">
                     </versionRange>
                     <prefs>
               </prefs>
@@ -500,6 +546,15 @@
     </emItem>
       <emItem  blockID="i576" id="newmoz@facebook.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="3">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i424" id="{C7AE725D-FA5C-4027-BB4C-787EF9F8248A}">
+                        <versionRange  minVersion="0" maxVersion="1.0.0.2" severity="1">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="23.0a1" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -542,6 +597,15 @@
     </emItem>
       <emItem  blockID="i431" id="chinaescapeone@facebook.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="3">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i806" id="{d9284e50-81fc-11da-a72b-0800200c9a66}">
+                        <versionRange  minVersion="0" maxVersion="7.7.34" severity="1">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="34.0a1" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -638,6 +702,15 @@
     </emItem>
       <emItem  blockID="i68" id="flashupdate@adobe.com">
                         <versionRange  minVersion="0" maxVersion="*">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i45" id="{22119944-ED35-4ab1-910B-E619EA06A115}">
+                        <versionRange  minVersion="0.1" maxVersion="7.6.1">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="8.0a1" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -787,6 +860,15 @@
                     <prefs>
               </prefs>
     </emItem>
+      <emItem  blockID="i924" id="{DAC3F861-B30D-40dd-9166-F4E75327FAC7}">
+                        <versionRange  minVersion="0" maxVersion="*" severity="3">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="39.0a1" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
       <emItem  blockID="i740" id="ascsurfingprotection@iobit.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
@@ -833,8 +915,13 @@
                     <prefs>
               </prefs>
     </emItem>
-      <emItem  blockID="i111" os="WINNT" id="{C3949AC2-4B17-43ee-B4F1-D26B9D42404D}">
+      <emItem  blockID="i918" os="WINNT" id="{C3949AC2-4B17-43ee-B4F1-D26B9D42404D}">
                         <versionRange  minVersion="0" maxVersion="15.0.5" severity="1">
+                    </versionRange>
+                                <versionRange  minVersion="0" maxVersion="*" severity="3">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="39.0a1" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -898,6 +985,15 @@
     </emItem>
       <emItem  blockID="i550" id="colmer@yopmail.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="3">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i46" id="{841468a1-d7f4-4bd3-84e6-bb0f13a06c64}">
+                        <versionRange  minVersion="0.1" maxVersion="*">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="9.0a1" maxVersion="9.0" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -1009,6 +1105,15 @@
     </emItem>
       <emItem  blockID="i816" id="noOpus@outlook.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="3">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i922" id="{34712C68-7391-4c47-94F3-8F88D49AD632}">
+                        <versionRange  minVersion="0" maxVersion="*" severity="3">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="39.0a1" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -1129,12 +1234,6 @@
     </emItem>
       <emItem  blockID="i91" id="crossriderapp4926@crossrider.com">
                         <versionRange  minVersion="0" maxVersion="0.81.43" severity="1">
-                    </versionRange>
-                    <prefs>
-              </prefs>
-    </emItem>
-      <emItem  blockID="i700" id="2bbadf1f-a5af-499f-9642-9942fcdb7c76@f05a14cc-8842-4eee-be17-744677a917ed.com">
-                        <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
                     <prefs>
               </prefs>
@@ -1285,14 +1384,20 @@
                     <prefs>
               </prefs>
     </emItem>
-      <emItem  blockID="i348" id="{13c9f1f9-2322-4d5c-81df-6d4bf8476ba4}">
-                        <versionRange  minVersion="0" maxVersion="*" severity="1">
+      <emItem  blockID="i100" id="{394DCBA4-1F92-4f8e-8EC9-8D2CB90CB69B}">
+                        <versionRange  minVersion="2.5.0" maxVersion="2.5.0" severity="1">
                     </versionRange>
                     <prefs>
               </prefs>
     </emItem>
       <emItem  blockID="i674" id="crossriderapp12555@crossrider.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i838" id="{87b5a11e-3b54-42d2-9102-0a7cb1f79ebf}">
+                        <versionRange  minVersion="0" maxVersion="*" severity="3">
                     </versionRange>
                     <prefs>
               </prefs>
@@ -1445,6 +1550,15 @@
                     <prefs>
               </prefs>
     </emItem>
+      <emItem  blockID="i75" os="Darwin,Linux" id="firebug@software.joehewitt.com">
+                        <versionRange  minVersion="1.9.0" maxVersion="1.9.0" severity="1">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="9.0a1" maxVersion="9.*" />
+                          </targetApplication>
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
       <emItem  blockID="i127" id="plugin@youtubeplayer.com">
                         <versionRange  minVersion="0" maxVersion="*">
                     </versionRange>
@@ -1579,6 +1693,20 @@
     </emItem>
       <emItem  blockID="i658" id="low_quality_flash@pie2k.com">
                         <versionRange  minVersion="46.2" maxVersion="47.1" severity="3">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i1" id="mozilla_cc@internetdownloadmanager.com">
+                        <versionRange  minVersion="2.1" maxVersion="3.3">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.0a1" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                                <versionRange  minVersion=" " maxVersion="6.9.8">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.7a1pre" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -1729,6 +1857,15 @@
     </emItem>
       <emItem  blockID="i523" id="/^({7e8a1050-cf67-4575-92df-dcc60e7d952d}|{b3420a9c-a397-4409-b90d-bcf22da1a08a}|{eca6641f-2176-42ba-bdbe-f3e327f8e0af}|{707dca12-3f99-4d94-afea-06dcc0ae0108}|{aea20431-87fc-40be-bc5b-18066fe2819c}|{30ee6676-1ba6-455a-a7e8-298fa863a546})$/">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i920" id="{FCE04E1F-9378-4f39-96F6-5689A9159E45}">
+                        <versionRange  minVersion="0" maxVersion="*" severity="3">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="39.0a1" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -1979,6 +2116,15 @@
                     <prefs>
               </prefs>
     </emItem>
+      <emItem  blockID="i11" id="yslow@yahoo-inc.com">
+                        <versionRange  minVersion="2.0.5" maxVersion="2.0.5">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.5.7" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
       <emItem  blockID="i584" id="{52b0f3db-f988-4788-b9dc-861d016f4487}">
                         <versionRange  minVersion="0" maxVersion="0.1.9999999" severity="1">
                     </versionRange>
@@ -2023,6 +2169,20 @@
     </emItem>
       <emItem  blockID="i532" id="249911bc-d1bd-4d66-8c17-df533609e6d8@c76f3de9-939e-4922-b73c-5d7a3139375d.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i38" id="{B7082FAA-CB62-4872-9106-E42DD88EDE45}">
+                        <versionRange  minVersion="0.1" maxVersion="3.3.0.*">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.7a1" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                                <versionRange  minVersion="3.3.1" maxVersion="*">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="5.0a1" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -2077,6 +2237,15 @@
     </emItem>
       <emItem  blockID="i228" id="crossriderapp5060@crossrider.com">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
+      <emItem  blockID="i4" id="{4B3803EA-5230-4DC3-A7FC-33638F3D3542}">
+                        <versionRange  minVersion="1.2" maxVersion="1.2">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.0a1" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -2175,6 +2344,15 @@
                     <prefs>
               </prefs>
     </emItem>
+      <emItem  blockID="i23" id="firefox@bandoo.com">
+                        <versionRange  minVersion="5.0" maxVersion="5.0" severity="1">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.7a1pre" maxVersion="*" />
+                          </targetApplication>
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
       <emItem  blockID="i718" id="G4Ce4@w.net">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
@@ -2240,8 +2418,8 @@
                     <prefs>
               </prefs>
     </emItem>
-      <emItem  blockID="i838" id="{87b5a11e-3b54-42d2-9102-0a7cb1f79ebf}">
-                        <versionRange  minVersion="0" maxVersion="*" severity="3">
+      <emItem  blockID="i700" id="2bbadf1f-a5af-499f-9642-9942fcdb7c76@f05a14cc-8842-4eee-be17-744677a917ed.com">
+                        <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
                     <prefs>
               </prefs>
@@ -2258,7 +2436,7 @@
                   <pref>browser.search.defaultenginename</pref>
               </prefs>
     </emItem>
-      <emItem  blockID="i748" id="{32da2f20-827d-40aa-a3b4-2fc4a294352e}">
+      <emItem  blockID="i461" id="{8E9E3331-D360-4f87-8803-52DE43566502}">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
                     <prefs>
@@ -2405,6 +2583,15 @@
                     <prefs>
               </prefs>
     </emItem>
+      <emItem  blockID="i15" id="personas@christopher.beard">
+                        <versionRange  minVersion="1.6" maxVersion="1.6">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.6" maxVersion="3.6.*" />
+                          </targetApplication>
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
       <emItem  blockID="i304" id="{f0e59437-6148-4a98-b0a6-60d557ef57f4}">
                         <versionRange  minVersion="0" maxVersion="*" severity="1">
                     </versionRange>
@@ -2517,6 +2704,12 @@
                     <prefs>
               </prefs>
     </emItem>
+      <emItem  blockID="i314" id="crossriderapp8812@crossrider.com">
+                        <versionRange  minVersion="0" maxVersion="*" severity="1">
+                    </versionRange>
+                    <prefs>
+              </prefs>
+    </emItem>
       <emItem  blockID="i712" id="{a2bfe612-4cf5-48ea-907c-f3fb25bc9d6b}">
                         <versionRange  minVersion="0" maxVersion="*" severity="3">
                     </versionRange>
@@ -2529,8 +2722,11 @@
                     <prefs>
               </prefs>
     </emItem>
-      <emItem  blockID="i314" id="crossriderapp8812@crossrider.com">
-                        <versionRange  minVersion="0" maxVersion="*" severity="1">
+      <emItem  blockID="i24" id="{6E19037A-12E3-4295-8915-ED48BC341614}">
+                        <versionRange  minVersion="0.1" maxVersion="1.3.328.4" severity="1">
+                      <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.7a1pre" maxVersion="*" />
+                          </targetApplication>
                     </versionRange>
                     <prefs>
               </prefs>
@@ -2542,121 +2738,509 @@
     </emItems>
 
   <pluginItems>
+      <pluginItem  blockID="p26">
+      <match name="name" exp="^Yahoo Application State Plugin$" />      <match name="description" exp="^Yahoo Application State Plugin$" />      <match name="filename" exp="npYState.dll" />                                    <versionRange >
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.0a1" maxVersion="3.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p27">
+      <match name="name" exp="QuickTime Plug-in 7[.]1[.]" />            <match name="filename" exp="npqtplugin.?[.]dll" />                                    <versionRange >
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.0a1" maxVersion="3.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
       <pluginItem  blockID="p28">
                   <match name="filename" exp="NPFFAddOn.dll" />                </pluginItem>
       <pluginItem  blockID="p31">
                   <match name="filename" exp="NPMySrch.dll" />                </pluginItem>
+      <pluginItem  blockID="p32">
+                  <match name="filename" exp="npViewpoint.dll" />                                    <versionRange >
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
       <pluginItem  blockID="p33">
       <match name="name" exp="[0-6]\.0\.[01]\d{2}\.\d+" />            <match name="filename" exp="npdeploytk.dll" />                      <versionRange  severity="1"></versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p34">
+                  <match name="filename" exp="[Nn][Pp][Jj][Pp][Ii]1[56]0_[0-9]+\.[Dd][Ll][Ll]" />                                    <versionRange >
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="3.6a1pre" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
                         </pluginItem>
       <pluginItem  blockID="p80">
       <match name="name" exp="\(TM\)" />      <match name="description" exp="[^\d\._]((0(\.\d+(\.\d+([_\.]\d+)?)?)?)|(1\.(([0-5](\.\d+([_\.]\d+)?)?)|(6(\.0([_\.](0?\d|1\d|2\d|30))?)?)|(7(\.0([_\.][0-2])?)?))))([^\d\._]|$)" />      <match name="filename" exp="(npjp2\.dll)|(libnpjp2\.so)" />                      <versionRange  severity="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p85">
-                  <match name="filename" exp="JavaPlugin2_NPAPI\.plugin" />                              </pluginItem>
+                  <match name="filename" exp="JavaPlugin2_NPAPI\.plugin" />                      <versionRange  minVersion="0" maxVersion="13.6.0" severity="1"></versionRange>
+                        </pluginItem>
       <pluginItem  os="Darwin" blockID="p89">
-                  <match name="filename" exp="AdobePDFViewerNPAPI\.plugin" />                              </pluginItem>
+                  <match name="filename" exp="AdobePDFViewerNPAPI\.plugin" />                      <versionRange  minVersion="0" maxVersion="10.1.3" severity="1"></versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p94">
+                  <match name="filename" exp="Flash\ Player\.plugin" />                                    <versionRange  minVersion="0" maxVersion="10.2.159.1" severity="0">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.0.1" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
       <pluginItem  blockID="p102">
-                  <match name="filename" exp="npmozax\.dll" />                              </pluginItem>
+                  <match name="filename" exp="npmozax\.dll" />                      <versionRange  minVersion="0" maxVersion="*"></versionRange>
+                        </pluginItem>
       <pluginItem  blockID="p113">
-                  <match name="filename" exp="npuplaypc\.dll" />                              </pluginItem>
+                  <match name="filename" exp="npuplaypc\.dll" />                      <versionRange  minVersion="0" maxVersion="1.0.0.0" severity="1"></versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p119">
+      <match name="name" exp="Java\(TM\) Plug-in 1\.(6\.0_(\d|[0-2]\d?|3[0-2])|7\.0(_0?([1-4]))?)([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p123">
+                  <match name="filename" exp="JavaPlugin2_NPAPI\.plugin" />                                    <versionRange  minVersion="0" maxVersion="14.2.0" severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p125">
+      <match name="name" exp="Java\(TM\) Platform SE ((6( U(\d|([0-2]\d)|3[0-2]))?)|(7(\sU[0-4])?))(\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
       <pluginItem  blockID="p129">
-                  <match name="filename" exp="Silverlight\.plugin" />                              </pluginItem>
+                  <match name="filename" exp="Silverlight\.plugin" />                      <versionRange  minVersion="0" maxVersion="5.0.99999" severity="1"></versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p132">
+      <match name="name" exp="Java\(TM\) Plug-in 1\.7\.0(_0?([5-6]))?([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p134">
+      <match name="name" exp="Java\(TM\) Platform SE 7 U[5-6](\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p138">
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                                    <versionRange  minVersion="Java 7 Update 01" maxVersion="Java 7 Update 06" severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
       <pluginItem  blockID="p152">
-                  <match name="filename" exp="npctrl\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="npctrl\.dll" />                      <versionRange  minVersion="0" maxVersion="4.1.10328.0" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p154">
-                  <match name="filename" exp="npctrl\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="npctrl\.dll" />                      <versionRange  minVersion="5.0" maxVersion="5.1.20124.9999" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p156">
-                  <match name="filename" exp="nppdf32\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="nppdf32\.dll" />                      <versionRange  minVersion="0" maxVersion="9.5.1" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p158">
-                  <match name="filename" exp="nppdf32\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="nppdf32\.dll" />                      <versionRange  minVersion="10.0" maxVersion="10.1.5.9999" severity="0" vulnerabilitystatus="1"></versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p160">
+                  <match name="filename" exp="NPSWF32\.dll" />                                    <versionRange  minVersion="0" maxVersion="10.2.9999" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="4.0" maxVersion="16.*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p176">
+                  <match name="filename" exp="(NPSWF32\.dll)|(Flash\ Player\.plugin)" />                                    <versionRange  minVersion="10.3" maxVersion="10.3.183.18.999" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="19.0a1" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p176">
+                  <match name="filename" exp="(NPSWF32\.dll)|(Flash\ Player\.plugin)" />                                    <versionRange  minVersion="10.3" maxVersion="10.3.183.18.999" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0.4" maxVersion="17.0.*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p178">
+                  <match name="filename" exp="(NPSWF[0-9_]*\.dll)|(Flash\ Player\.plugin)" />                                    <versionRange  minVersion="11.0" maxVersion="11.7.700.169" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="19.0a1" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p178">
+                  <match name="filename" exp="(NPSWF[0-9_]*\.dll)|(Flash\ Player\.plugin)" />                                    <versionRange  minVersion="11.0" maxVersion="11.7.700.169" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0.4" maxVersion="17.0.*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p180">
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                                    <versionRange  minVersion="Java 7 Update 0" maxVersion="Java 7 Update 10" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://java.com/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p182">
+      <match name="name" exp="Java\(TM\) Platform SE 7 U([0-9]|(1[0-1]))(\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p184">
+      <match name="name" exp="Java\(TM\) Plug-in 1\.7\.0(_0?([0-9]|(1[0-1]))?)?([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p186">
+      <match name="name" exp="Java\(TM\) Platform SE 6 U3[1-8](\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p188">
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                                    <versionRange  minVersion="Java 6 Update 0" maxVersion="Java 6 Update 38" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p190">
+      <match name="name" exp="Java\(TM\) Plug-in 1\.6\.0_3[1-8]([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p210">
+      <match name="name" exp="Java\(TM\) Plug-in 1\.7\.0(_0?7)?([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p212">
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                                    <versionRange  minVersion="Java 7 Update 07" maxVersion="Java 7 Update 07" severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p214">
+      <match name="name" exp="Java\(TM\) Platform SE 7 U7(\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="0.1" maxVersion="17.*" />
+                          </targetApplication>
+                  </versionRange>
                         </pluginItem>
       <pluginItem  blockID="p240">
-                  <match name="filename" exp="DivXBrowserPlugin\.plugin" />                              </pluginItem>
+                  <match name="filename" exp="DivXBrowserPlugin\.plugin" />                      <versionRange  minVersion="0" maxVersion="1.4" severity="1"></versionRange>
+                        </pluginItem>
+      <pluginItem  os="Darwin" blockID="p242">
+            <match name="description" exp="Flip4Mac" />                                          <versionRange  minVersion="0" maxVersion="2.4.3.999" severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="18.0a1" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
       <pluginItem  blockID="p248">
-                  <match name="filename" exp="Scorch\.plugin" />                              </pluginItem>
+                  <match name="filename" exp="Scorch\.plugin" />                      <versionRange  minVersion="0" maxVersion="6.2.0b88" severity="1"></versionRange>
+                        </pluginItem>
       <pluginItem  blockID="p250">
-                  <match name="filename" exp="npFoxitReaderPlugin\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="2"></versionRange>
+                  <match name="filename" exp="npFoxitReaderPlugin\.dll" />                      <versionRange  minVersion="0" maxVersion="2.2.1.530" severity="0" vulnerabilitystatus="2"></versionRange>
                         </pluginItem>
       <pluginItem  os="Darwin" blockID="p252">
-                  <match name="filename" exp="AdobePDFViewerNPAPI\.plugin" />                              </pluginItem>
+                  <match name="filename" exp="AdobePDFViewerNPAPI\.plugin" />                      <versionRange  minVersion="11.0.0" maxVersion="11.0.01" severity="1"></versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p254">
+                  <match name="filename" exp="PDF Browser Plugin\.plugin" />                                    <versionRange  minVersion="0" maxVersion="2.4.2" severity="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="18.0a1" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p260">
+                  <match name="filename" exp="(NPSWF32\.dll)|(Flash\ Player\.plugin)" />                                    <versionRange  minVersion="0" maxVersion="10.2.9999" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="18.0a1" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p260">
+                  <match name="filename" exp="(NPSWF32\.dll)|(Flash\ Player\.plugin)" />                                    <versionRange  minVersion="0" maxVersion="10.2.9999" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0.4" maxVersion="17.0.*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p290">
+                  <match name="filename" exp="(NPSWF32\.dll)|(Flash\ Player\.plugin)" />                                    <versionRange  minVersion="10.3.183.19" maxVersion="10.3.183.66" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="19.0a1" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p290">
+                  <match name="filename" exp="(NPSWF32\.dll)|(Flash\ Player\.plugin)" />                                    <versionRange  minVersion="10.3.183.19" maxVersion="10.3.183.66" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0.4" maxVersion="17.0.*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p292">
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                                    <versionRange  minVersion="Java 7 Update 12" maxVersion="Java 7 Update 15" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p294">
+      <match name="name" exp="Java\(TM\) Platform SE 7 U1[2-5](\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p296">
+      <match name="name" exp="Java\(TM\) Plug-in 1\.7\.0_1[2-5]([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p298">
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                                    <versionRange  minVersion="Java 6 Update 39" maxVersion="Java 6 Update 41" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p300">
+      <match name="name" exp="Java\(TM\) Platform SE 6 U(39|40|41)(\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p302">
+      <match name="name" exp="Java\(TM\) Plug-in 1\.6\.0_(39|40|41)([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p328">
+                  <match name="filename" exp="Silverlight\.plugin" />                                    <versionRange  minVersion="5.1" maxVersion="5.1.20124.9999" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="19.0a1" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p328">
+                  <match name="filename" exp="Silverlight\.plugin" />                                    <versionRange  minVersion="5.1" maxVersion="5.1.20124.9999" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0.4" maxVersion="17.0.*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p330">
+            <match name="description" exp="^Shockwave Flash (([1-9]\.[0-9]+)|(10\.([0-2]|(3 r(([0-9][0-9]?)|1(([0-7][0-9])|8[0-2]))))))( |$)" />      <match name="filename" exp="libflashplayer\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="19.0a1" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p330">
+            <match name="description" exp="^Shockwave Flash (([1-9]\.[0-9]+)|(10\.([0-2]|(3 r(([0-9][0-9]?)|1(([0-7][0-9])|8[0-2]))))))( |$)" />      <match name="filename" exp="libflashplayer\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0.4" maxVersion="17.0.*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p332">
+            <match name="description" exp="^Shockwave Flash 11.(0|1) r[0-9]{1,3}$" />      <match name="filename" exp="libflashplayer\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="19.0a1" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
+      <pluginItem  blockID="p332">
+            <match name="description" exp="^Shockwave Flash 11.(0|1) r[0-9]{1,3}$" />      <match name="filename" exp="libflashplayer\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0.4" maxVersion="17.0.*" />
+                          </targetApplication>
+                  </versionRange>
+                            <infoURL>https://get.adobe.com/flashplayer/</infoURL>
+          </pluginItem>
       <pluginItem  blockID="p366">
-                  <match name="filename" exp="Scorch\.plugin" />                              </pluginItem>
+                  <match name="filename" exp="Scorch\.plugin" />                      <versionRange  minVersion="6.2.0" maxVersion="6.2.0" severity="1"></versionRange>
+                        </pluginItem>
       <pluginItem  blockID="p408">
-                  <match name="filename" exp="QuickTime Plugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="QuickTime Plugin\.plugin" />                      <versionRange  minVersion="0" maxVersion="7.6.5" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p410">
-                  <match name="filename" exp="npqtplugin\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="npqtplugin\.dll" />                      <versionRange  minVersion="0" maxVersion="7.7.3" severity="0" vulnerabilitystatus="1"></versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p412">
+      <match name="name" exp="Java\(TM\) Plug-in 1\.6\.0_4[2-5]([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p414">
+      <match name="name" exp="Java\(TM\) Platform SE 6 U4[2-5](\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p416">
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                                    <versionRange  minVersion="Java 6 Update 42" maxVersion="Java 6 Update 45" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p418">
+      <match name="name" exp="Java\(TM\) Plug-in 1\.7\.0_(1[6-9]|2[0-4])([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p420">
+      <match name="name" exp="Java\(TM\) Platform SE 7 U(1[6-9]|2[0-4])(\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p422">
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                                    <versionRange  minVersion="Java 7 Update 16" maxVersion="Java 7 Update 24" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
                         </pluginItem>
       <pluginItem  blockID="p428">
                   <match name="filename" exp="np[dD]eployJava1\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="2"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p456">
-                  <match name="filename" exp="npvlc\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="npvlc\.dll" />                      <versionRange  minVersion="0" maxVersion="2.0.5" severity="0" vulnerabilitystatus="1"></versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p457">
+      <match name="name" exp="Java(\(TM\))? Plug-in ((1\.7\.0_(2[5-9]|3\d|4[0-4]))|(10\.4[0-4](\.[0-9]+)?))([^\d\._]|$)" />            <match name="filename" exp="libnpjp2\.so" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p458">
+      <match name="name" exp="Java\(TM\) Platform SE 7 U(2[5-9]|3\d|4[0-4])(\s[^\d\._U]|$)" />            <match name="filename" exp="npjp2\.dll" />                                    <versionRange  severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
+                        </pluginItem>
+      <pluginItem  blockID="p459">
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                                    <versionRange  minVersion="Java 7 Update 25" maxVersion="Java 7 Update 44" severity="0" vulnerabilitystatus="1">
+                                <targetApplication  id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}">
+                              <versionRange  minVersion="17.0" maxVersion="*" />
+                          </targetApplication>
+                  </versionRange>
                         </pluginItem>
       <pluginItem  blockID="p556">
-                  <match name="filename" exp="npUnity3D32\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="npUnity3D32\.dll" />                      <versionRange  minVersion="0" maxVersion="4.6.6f1" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p558">
             <match name="description" exp="^($|Unity Web Player version ([0-3]|(4\.([0-5]|6(\.([0-5]|6f1)))?[^0-9.])))" />      <match name="filename" exp="Unity Web Player\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p572">
-                  <match name="filename" exp="npdjvu\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="npdjvu\.dll" />                      <versionRange  minVersion="0" maxVersion="6.1.4.27993" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p574">
-                  <match name="filename" exp="NPDjVu\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="NPDjVu\.plugin" />                      <versionRange  minVersion="0" maxVersion="6.1.1" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p592">
-                  <match name="filename" exp="CiscoWebCommunicator\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="CiscoWebCommunicator\.plugin" />                      <versionRange  minVersion="0" maxVersion="3.0.5.99999999999999" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p594">
-                  <match name="filename" exp="npCiscoWebCommunicator\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="npCiscoWebCommunicator\.dll" />                      <versionRange  minVersion="0" maxVersion="3.0.5.99999999999999" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p794">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="10.3.183.66" maxVersion="13.0.0.258" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p796">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="0" maxVersion="11.2.202.424" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p798">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="14.0" maxVersion="15.0.0.242" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p824">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="13.0.0.259" maxVersion="13.0.0.263" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p826">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.425" maxVersion="11.2.202.439" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p828">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="15.0.0.243" maxVersion="16.0.0.287" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p830">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.439" maxVersion="11.2.202.441" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p832">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="16.0.0.295" maxVersion="16.0.0.304" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p834">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="13.0.0.263" maxVersion="13.0.0.268" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p902">
-                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  minVersion="Java 7 Update 45" maxVersion="Java 7 Update 78" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p904">
-                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  minVersion="Java 8" maxVersion="Java 8 Update 44" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p906">
@@ -2676,47 +3260,47 @@
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p928">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="13.0.0.269" maxVersion="13.0.0.295" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p930">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="16.0.0.305" maxVersion="18.0.0.193" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p932">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.442" maxVersion="11.2.202.467" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p936">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.468" maxVersion="11.2.202.480" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p938">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="18.0.0.194" maxVersion="18.0.0.202" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p940">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="13.0.0.296" maxVersion="13.0.0.301" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p944">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="13.0.0.302" maxVersion="13.0.0.302" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p946">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="18.0.0.203" maxVersion="18.0.0.203" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p948">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.481" maxVersion="11.2.202.481" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p954">
-                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  minVersion="Java 7 Update 79" maxVersion="Java 7 Update 80" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p956">
-                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  minVersion="Java 8 Update 45" maxVersion="Java 8 Update 45" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p958">
@@ -2736,57 +3320,57 @@
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1002">
-                  <match name="filename" exp="npUnity3D32\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="npUnity3D32\.dll" />                      <versionRange  minVersion="5.0" maxVersion="5.0.3f1" severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p1004">
             <match name="description" exp="^($|Unity Web Player version 5.0(\.([0-2]|3f1))?[^0-9.])" />      <match name="filename" exp="Unity Web Player\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
                         </pluginItem>
       <pluginItem  blockID="p1020">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="13.0" maxVersion="13.*" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1026">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="18.0.0.204" maxVersion="18.0.0.232" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p1028">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.482" maxVersion="11.2.202.508" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p1044">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.509" maxVersion="11.2.202.539" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1046">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="18.0.0.233" maxVersion="18.0.0.254" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1048">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="19.0" maxVersion="19.0.0.225" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1052">
-                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  minVersion="Java 7 Update 11" maxVersion="Java 7 Update 11" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1053">
-                  <match name="filename" exp="nprpplugin\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="nprpplugin\.dll" />                      <versionRange  minVersion="0" maxVersion="17.0.10.7" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://real.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1054">
-                  <match name="filename" exp="np32dsw_[0-9]+\.dll" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="np32dsw_[0-9]+\.dll" />                      <versionRange  minVersion="0" maxVersion="12.2.0.162" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/shockwave/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1055">
-                  <match name="filename" exp="DirectorShockwave\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="DirectorShockwave\.plugin" />                      <versionRange  minVersion="0" maxVersion="12.2.0.162" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/shockwave/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1059">
-                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  minVersion="Java 7 Update 81" maxVersion="Java 7 Update 90" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1060">
-                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  minVersion="Java 8 Update 46" maxVersion="Java 8 Update 64" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1061">
@@ -2806,63 +3390,63 @@
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p1065">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.540" maxVersion="11.2.202.548" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1066">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="18.0.0.255" maxVersion="18.0.0.261" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1067">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="19.0.0.226" maxVersion="19.0.0.245" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1074">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="19.0.0.246" maxVersion="20.0.0.235" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1075">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="18.0.0.262" maxVersion="18.0.0.268" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p1076">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.549" maxVersion="11.2.202.554" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1120">
-                  <match name="filename" exp="(Silverlight\.plugin|npctrl\.dll)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(Silverlight\.plugin|npctrl\.dll)" />                      <versionRange  minVersion="5.1.20125" maxVersion="5.1.41105.0" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://www.microsoft.com/getsilverlight</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1121">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="20.0.0.235" maxVersion="20.0.0.286" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1122">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="18.0.0.268" maxVersion="18.0.0.326" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p1123">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.554" maxVersion="11.2.202.559" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  os="Linux" blockID="p1138">
-                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="libflashplayer\.so" />                      <versionRange  minVersion="11.2.202.559" maxVersion="11.2.202.569" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1139">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="18.0.0.326" maxVersion="18.0.0.329" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1140">
-                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="(NPSWF32.*\.dll)|(NPSWF64.*\.dll)|(Flash\ Player\.plugin)" />                      <versionRange  minVersion="20.0.0.286" maxVersion="20.0.0.306" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://get.adobe.com/flashplayer/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1141">
-                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  minVersion="Java 7 Update 91" maxVersion="Java 7 Update 97" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1142">
-                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  severity="0" vulnerabilitystatus="1"></versionRange>
+                  <match name="filename" exp="JavaAppletPlugin\.plugin" />                      <versionRange  minVersion="Java 8 Update 64" maxVersion="Java 8 Update 76" severity="0" vulnerabilitystatus="1"></versionRange>
                             <infoURL>https://java.com/</infoURL>
           </pluginItem>
       <pluginItem  blockID="p1143">
