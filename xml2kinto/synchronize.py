@@ -19,7 +19,7 @@ def get_diff(source, dest):
             [dest_dict[k] for k in to_delete])
 
 
-def push_changes(diff, kinto_client, bucket, collection):
+def push_changes(diff, kinto_client, bucket, collection, to_be_signed=False):
     to_create, to_delete = diff
 
     logger.warn('Syncing to {}{}'.format(
@@ -38,7 +38,7 @@ def push_changes(diff, kinto_client, bucket, collection):
             record['enabled'] = True
             batch.create_record(record)
 
-    if to_create or to_delete:
+    if to_create or to_delete or to_be_signed:
         logger.info('Trigger the signature.')
 
         # Trigger signature once modifications where done.

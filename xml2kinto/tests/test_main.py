@@ -74,7 +74,8 @@ def test_sync_records_calls_the_scenario():
                         (mock.sentinel.to_create, mock.sentinel.to_delete),
                         mock.sentinel.kinto_client,
                         bucket=mock.sentinel.bucket,
-                        collection=mock.sentinel.collection)
+                        collection=mock.sentinel.collection,
+                        to_be_signed=True)
 
 
 class TestMain(unittest.TestCase):

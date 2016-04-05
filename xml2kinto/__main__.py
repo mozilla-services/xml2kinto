@@ -85,7 +85,7 @@ PLUGINS_ITEMS_FIELDS = (
 
 
 def sync_records(fields, filename, xpath, kinto_client, bucket, collection,
-                 schema=None, with_scrapping=False):
+                 schema=None, with_scrapping=False, force_signature=True):
     xml_records = get_xml_records(
         fields=fields,
         filename=filename,
@@ -103,7 +103,8 @@ def sync_records(fields, filename, xpath, kinto_client, bucket, collection,
         to_create = scrap_details_from_amo(to_create)
 
     push_changes((to_create, to_delete), kinto_client,
-                 bucket=bucket, collection=collection)
+                 bucket=bucket, collection=collection,
+                 to_be_signed=force_signature)
 
 
 def main(args=None):
