@@ -6,6 +6,7 @@ DEV_STAMP = $(VENV)/.dev_env_installed.stamp
 INSTALL_STAMP = $(VENV)/.install.stamp
 TEMPDIR := $(shell mktemp -d)
 KINTO_SERVER = https://kinto.stage.mozaws.net/v1
+BLOCKLIST_FILE_URL = https://blocklist.addons.mozilla.org/blocklist/3/%7Bec8030f7-c20a-464f-9b0e-13a3a9e97384%7D/48.0a1/
 
 
 .IGNORE: clean distclean maintainer-clean
@@ -51,3 +52,6 @@ maintainer-clean: distclean
 
 sync: install
 	$(VENV)/bin/xml2kinto -s $(KINTO_SERVER)
+
+update-blocklist-file:
+	wget -O blocklist.xml $(BLOCKLIST_FILE_URL)
