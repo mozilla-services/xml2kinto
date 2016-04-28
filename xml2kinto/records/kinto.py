@@ -1,5 +1,5 @@
 from kinto_client import Client
-from kinto_client.exceptions import KintoException
+from kinto_client.exceptions import KintoException, BucketNotFound
 
 from .base import Records
 from .id_generator import create_id
@@ -7,16 +7,25 @@ from .id_generator import create_id
 
 class KintoRecords(Records):
     def _load(self):
+        collection = self.options['collection_name']
+        bucket = self.options['bucket_name']
+
         self.client = Client(server_url=self.options['server'],
                              auth=self.options['auth'],
-                             bucket=self.options['bucket_name'],
-                             collection=self.options['collection_name'])
+                             bucket=bucket,
+                             collection=collection)
 
         # Create bucket
-        self.client.create_bucket()
+        try:
+            self.client.get_bucket(bucket)
+        except BucketNotFound:
+            self.client.create_bucket()
 
-        self.client.create_collection(self.options['collection_name'],
-                                      permissions=self.options['permissions'])
+        try:
+            self.client.get_collection(collection=collection, bucket=bucket)
+        except KintoException:
+            self.client.create_collection(collection,
+                                          permissions=self.options['permissions'])
 
         # XXX to be removed later
         # remove the 'onecrl' bucket if it exists
