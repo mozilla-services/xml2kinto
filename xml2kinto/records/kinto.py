@@ -45,8 +45,8 @@ class KintoRecords(Records):
         try:
             self.client.get_collection(collection=collection, bucket=bucket)
         except KintoException:
-            self.client.create_collection(collection,
-                                          permissions=self.options['permissions'])
+            perms = self.options['permissions']
+            self.client.create_collection(collection, permissions=perms)
 
         # XXX to be removed later
         # remove the 'onecrl' bucket if it exists
