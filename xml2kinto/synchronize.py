@@ -50,4 +50,8 @@ def synchronize(fields, xml_options, kinto_options):
         except KintoException as e:
             raise SynchronizationError(e.response.content)
 
+    # now ask for the signing
+    print('Asked for signing')
+    kinto.ask_for_signing()
+
     print('Done!')
