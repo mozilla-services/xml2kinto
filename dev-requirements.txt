@@ -6,4 +6,4 @@ pytest-cache
 pytest-capturelog
 pytest-cover
 pytest-sugar
-https://github.com/Kinto/kinto.py/archive/1.0.0.zip
+https://github.com/Kinto/kinto.py/archive/4.1.0.zip
