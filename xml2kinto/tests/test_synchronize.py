@@ -31,7 +31,12 @@ deleted_record = {
 class TestSynchronize:
     def test_synchronize_create_missing_records(self):
         with mock.patch('xml2kinto.synchronize.KintoRecords') as KintoRecords:
-            KintoRecords.return_value.records = []
+            KintoRecords.return_value.records = [{
+                "id": "58547569-b7f8-9f18-1641-ff7f056ef16a",
+                "issuerName": "MDICxAzJBgNVBAYTAkNOMQ4wDAYDVQQKEwVDTk5JQzE"
+                "TMBEGA1UEAxMKQ05OSUMgUk9APV==",
+                "serialNumber": "STMAgj=="
+            }]
             KintoRecords.return_value.find.return_value = None
 
             here = os.path.dirname(__file__)
@@ -40,7 +45,7 @@ class TestSynchronize:
             synchronize(FIELDS,
                         xml_options={'filename': test_file},
                         kinto_options=mock.MagicMock())
-            assert KintoRecords.return_value.create.call_count == 2
+            assert KintoRecords.return_value.create.call_count == 3
 
     def test_synchronize_delete_removed_records(self):
         with mock.patch('xml2kinto.synchronize.KintoRecords') as KintoRecords:
@@ -67,7 +72,7 @@ class TestSynchronize:
             synchronize(FIELDS,
                         xml_options={'filename': test_file},
                         kinto_options=mock.MagicMock())
-            assert KintoRecords.return_value.create.call_count == 1
+            assert KintoRecords.return_value.create.call_count == 2
             assert KintoRecords.return_value.delete.call_count == 0
 
     def test_synchronize_raises_SynchronizationError_if_delete_fails(self):
