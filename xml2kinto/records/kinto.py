@@ -64,10 +64,10 @@ class KintoRecords(Records):
     def delete(self, data):
         self.client.delete_record(data['id'])
 
-    def create(self, data):
+    def create(self, data, **kwargs):
         if 'id' not in data:
             data['id'] = create_id(data)
-        rec = self.client.create_record(data)
+        rec = self.client.create_record(data, **kwargs)
         return rec
 
     def ask_for_signing(self):

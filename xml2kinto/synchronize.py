@@ -54,4 +54,9 @@ def synchronize(fields, xml_options, kinto_options):
     print('Asked for signing')
     kinto.ask_for_signing()
 
+    # XXX: Fix current signing process
+    kinto = KintoRecords(fields, options=kinto_options)
+    kinto.create(kinto.records[-1], safe=False)
+    kinto.ask_for_signing()
+
     print('Done!')
