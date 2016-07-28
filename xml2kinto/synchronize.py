@@ -1,3 +1,4 @@
+
 from __future__ import print_function
 
 from kinto_client.exceptions import KintoException
@@ -54,9 +55,11 @@ def synchronize(fields, xml_options, kinto_options):
     print('Asked for signing')
     kinto.ask_for_signing()
 
-    # XXX: Fix current signing process
-    kinto = KintoRecords(fields, options=kinto_options)
-    kinto.create(kinto.records[-1], safe=False)
-    kinto.ask_for_signing()
+    # Update only if there were a change.
+    if to_create or to_update or to_delete:
+        # XXX: Fix current signing process
+        kinto = KintoRecords(fields, options=kinto_options)
+        kinto.create(kinto.records[-1], safe=False)
+        kinto.ask_for_signing()
 
     print('Done!')
